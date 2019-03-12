@@ -5,12 +5,13 @@ import ds.IntMaxHeap;
 import ds.IntMinHeap;
 
 import java.util.function.BiFunction;
+import java.util.function.IntBinaryOperator;
 
 public enum SortingDirection {
     ASCENDING{
         @Override
-        public BiFunction<Integer, Integer, Boolean> shouldSwap() {
-            return (a, b) -> a > b ;
+        public boolean shouldSwap(int a, int b){
+            return this.comparator.applyAsInt(a, b) > 0;
         }
 
         @Override
@@ -20,8 +21,8 @@ public enum SortingDirection {
     },
     DESCENDING{
         @Override
-        public BiFunction<Integer, Integer, Boolean> shouldSwap() {
-            return (a, b) -> a < b ;
+        public boolean shouldSwap(int a, int b){
+            return this.comparator.applyAsInt(a, b) < 0;
         }
 
         @Override
@@ -30,6 +31,7 @@ public enum SortingDirection {
         }
     };
 
-    public abstract BiFunction<Integer, Integer, Boolean> shouldSwap();
-    public abstract AbstractIntHeap getIntHeap(int[] numbers) ;
+    protected IntBinaryOperator comparator = (a, b) -> a < b ? 1 : (a > b) ? -1 : 0;
+    public abstract boolean shouldSwap(int a, int b);
+    public abstract AbstractIntHeap getIntHeap(int[] numbers);
 }
