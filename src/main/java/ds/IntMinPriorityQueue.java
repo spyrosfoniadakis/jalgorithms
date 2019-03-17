@@ -1,6 +1,6 @@
 package ds;
 
-public class IntMinPriorityQueue extends IntMinHeap implements PrimitivePriorityQueue {
+public final class IntMinPriorityQueue extends IntMinHeap implements PrimitivePriorityQueue {
 
     private IntMinPriorityQueue(){
         super();
