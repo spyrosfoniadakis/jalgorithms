@@ -19,13 +19,13 @@ public abstract class AbstractPrimitiveArrayHeap implements PrimitiveHeap, Index
 
     @Override
     public int getLeftChildIndexOf(int index) {
-        int childIndex =  index << 1;
+        int childIndex =  (index != 0) ? index << 1 : 1;
         return (childIndex < this.size) ? childIndex : -1;
     }
 
     @Override
     public int getRightChildIndexOf(int index) {
-        int childIndex =  (index << 1) + 1;
+        int childIndex =  (index != 0) ? (index << 1) + 1 : 2;
         return (childIndex < this.size) ? childIndex : -1;
     }
 

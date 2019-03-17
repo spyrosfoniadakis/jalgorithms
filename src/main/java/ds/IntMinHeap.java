@@ -8,30 +8,30 @@ import utils.ArrayUtils;
 public class IntMinHeap extends AbstractIntHeap{
 
     private IntMinHeap(){
-        super();
+        this(10);
     }
 
     private IntMinHeap(int capacity){
-        super(capacity);
+        this(new int[capacity], 0);
     }
 
     private IntMinHeap(int[] elements){
-        super(elements);
+        this(elements, elements.length);
     }
 
     private IntMinHeap(int[] elements, int size){
-        super(elements);
+        super(elements, size, (a, b) -> a < b ? -1 : a > b ? 1 : 0);
     }
 
     @Override
     public void heapify(){
-        super.heapifyFrom(0, (a, b) -> a > b);
+        super.heapifyFrom(0);
     }
 
     @Override
     public void build(){
         for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
-            heapifyFrom(i, (a, b) -> a > b);
+            heapifyFrom(i);
         }
     }
 
@@ -42,11 +42,11 @@ public class IntMinHeap extends AbstractIntHeap{
             return;
         }
         else if(value > 0){
-            this.heapifyFrom(index, (a, b) -> a > b);
+            this.heapifyFrom(index);
         }
         else {
             int parentIndex;
-            while(index > 0 && this.elements[index] < this.elements[parentIndex = this.getParentIndexOf(index)]){
+            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
                 ArrayUtils.swap(this.elements, index, parentIndex);
                 index= parentIndex;
             }

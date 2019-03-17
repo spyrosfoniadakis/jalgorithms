@@ -2,36 +2,48 @@ package ds;
 
 import utils.ArrayUtils;
 
-import java.util.function.IntBinaryOperator;
-import java.util.function.IntPredicate;
-
 public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
+    /**
+     * This interface although a Comparator it does not extends teh Comparator interface
+     * because the latter is not defined for primitives and it would be better to avoid
+     * any unnecessary boxing and unboxing. Both Comparator and IntHeapComparator define
+     * the same method - boxing left aside - so nothing will actually be noticed by
+     * anyone who is going to use it with a lambda expression.
+     *
+     * It could extend the IntBinaryOperator to maximize re-usability but it would confuse
+     * those who will try to create an anonymous class or implement it some how in a class
+     * based syntax.
+     */
     @FunctionalInterface
-    interface IntHeapOrderComparator{
-        boolean shouldSwap(int a, int b);
+    interface IntHeapComparator {
+
+        int compare(int a, int b);
+
+        default boolean shouldSwap(int a, int b){
+            return this.compare(a, b) > 0;
+        }
+
     }
-
-//    protected IntBinaryOperator comparator;
-
 
     protected int[] elements;
+    private IntHeapComparator comparator;
 
-    protected AbstractIntHeap(){
-        this(10);
+    protected AbstractIntHeap(IntHeapComparator comparator){
+        this(comparator, 10);
     }
 
-    protected AbstractIntHeap(int capacity){
-        this.elements = new int[capacity];
-        this.setSize(0);
+    protected AbstractIntHeap(IntHeapComparator comparator, int capacity){
+        this(new int[capacity], comparator);
     }
 
-    protected AbstractIntHeap(int[] elements){
-        this(elements, elements.length);
+    protected AbstractIntHeap(int[] elements, IntHeapComparator comparator){
+        this(elements, elements.length, comparator);
     }
 
-    protected AbstractIntHeap(int[] elements, int size){
+    protected AbstractIntHeap(int[] elements, int size, IntHeapComparator comparator){
         this.elements = elements;
+        this.comparator = comparator;
         this.setSize(size);
         this.build();
     }
@@ -53,7 +65,7 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         return extracted;
     }
 
-    protected void heapifyFrom(int index, IntHeapOrderComparator cmp) {
+    protected void heapifyFrom(int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -63,15 +75,15 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
         System.out.println(String.format("heap size: %s, left: %s, right: %s, root: %s", this.getSize(), leftIndex, rightIndex, index));
 
-        if (leftIndex != -1 && cmp.shouldSwap(elements[nextIndex], elements[leftIndex])){
+        if (leftIndex != -1 && this.comparator.shouldSwap(elements[nextIndex], elements[leftIndex])){
             nextIndex = leftIndex;
         }
-        if(rightIndex != -1 && cmp.shouldSwap(elements[nextIndex], elements[rightIndex])){
+        if(rightIndex != -1 && this.comparator.shouldSwap(elements[nextIndex], elements[rightIndex])){
             nextIndex = rightIndex;
         }
         if(index != nextIndex){
             ArrayUtils.swap(elements, index, nextIndex);
-            this.heapifyFrom(nextIndex, cmp);
+            this.heapifyFrom(nextIndex);
         }
     }
 
@@ -85,6 +97,12 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
     public abstract void build();
 
+    /**
+     * Increases or decreases (by adding a negative value) the initial value of the
+     * element at <code>index</code>
+     * @param index
+     * @param value
+     */
     public abstract void increaseElementValueBy(int index, int value);
 
     public void insert(int element){
@@ -104,5 +122,9 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         }
         newElements[this.size++] = element;
         this.elements = newElements;
+    }
+
+    protected IntHeapComparator getComparator(){
+        return this.comparator;
     }
 }

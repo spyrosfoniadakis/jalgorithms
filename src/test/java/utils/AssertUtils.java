@@ -1,6 +1,7 @@
 package utils;
 
 import ds.IntMaxHeap;
+import ds.IntMinHeap;
 import org.junit.Assert;
 import sorting.SortingDirection;
 
@@ -32,7 +33,7 @@ public class AssertUtils {
     }
 
     public static void assertIsMaxHeap(IntMaxHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
-        Object value = ReflectionUtils.getFieldValueOf(heap, "ds.IntMaxHeap", "elements");
+        Object value = ReflectionUtils.getFieldValueOf(heap, IntMaxHeap.class.getCanonicalName(), "elements");
         int[] elements = (int[]) value;
         int[] extracted = new int[elements.length];
         int index = 0;
@@ -40,6 +41,17 @@ public class AssertUtils {
             extracted[index++]= heap.extract();
         }
         assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
+    public static void assertIsMinHeap(IntMinHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        Object value = ReflectionUtils.getFieldValueOf(heap, IntMinHeap.class.getCanonicalName(), "elements");
+        int[] elements = (int[]) value;
+        int[] extracted = new int[elements.length];
+        int index = 0;
+        while (heap.getSize() > 0){
+            extracted[index++]= heap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.ASCENDING);
     }
 
     public enum SortingDirection{
