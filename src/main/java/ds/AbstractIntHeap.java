@@ -16,7 +16,7 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
      * based syntax.
      */
     @FunctionalInterface
-    interface IntHeapComparator {
+    public interface IntHeapComparator {
 
         int compare(int a, int b);
 
