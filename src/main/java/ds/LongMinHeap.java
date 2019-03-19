@@ -2,6 +2,21 @@ package ds;
 
 import utils.ArrayUtils;
 
+/**
+ * It models a MinHeap containing elements alone long primitive data type. The implementation is identical
+ * to the rest of the primitive-typed MinHeaps in the <code>ds</code> package, yet not much generalization can be made
+ * due to the difference in the returned type and in the inability to generalize on the primitive types.
+ * <br/> <br/>
+ * The client can:
+ * <ul>
+ *     <li>Create an empty heap of longs</li>
+ *     <li>Create a heap of longs given an array of longs containing elements in arbitrary order</li>
+ *     <li>Peek the minimum element</li>
+ *     <li>Extract the minimum element of the heap - the remaining elements will still form a heap after the element's
+ *          extraction</li>
+ *     <li>Sort the elements of the heap - this action will destroy the heap.</li>
+ * </ul>
+ */
 public class LongMinHeap extends AbstractLongHeap  {
 
     LongMinHeap(){
@@ -17,7 +32,7 @@ public class LongMinHeap extends AbstractLongHeap  {
     }
 
     LongMinHeap(long[] elements, int size){
-        super(elements, size, (a, b) -> a > b ? -1 : a < b ? 1 : 0);
+        super(elements, size, (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
     @Override

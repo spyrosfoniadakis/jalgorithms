@@ -2,16 +2,7 @@ package ds;
 
 import utils.ArrayUtils;
 
-/**
- * It models a Heap conatining double elements alone of teh double primitive data type. The implementation is identical
- * to the rest of the primitive-typed Heaps in the <code>ds</code> package, yet not much generalization can be made
- * due to teh difference in the returned type and in the inability to generalize on the primitive types.
- * <br/> <br/>
- * The client can:
- * <ul>
- *     <li></li>
- * </ul>
- */
+
 public abstract class AbstractDoubleHeap extends AbstractPrimitiveArrayHeap {
 
     @FunctionalInterface

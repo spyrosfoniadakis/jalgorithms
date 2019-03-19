@@ -40,12 +40,8 @@ public final class HeapSort {
 
         public void sort(int[] numbers, SortingDirection direction) {
             AbstractIntHeap heap = direction.getIntHeap(numbers);
-//            IntMaxHeap heap = IntMaxHeap.from(numbers);
             heap.sort();
         }
-
-
-
 
         @Override
         public void sort(long[] numbers) {

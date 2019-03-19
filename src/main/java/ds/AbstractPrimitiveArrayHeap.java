@@ -29,8 +29,6 @@ public abstract class AbstractPrimitiveArrayHeap implements PrimitiveHeap, Index
         return (childIndex < this.size) ? childIndex : -1;
     }
 
-
-
     protected void setSize(int size) {
         this.size = size;
     }

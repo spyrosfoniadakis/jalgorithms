@@ -4,6 +4,8 @@ import utils.ArrayUtils;
 
 public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
+    // TODO: Consider defining it in a separate file as a top-level interface so as to be accessible for the sorting
+    //  utility classes as well
     /**
      * This interface although a Comparator it does not extends teh Comparator interface
      * because the latter is not defined for primitives and it would be better to avoid
