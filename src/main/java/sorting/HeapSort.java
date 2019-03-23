@@ -1,7 +1,6 @@
 package sorting;
 
-import ds.AbstractIntHeap;
-import ds.IntMaxHeap;
+import ds.*;
 
 import java.util.Comparator;
 
@@ -38,24 +37,35 @@ public final class HeapSort {
             heap.sort();
         }
 
+        // TODO: Allow the client code to decide between ascending and descending ordering
+        //      in all Sorters, so put it in the Sorter interface. Also redesign the
+        //      SortingDirection enum.
         public void sort(int[] numbers, SortingDirection direction) {
-            AbstractIntHeap heap = direction.getIntHeap(numbers);
+            AbstractIntHeap heap = direction.createHeapFrom(numbers);
             heap.sort();
         }
 
         @Override
         public void sort(long[] numbers) {
+            LongMaxHeap heap = LongMaxHeap.from(numbers);
+            heap.sort();
+        }
 
+        public void sort(long[] numbers, SortingDirection direction) {
+            AbstractLongHeap heap = direction.createHeapFrom(numbers);
+            heap.sort();
         }
 
         @Override
         public void sort(float[] numbers) {
-
+            FloatMaxHeap heap = FloatMaxHeap.from(numbers);
+            heap.sort();
         }
 
         @Override
         public void sort(double[] numbers) {
-
+            DoubleMaxHeap heap = DoubleMaxHeap.from(numbers);
+            heap.sort();
         }
 
         @Override

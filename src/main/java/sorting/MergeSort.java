@@ -31,8 +31,6 @@ public final class MergeSort {
 
     private static class MergeSorter implements Sorter {
 
-
-
         @Override
         public void sort(int[] numbers) {
             sort(numbers, 0, numbers.length);
