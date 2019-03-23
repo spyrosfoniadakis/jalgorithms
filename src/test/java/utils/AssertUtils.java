@@ -1,9 +1,6 @@
 package utils;
 
-import ds.IntMaxHeap;
-import ds.IntMinHeap;
-import ds.LongMaxHeap;
-import ds.LongMinHeap;
+import ds.*;
 import org.junit.Assert;
 import sorting.SortingDirection;
 
@@ -56,6 +53,28 @@ public class AssertUtils {
         assertIsSorted(extracted, SortingDirection.DESCENDING);
     }
 
+    public static void assertIsMaxHeap(FloatMaxHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
+        float[] elements = (float[]) value;
+        float[] extracted = new float[elements.length];
+        int index = 0;
+        while (heap.getSize() > 0){
+            extracted[index++]= heap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
+    public static void assertIsMaxHeap(DoubleMaxHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
+        double[] elements = (double[]) value;
+        double[] extracted = new double[elements.length];
+        int index = 0;
+        while (heap.getSize() > 0){
+            extracted[index++]= heap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
     public static void assertIsMinHeap(IntMinHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
         int[] elements = (int[]) value;
@@ -71,6 +90,28 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
         long[] elements = (long[]) value;
         long[] extracted = new long[elements.length];
+        int index = 0;
+        while (heap.getSize() > 0){
+            extracted[index++]= heap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.ASCENDING);
+    }
+
+    public static void assertIsMinHeap(FloatMinHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
+        float[] elements = (float[]) value;
+        float[] extracted = new float[elements.length];
+        int index = 0;
+        while (heap.getSize() > 0){
+            extracted[index++]= heap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.ASCENDING);
+    }
+
+    public static void assertIsMinHeap(DoubleMinHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        Object value = ReflectionUtils.getFieldValueOf(heap, heap.getClass().getCanonicalName(), "elements");
+        double[] elements = (double[]) value;
+        double[] extracted = new double[elements.length];
         int index = 0;
         while (heap.getSize() > 0){
             extracted[index++]= heap.extract();
