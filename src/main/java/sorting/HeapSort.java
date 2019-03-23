@@ -1,5 +1,6 @@
 package sorting;
 
+import comparator.*;
 import ds.*;
 
 import java.util.Comparator;
@@ -21,52 +22,128 @@ public final class HeapSort {
         sorter.sort(numbers);
     }
 
+    public static void sort(float[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
+    }
+
     public static void sort(long[] numbers){
         sorter.sort(numbers);
+    }
+
+    public static void sort(long[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
     }
 
     public static void sort(double[] numbers){
         sorter.sort(numbers);
     }
 
+    public static void sort(double[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
+    }
+
+    private static class IntHeap extends AbstractIntHeap{
+
+        private IntHeap(int[] elements, IntComparator comparator){
+            super(elements, elements.length, comparator);
+        }
+
+        @Override
+        public void increaseElementValueBy(int index, int value) {
+            throw new UnsupportedOperationException();
+        }
+
+        public static IntHeap from(int[] elements, IntComparator comparator){
+            return new IntHeap(elements, comparator);
+        }
+    }
+
+    private static class LongHeap extends AbstractLongHeap{
+
+        private LongHeap(long[] elements, LongComparator comparator){
+            super(elements, elements.length, comparator);
+        }
+
+        @Override
+        public void increaseElementValueBy(int index, long value) {
+            throw new UnsupportedOperationException();
+        }
+
+        public static LongHeap from(long[] elements, LongComparator comparator){
+            return new LongHeap(elements, comparator);
+        }
+    }
+
+    private static class FloatHeap extends AbstractFloatHeap{
+
+        private FloatHeap(float[] elements, FloatComparator comparator){
+            super(elements, elements.length, comparator);
+        }
+
+        @Override
+        public void increaseElementValueBy(int index, float value) {
+            throw new UnsupportedOperationException();
+        }
+
+        public static FloatHeap from(float[] elements, FloatComparator comparator){
+            return new FloatHeap(elements, comparator);
+        }
+    }
+
+    private static class DoubleHeap extends AbstractDoubleHeap{
+
+        private DoubleHeap(double[] elements, DoubleComparator comparator){
+            super(elements, elements.length, comparator);
+        }
+
+        @Override
+        public void increaseElementValueBy(int index, double value) {
+            throw new UnsupportedOperationException();
+        }
+
+        public static DoubleHeap from(double[] elements, DoubleComparator comparator){
+            return new DoubleHeap(elements, comparator);
+        }
+    }
+
     private static class HeapSorter implements Sorter {
 
         @Override
         public void sort(int[] numbers) {
-            IntMaxHeap heap = IntMaxHeap.from(numbers);
-            heap.sort();
+            IntHeap.from(numbers, Comparators.INT_ASCENDING_COMPARATOR).sort();
         }
 
-        // TODO: Allow the client code to decide between ascending and descending ordering
-        //      in all Sorters, so put it in the Sorter interface. Also redesign the
-        //      SortingDirection enum.
         public void sort(int[] numbers, SortingDirection direction) {
-            AbstractIntHeap heap = direction.createHeapFrom(numbers);
-            heap.sort();
+            IntHeap.from(numbers, direction.getOpposite().getIntComparator()).sort();
         }
 
         @Override
         public void sort(long[] numbers) {
-            LongMaxHeap heap = LongMaxHeap.from(numbers);
-            heap.sort();
+            LongHeap.from(numbers, Comparators.LONG_ASCENDING_COMPARATOR).sort();
         }
 
         public void sort(long[] numbers, SortingDirection direction) {
-            AbstractLongHeap heap = direction.createHeapFrom(numbers);
-            heap.sort();
+            LongHeap.from(numbers, direction.getOpposite().getLongComparator()).sort();
         }
 
         @Override
         public void sort(float[] numbers) {
-            FloatMaxHeap heap = FloatMaxHeap.from(numbers);
-            heap.sort();
+            FloatHeap.from(numbers, Comparators.FLOAT_ASCENDING_COMPARATOR).sort();
+        }
+
+        public void sort(float[] numbers, SortingDirection direction) {
+            FloatHeap.from(numbers, direction.getOpposite().getFloatComparator()).sort();
         }
 
         @Override
         public void sort(double[] numbers) {
-            DoubleMaxHeap heap = DoubleMaxHeap.from(numbers);
-            heap.sort();
+            DoubleHeap.from(numbers, Comparators.DOUBLE_ASCENDING_COMPARATOR).sort();
         }
+
+        public void sort(double[] numbers, SortingDirection direction) {
+            DoubleHeap.from(numbers, direction.getOpposite().getDoubleComparator()).sort();
+        }
+
 
         @Override
         public <T extends Comparable<T>> void sort(T[] elements) {
