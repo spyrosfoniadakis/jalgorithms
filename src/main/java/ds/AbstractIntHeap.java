@@ -1,11 +1,10 @@
 package ds;
 
+import comparator.IntComparator;
 import utils.ArrayUtils;
 
 public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
-    // TODO: Consider defining it in a separate file as a top-level interface so as to be accessible for the sorting
-    //  utility classes as well
     /**
      * This interface although a Comparator it does not extends teh Comparator interface
      * because the latter is not defined for primitives and it would be better to avoid
@@ -18,32 +17,31 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
      * based syntax.
      */
     @FunctionalInterface
-    public interface IntHeapComparator {
+    public interface IntHeapComparator extends IntComparator {
 
         int compare(int a, int b);
 
         default boolean shouldSwap(int a, int b){
             return this.compare(a, b) > 0;
         }
-
     }
 
     protected int[] elements;
-    private IntHeapComparator comparator;
+    private IntComparator comparator;
 
-    protected AbstractIntHeap(IntHeapComparator comparator){
+    protected AbstractIntHeap(IntComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractIntHeap(IntHeapComparator comparator, int capacity){
+    protected AbstractIntHeap(IntComparator comparator, int capacity){
         this(new int[capacity], comparator);
     }
 
-    protected AbstractIntHeap(int[] elements, IntHeapComparator comparator){
+    protected AbstractIntHeap(int[] elements, IntComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractIntHeap(int[] elements, int size, IntHeapComparator comparator){
+    protected AbstractIntHeap(int[] elements, int size, IntComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
@@ -51,15 +49,15 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
     }
 
     @Override
-    public int getCapacity() {
+    public final int getCapacity() {
         return elements.length;
     }
 
-    public int peek(){
+    public final int peek(){
         return elements[0];
     }
 
-    public int extract(){
+    public final int extract(){
         int extracted = elements[0];
         this.elements[0] = this.elements[elements.length-1];
         this.size--;
@@ -67,7 +65,12 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         return extracted;
     }
 
-    protected void heapifyFrom(int index) {
+    @Override
+    public final void heapify(){
+        heapifyFrom(0);
+    }
+
+    protected final void heapifyFrom(int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -89,7 +92,7 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         }
     }
 
-    public void sort(){
+    public final void sort(){
         for(int i = this.getSize()-1; i>=0 ; i--){
             ArrayUtils.swap(this.elements, 0, i);
             this.setSize(this.getSize()-1);
@@ -97,7 +100,11 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         }
     }
 
-    public abstract void build();
+    public final void build(){
+        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+            heapifyFrom(i);
+        }
+    }
 
     /**
      * Increases or decreases (by adding a negative value) the initial value of the
@@ -107,12 +114,12 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
      */
     public abstract void increaseElementValueBy(int index, int value);
 
-    public void insert(int element){
+    public final void insert(int element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected void ensureInsertion(int element){
+    protected final void ensureInsertion(int element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -126,7 +133,7 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         this.elements = newElements;
     }
 
-    protected IntHeapComparator getComparator(){
+    protected final IntComparator getComparator(){
         return this.comparator;
     }
 }

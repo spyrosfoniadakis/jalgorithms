@@ -1,35 +1,38 @@
 package ds;
 
+import comparator.LongComparator;
 import utils.ArrayUtils;
 
 public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
 
     @FunctionalInterface
-    public interface LongHeapComparator {
+    public interface LongHeapComparator extends LongComparator {
 
+        @Override
         int compare(long a, long b);
 
+        @Override
         default boolean shouldSwap(long a, long b){
             return this.compare(a, b) > 0;
         }
     }
 
     protected long[] elements;
-    private LongHeapComparator comparator;
+    private LongComparator comparator;
 
-    protected AbstractLongHeap(LongHeapComparator comparator){
+    protected AbstractLongHeap(LongComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractLongHeap(LongHeapComparator comparator, int capacity){
+    protected AbstractLongHeap(LongComparator comparator, int capacity){
         this(new long[capacity], comparator);
     }
 
-    protected AbstractLongHeap(long[] elements, LongHeapComparator comparator){
+    protected AbstractLongHeap(long[] elements, LongComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractLongHeap(long[] elements, int size, LongHeapComparator comparator){
+    protected AbstractLongHeap(long[] elements, int size, LongComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
@@ -37,15 +40,15 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
     }
 
     @Override
-    public int getCapacity() {
+    public final int getCapacity() {
         return elements.length;
     }
 
-    public long peek(){
+    public final long peek(){
         return elements[0];
     }
 
-    public long extract(){
+    public final long extract(){
         long extracted = elements[0];
         this.elements[0] = this.elements[elements.length-1];
         this.size--;
@@ -53,7 +56,7 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
         return extracted;
     }
 
-    protected void heapifyFrom(int index) {
+    protected final void heapifyFrom(int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -75,7 +78,7 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
         }
     }
 
-    public void sort(){
+    public final void sort(){
         for(int i = this.getSize()-1; i>=0 ; i--){
             ArrayUtils.swap(this.elements, 0, i);
             this.setSize(this.getSize()-1);
@@ -83,7 +86,15 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
         }
     }
 
-    public abstract void build();
+    public final void heapify(){
+        heapifyFrom(0);
+    }
+
+    public final void build(){
+        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+            heapifyFrom(i);
+        }
+    }
 
     /**
      * Increases or decreases (by adding a negative value) the initial value of the
@@ -93,12 +104,12 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
      */
     public abstract void increaseElementValueBy(int index, long value);
 
-    public void insert(long element){
+    public final void insert(long element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected void ensureInsertion(long element){
+    protected final void ensureInsertion(long element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -112,7 +123,7 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
         this.elements = newElements;
     }
 
-    protected LongHeapComparator getComparator(){
+    protected final LongComparator getComparator(){
         return this.comparator;
     }
 }

@@ -1,13 +1,12 @@
 package ds;
 
+import comparator.FloatComparator;
 import utils.ArrayUtils;
 
 public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
 
-    // TODO: Consider defining it in a separate file as a top-level interface so as to be accessible for the sorting
-    //  utility classes as well
     /**
-     * This interface although a Comparator it does not extends teh Comparator interface
+     * This interface although a Comparator it does not extends the Comparator interface
      * because the latter is not defined for primitives and it would be better to avoid
      * any unnecessary boxing and unboxing. Both Comparator and IntHeapComparator define
      * the same method - boxing left aside - so nothing will actually be noticed by
@@ -18,10 +17,12 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
      * based syntax.
      */
     @FunctionalInterface
-    public interface FloatHeapComparator {
+    public interface FloatHeapComparator extends FloatComparator {
 
-        float compare(float a, float b);
+        @Override
+        int compare(float a, float b);
 
+        @Override
         default boolean shouldSwap(float a, float b){
             return this.compare(a, b) > 0;
         }
@@ -29,21 +30,21 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
     }
 
     protected float[] elements;
-    private FloatHeapComparator comparator;
+    private FloatComparator comparator;
 
-    protected AbstractFloatHeap(FloatHeapComparator comparator){
+    protected AbstractFloatHeap(FloatComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractFloatHeap(FloatHeapComparator comparator, int capacity){
+    protected AbstractFloatHeap(FloatComparator comparator, int capacity){
         this(new float[capacity], comparator);
     }
 
-    protected AbstractFloatHeap(float[] elements, FloatHeapComparator comparator){
+    protected AbstractFloatHeap(float[] elements, FloatComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractFloatHeap(float[] elements, int size, FloatHeapComparator comparator){
+    protected AbstractFloatHeap(float[] elements, int size, FloatComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
@@ -51,11 +52,11 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
     }
 
     @Override
-    public int getCapacity() {
+    public final int getCapacity() {
         return elements.length;
     }
 
-    public float peek(){
+    public final float peek(){
         return elements[0];
     }
 
@@ -67,7 +68,7 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
         return extracted;
     }
 
-    protected void heapifyFrom(int index) {
+    protected final void heapifyFrom(int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -89,7 +90,7 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
         }
     }
 
-    public void sort(){
+    public final void sort(){
         for(int i = this.getSize()-1; i>=0 ; i--){
             ArrayUtils.swap(this.elements, 0, i);
             this.setSize(this.getSize()-1);
@@ -97,7 +98,16 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
         }
     }
 
-    public abstract void build();
+    @Override
+    public final void heapify(){
+        heapifyFrom(0);
+    }
+
+    public final void build(){
+        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+            heapifyFrom(i);
+        }
+    }
 
     /**
      * Increases or decreases (by adding a negative value) the initial value of the
@@ -107,12 +117,12 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
      */
     public abstract void increaseElementValueBy(int index, float value);
 
-    public void insert(int element){
+    public final void insert(int element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected void ensureInsertion(float element){
+    protected final void ensureInsertion(float element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -126,7 +136,7 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
         this.elements = newElements;
     }
 
-    protected FloatHeapComparator getComparator(){
+    protected final FloatComparator getComparator(){
         return this.comparator;
     }
 }

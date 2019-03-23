@@ -36,12 +36,12 @@ public class DoubleMinHeap extends AbstractDoubleHeap{
         super(elements, size, (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    @Override
-    public void build() {
-        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
-            heapifyFrom(i);
-        }
-    }
+//    @Override
+//    public void build() {
+//        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+//            heapifyFrom(i);
+//        }
+//    }
 
     @Override
     public void increaseElementValueBy(int index, double value) {
@@ -61,10 +61,10 @@ public class DoubleMinHeap extends AbstractDoubleHeap{
         }
     }
 
-    @Override
-    public void heapify() {
-        super.heapifyFrom(0);
-    }
+//    @Override
+//    public void heapify() {
+//        super.heapifyFrom(0);
+//    }
 
     public final static DoubleMinHeap newHeap(){
         return new DoubleMinHeap();
