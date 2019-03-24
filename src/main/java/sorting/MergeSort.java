@@ -31,116 +31,134 @@ public final class MergeSort {
 
     private static class MergeSorter implements Sorter {
 
-        @Override
-        public void sort(int[] numbers) {
-            sort(numbers, 0, numbers.length);
+        private int getMiddleIndex(int start, int end) {
+            return ((start + end) % 2 == 0) ? Math.floorDiv(start + end, 2) : Math.floorDiv(start + end, 2) + 1;
         }
 
-        public void sort(int[] numbers, int start, int end){
+        @Override
+        public void sort(int[] numbers) {
+            this.sort(numbers, SortingDirection.ASCENDING);
+        }
+
+        public void sort(int[] numbers, SortingDirection direction) {
+            sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(int[] numbers, int start, int end, SortingDirection direction){
             if(isSingleElementArray(start, end))
                 return;
 
             int middle = getMiddleIndex(start, end);
             System.out.println(String.format("start: %d, end: %d, middle: %d", start, end, middle));
-            this.sort(numbers, start, middle);
-            this.sort(numbers, middle, end);
-            merge(numbers, start, middle, end);
+            this.sort(numbers, start, middle, direction);
+            this.sort(numbers, middle, end, direction);
+            merge(numbers, start, middle, end, direction);
         }
 
-        private void merge(int[] numbers, int start, int middle, int end) {
+        private void merge(int[] numbers, int start, int middle, int end, SortingDirection direction) {
             int[] left = Arrays.copyOfRange(numbers, start, middle);
             int[] right = Arrays.copyOfRange(numbers, middle, end);
 
             int i = 0;
             int j = 0;
-            for(int index = start; index < end; index ++){
-                boolean chooseFromleft = (j == right.length) || (i < left.length && left[i] <= right[j]);
+            for(int index = start; index < end; index++){
+                boolean chooseFromleft = (j == right.length) || (i < left.length && !direction.getIntComparator().shouldSwap(left[i], right[j]));
                 numbers[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
 
         @Override
         public void sort(long[] numbers) {
-            sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(long[] numbers, int start, int end){
+        public void sort(long[] numbers, SortingDirection direction) {
+            sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(long[] numbers, int start, int end, SortingDirection direction){
             if(isSingleElementArray(start, end))
                 return;
 
             int middle = getMiddleIndex(start, end);
-            this.sort(numbers, start, middle);
-            this.sort(numbers, middle, end);
-            merge(numbers, start, middle, end);
+            System.out.println(String.format("start: %d, end: %d, middle: %d", start, end, middle));
+            this.sort(numbers, start, middle, direction);
+            this.sort(numbers, middle, end, direction);
+            merge(numbers, start, middle, end, direction);
         }
 
-        private int getMiddleIndex(int start, int end) {
-            return ((start + end) % 2 == 0) ? Math.floorDiv(start + end, 2) : Math.floorDiv(start + end, 2) + 1;
-        }
-
-        private void merge(long[] numbers, int start, int middle, int end) {
+        private void merge(long[] numbers, int start, int middle, int end, SortingDirection direction) {
             long[] left = Arrays.copyOfRange(numbers, start, middle);
             long[] right = Arrays.copyOfRange(numbers, middle, end);
 
             int i = 0;
             int j = 0;
-            for(int index = start; index < end; index ++){
-                boolean chooseFromleft = (j == right.length) || (i < left.length && left[i] <= right[j]);
-                numbers[index] = (chooseFromleft) ? left[i] : right[j];
+            for(int index = start; index < end; index++){
+                boolean chooseFromleft = (j == right.length) || (i < left.length && !direction.getLongComparator().shouldSwap(left[i], right[j]));
+                numbers[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
 
         @Override
         public void sort(float[] numbers) {
-            sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(float[] numbers, int start, int end){
+        public void sort(float[] numbers, SortingDirection direction) {
+            sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(float[] numbers, int start, int end, SortingDirection direction){
             if(isSingleElementArray(start, end))
                 return;
 
             int middle = getMiddleIndex(start, end);
-            this.sort(numbers, start, middle);
-            this.sort(numbers, middle, end);
-            merge(numbers, start, middle, end);
+            System.out.println(String.format("start: %d, end: %d, middle: %d", start, end, middle));
+            this.sort(numbers, start, middle, direction);
+            this.sort(numbers, middle, end, direction);
+            merge(numbers, start, middle, end, direction);
         }
 
-        private void merge(float[] numbers, int start, int middle, int end) {
+        private void merge(float[] numbers, int start, int middle, int end, SortingDirection direction) {
             float[] left = Arrays.copyOfRange(numbers, start, middle);
             float[] right = Arrays.copyOfRange(numbers, middle, end);
 
             int i = 0;
             int j = 0;
             for(int index = start; index < end; index ++){
-                boolean chooseFromleft = (j == right.length) || (i < left.length && left[i] <= right[j]);
-                numbers[index] = (chooseFromleft) ? left[i] : right[j];
+                boolean chooseFromleft = (j == right.length) || (i < left.length && !direction.getFloatComparator().shouldSwap(left[i], right[j]));
+                numbers[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
 
         @Override
         public void sort(double[] numbers) {
-            sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(double[] numbers, int start, int end){
+        public void sort(double[] numbers, SortingDirection direction) {
+            sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(double[] numbers, int start, int end, SortingDirection direction){
             if(isSingleElementArray(start, end))
                 return;
 
             int middle = getMiddleIndex(start, end);
-            this.sort(numbers, start, middle);
-            this.sort(numbers, middle, end);
-            merge(numbers, start, middle, end);
+            this.sort(numbers, start, middle, direction);
+            this.sort(numbers, middle, end, direction);
+            merge(numbers, start, middle, end, direction);
         }
 
-        private void merge(double[] numbers, int start, int middle, int end) {
+        private void merge(double[] numbers, int start, int middle, int end, SortingDirection direction) {
             double[] left = Arrays.copyOfRange(numbers, start, middle);
             double[] right = Arrays.copyOfRange(numbers, middle, end);
 
             int i = 0;
             int j = 0;
             for(int index = start; index < end; index ++){
-                boolean chooseFromleft = (j == right.length) || (i < left.length && left[i] <= right[j]);
-                numbers[index] = (chooseFromleft) ? left[i] : right[j];
+                boolean chooseFromleft = (j == right.length) || (i < left.length && !direction.getDoubleComparator().shouldSwap(left[i], right[j]));
+                numbers[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
 
@@ -171,7 +189,7 @@ public final class MergeSort {
             int j = 0;
             for(int index = start; index < end; index ++){
                 boolean chooseFromleft = (j == right.length) || (i < left.length && left[i].compareTo(right[j]) <= 0);
-                elements[index] = (chooseFromleft) ? left[i] : right[j];
+                elements[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
 
@@ -198,7 +216,7 @@ public final class MergeSort {
             int j = 0;
             for(int index = start; index < end; index ++){
                 boolean chooseFromleft = (j == right.length) || (i < left.length && comparator.compare(left[i], right[j]) <= 0);
-                elements[index] = (chooseFromleft) ? left[i] : right[j];
+                elements[index] = (chooseFromleft) ? left[i++] : right[j++];
             }
         }
     }
