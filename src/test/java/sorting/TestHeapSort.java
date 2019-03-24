@@ -1,9 +1,6 @@
 package sorting;
 
 import org.junit.Test;
-import utils.AssertUtils;
-
-import java.util.Arrays;
 
 public class TestHeapSort {
 

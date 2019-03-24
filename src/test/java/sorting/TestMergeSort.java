@@ -1,10 +1,6 @@
 package sorting;
 
 import org.junit.Test;
-import sorting.MergeSort;
-import utils.AssertUtils;
-
-import java.util.Arrays;
 
 public class TestMergeSort {
 

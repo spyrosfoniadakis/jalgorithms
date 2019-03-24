@@ -1,6 +1,14 @@
 package utils;
 
-import ds.*;
+
+import ds.DoubleMaxHeap;
+import ds.DoubleMinHeap;
+import ds.FloatMaxHeap;
+import ds.FloatMinHeap;
+import ds.IntMaxHeap;
+import ds.IntMinHeap;
+import ds.LongMaxHeap;
+import ds.LongMinHeap;
 import org.junit.Assert;
 import sorting.SortingDirection;
 

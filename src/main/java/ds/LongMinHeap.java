@@ -35,18 +35,6 @@ public class LongMinHeap extends AbstractLongHeap  {
         super(elements, size, (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-//    @Override
-//    public final void heapify(){
-//        super.heapifyFrom(0);
-//    }
-//
-//    @Override
-//    public final void build(){
-//        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
-//            heapifyFrom(i);
-//        }
-//    }
-
     @Override
     public final void increaseElementValueBy(int index, long value){
         this.elements[index] += value;

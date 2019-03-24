@@ -35,7 +35,6 @@ public final class InsertionSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-
         public void sort(int[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 int key = numbers[i];

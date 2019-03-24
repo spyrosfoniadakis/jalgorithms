@@ -1,7 +1,10 @@
 package sorting;
 
-import comparator.*;
-import ds.*;
+import comparator.Comparators;
+import comparator.DoubleComparator;
+import comparator.FloatComparator;
+import comparator.IntComparator;
+import comparator.LongComparator;
 
 public enum SortingDirection {
     ASCENDING{
@@ -62,5 +65,4 @@ public enum SortingDirection {
     public abstract LongComparator getLongComparator();
     public abstract FloatComparator getFloatComparator();
     public abstract DoubleComparator getDoubleComparator();
-
 }
