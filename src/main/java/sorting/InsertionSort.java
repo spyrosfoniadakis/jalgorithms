@@ -33,15 +33,6 @@ public final class InsertionSort {
         @Override
         public void sort(int[] numbers) {
             this.sort(numbers, SortingDirection.ASCENDING);
-//            for(int i = 1; i < numbers.length; i++){
-//                int key = numbers[i];
-//                int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
-//                    numbers[j+1] = numbers[j];
-//                    j--;
-//                }
-//                numbers[j+1] = key;
-//            }
         }
 
 
@@ -49,7 +40,6 @@ public final class InsertionSort {
             for(int i = 1; i < numbers.length; i++){
                 int key = numbers[i];
                 int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
                 while(j >= 0 && direction.getIntComparator().shouldSwap(numbers[j], key)){
                     numbers[j+1] = numbers[j];
                     j--;
@@ -60,25 +50,13 @@ public final class InsertionSort {
 
         @Override
         public void sort(long[] numbers) {
-
             this.sort(numbers, SortingDirection.ASCENDING);
-
-//            for(int i = 1; i < numbers.length; i++){
-//                long key = numbers[i];
-//                int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
-//                    numbers[j+1] = numbers[j];
-//                    j--;
-//                }
-//                numbers[j+1] = key;
-//            }
         }
 
         public void sort(long[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 long key = numbers[i];
                 int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
                 while(j >= 0 && direction.getLongComparator().shouldSwap(numbers[j], key)){
                     numbers[j+1] = numbers[j];
                     j--;
@@ -90,22 +68,12 @@ public final class InsertionSort {
         @Override
         public void sort(float[] numbers) {
             this.sort(numbers, SortingDirection.ASCENDING);
-//            for(int i = 1; i < numbers.length; i++){
-//                float key = numbers[i];
-//                int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
-//                    numbers[j+1] = numbers[j];
-//                    j--;
-//                }
-//                numbers[j+1] = key;
-//            }
         }
 
         public void sort(float[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 float key = numbers[i];
                 int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
                 while(j >= 0 && direction.getFloatComparator().shouldSwap(numbers[j], key)){
                     numbers[j+1] = numbers[j];
                     j--;
@@ -117,22 +85,12 @@ public final class InsertionSort {
         @Override
         public void sort(double[] numbers) {
             this.sort(numbers, SortingDirection.ASCENDING);
-//            for(int i = 1; i < numbers.length; i++){
-//                double key = numbers[i];
-//                int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
-//                    numbers[j+1] = numbers[j];
-//                    j--;
-//                }
-//                numbers[j+1] = key;
-//            }
         }
 
         public void sort(double[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 double key = numbers[i];
                 int j = i-1;
-//                while(j >= 0 && numbers[j] > key){
                 while(j >= 0 && direction.getDoubleComparator().shouldSwap(numbers[j], key)){
                     numbers[j+1] = numbers[j];
                     j--;
