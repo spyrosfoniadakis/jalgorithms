@@ -5,7 +5,6 @@ import org.junit.Assert;
 import sorting.SortingDirection;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
@@ -119,35 +118,6 @@ public class AssertUtils {
         assertIsSorted(extracted, SortingDirection.ASCENDING);
     }
 
-    public enum SortingDirection{
-        ASCENDING{
-//            @Override
-//            public BiFunction<Integer, Integer, Boolean> shouldSwap() {
-//                return (a, b) -> a > b ;
-//            }
-
-            @Override
-            public <T extends Comparable<T>> BiFunction<T, T, Boolean> shouldSwap() {
-                return (a, b) -> a.compareTo(b) > 0 ;
-            }
-
-        },
-        DESCENDING{
-//            @Override
-//            public BiFunction<Integer, Integer, Boolean> shouldSwap() {
-//                return (a, b) -> a < b ;
-//            }
-
-            @Override
-            public <T extends Comparable<T>> BiFunction<T, T, Boolean> shouldSwap() {
-                return (a, b) -> a.compareTo(b) < 0 ;
-            }
-        };
-
-        public abstract <T extends Comparable<T>> BiFunction<T, T, Boolean> shouldSwap();
-
-    }
-
     public static void assertIsSorted(int[] numbers) {
         int prev = 0;
         int current = 1;
@@ -160,8 +130,7 @@ public class AssertUtils {
         int prev = 0;
         int current = 1;
         while(current < numbers.length){
-//            Assert.assertThat(numbers[prev++], is(lessThanOrEqualTo(numbers[current++])));
-            Assert.assertThat(!direction.<Integer>shouldSwap().apply(numbers[prev++], numbers[current++]), is(equalTo(true)));
+            Assert.assertThat(direction.getIntComparator().shouldSwap(numbers[prev++], numbers[current++]), is(equalTo(false)));
         }
     }
 
@@ -169,8 +138,7 @@ public class AssertUtils {
         int prev = 0;
         int current = 1;
         while(current < numbers.length){
-//            Assert.assertThat(numbers[prev++], is(lessThanOrEqualTo(numbers[current++])));
-            Assert.assertThat(!direction.<Long>shouldSwap().apply(numbers[prev++], numbers[current++]), is(equalTo(true)));
+            Assert.assertThat(direction.getLongComparator().shouldSwap(numbers[prev++], numbers[current++]), is(equalTo(false)));
         }
     }
 
@@ -178,8 +146,7 @@ public class AssertUtils {
         int prev = 0;
         int current = 1;
         while(current < numbers.length){
-//            Assert.assertThat(numbers[prev++], is(lessThanOrEqualTo(numbers[current++])));
-            Assert.assertThat(!direction.<Float>shouldSwap().apply(numbers[prev++], numbers[current++]), is(equalTo(true)));
+            Assert.assertThat(direction.getFloatComparator().shouldSwap(numbers[prev++], numbers[current++]), is(equalTo(false)));
         }
     }
 
@@ -187,8 +154,7 @@ public class AssertUtils {
         int prev = 0;
         int current = 1;
         while(current < numbers.length){
-//            Assert.assertThat(numbers[prev++], is(lessThanOrEqualTo(numbers[current++])));
-            Assert.assertThat(!direction.<Double>shouldSwap().apply(numbers[prev++], numbers[current++]), is(equalTo(true)));
+            Assert.assertThat(direction.getDoubleComparator().shouldSwap(numbers[prev++], numbers[current++]), is(equalTo(false)));
         }
     }
 
