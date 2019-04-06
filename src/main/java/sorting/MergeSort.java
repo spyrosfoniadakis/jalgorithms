@@ -40,6 +40,7 @@ public final class MergeSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(int[] numbers, SortingDirection direction) {
             sort(numbers, 0, numbers.length, direction);
         }
@@ -72,6 +73,7 @@ public final class MergeSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(long[] numbers, SortingDirection direction) {
             sort(numbers, 0, numbers.length, direction);
         }
@@ -104,6 +106,7 @@ public final class MergeSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(float[] numbers, SortingDirection direction) {
             sort(numbers, 0, numbers.length, direction);
         }
@@ -136,6 +139,7 @@ public final class MergeSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(double[] numbers, SortingDirection direction) {
             sort(numbers, 0, numbers.length, direction);
         }

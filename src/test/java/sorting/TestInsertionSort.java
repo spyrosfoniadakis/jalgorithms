@@ -51,5 +51,4 @@ public class TestInsertionSort {
         double[] numbers = new double[]{1.0d, 14.1d, 8.3d, 10.8d, 6.2d, 9.01d, 21.3d, 16.7d, 12.2d, 3.3d, 0.4d};
         SortingUtils.executeSortTestOn(numbers, SortingDirection.ASCENDING, InsertionSort::sort, "test_insertionSort_doubleSorted");
     }
-
 }

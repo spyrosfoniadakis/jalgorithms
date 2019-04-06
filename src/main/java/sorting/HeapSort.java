@@ -113,6 +113,7 @@ public final class HeapSort {
             IntHeap.from(numbers, Comparators.INT_ASCENDING_COMPARATOR).sort();
         }
 
+        @Override
         public void sort(int[] numbers, SortingDirection direction) {
             IntHeap.from(numbers, direction.getOpposite().getIntComparator()).sort();
         }
@@ -122,6 +123,7 @@ public final class HeapSort {
             LongHeap.from(numbers, Comparators.LONG_ASCENDING_COMPARATOR).sort();
         }
 
+        @Override
         public void sort(long[] numbers, SortingDirection direction) {
             LongHeap.from(numbers, direction.getOpposite().getLongComparator()).sort();
         }
@@ -131,6 +133,7 @@ public final class HeapSort {
             FloatHeap.from(numbers, Comparators.FLOAT_ASCENDING_COMPARATOR).sort();
         }
 
+        @Override
         public void sort(float[] numbers, SortingDirection direction) {
             FloatHeap.from(numbers, direction.getOpposite().getFloatComparator()).sort();
         }
@@ -140,6 +143,7 @@ public final class HeapSort {
             DoubleHeap.from(numbers, Comparators.DOUBLE_ASCENDING_COMPARATOR).sort();
         }
 
+        @Override
         public void sort(double[] numbers, SortingDirection direction) {
             DoubleHeap.from(numbers, direction.getOpposite().getDoubleComparator()).sort();
         }

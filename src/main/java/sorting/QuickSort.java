@@ -41,23 +41,28 @@ public final class QuickSort {
 
         @Override
         public void sort(int[] numbers) {
-            this.sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(int[] numbers, int start, int end) {
+        @Override
+        public void sort(int[] numbers, SortingDirection direction) {
+            this.sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(int[] numbers, int start, int end, SortingDirection direction) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end);
-            this.sort(numbers, start, partitionIndex);
-            this.sort(numbers, partitionIndex+1, end);
+            int partitionIndex = this.getPartitionIndex(numbers, start, end, direction);
+            this.sort(numbers, start, partitionIndex, direction);
+            this.sort(numbers, partitionIndex+1, end, direction);
         }
 
-        private int getPartitionIndex(int[] numbers, int start, int end) {
+        private int getPartitionIndex(int[] numbers, int start, int end, SortingDirection direction) {
             int pointOfReference = numbers[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(numbers[i] <= pointOfReference){
+                if(direction.getOpposite().getIntComparator().shouldSwap(numbers[i], pointOfReference)){
                     ArrayUtils.swap(numbers, i, ++partitionIndex);
                 }
             }
@@ -68,23 +73,28 @@ public final class QuickSort {
 
         @Override
         public void sort(long[] numbers) {
-            this.sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(long[] numbers, int start, int end) {
+        @Override
+        public void sort(long[] numbers, SortingDirection direction) {
+            this.sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(long[] numbers, int start, int end, SortingDirection direction) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end);
-            this.sort(numbers, start, partitionIndex);
-            this.sort(numbers, partitionIndex+1, end);
+            int partitionIndex = this.getPartitionIndex(numbers, start, end, direction);
+            this.sort(numbers, start, partitionIndex, direction);
+            this.sort(numbers, partitionIndex+1, end, direction);
         }
 
-        private int getPartitionIndex(long[] numbers, int start, int end) {
+        private int getPartitionIndex(long[] numbers, int start, int end, SortingDirection direction) {
             long pointOfReference = numbers[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(numbers[i] <= pointOfReference){
+                if(direction.getOpposite().getLongComparator().shouldSwap(numbers[i], pointOfReference)){
                     ArrayUtils.swap(numbers, i, ++partitionIndex);
                 }
             }
@@ -95,23 +105,28 @@ public final class QuickSort {
 
         @Override
         public void sort(float[] numbers) {
-            this.sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(float[] numbers, int start, int end) {
+        @Override
+        public void sort(float[] numbers, SortingDirection direction) {
+            this.sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(float[] numbers, int start, int end, SortingDirection direction) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end);
-            this.sort(numbers, start, partitionIndex);
-            this.sort(numbers, partitionIndex+1, end);
+            int partitionIndex = this.getPartitionIndex(numbers, start, end, direction);
+            this.sort(numbers, start, partitionIndex, direction);
+            this.sort(numbers, partitionIndex+1, end, direction);
         }
 
-        private int getPartitionIndex(float[] numbers, int start, int end) {
+        private int getPartitionIndex(float[] numbers, int start, int end, SortingDirection direction) {
             float pointOfReference = numbers[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(numbers[i] <= pointOfReference){
+                if(direction.getOpposite().getFloatComparator().shouldSwap(numbers[i], pointOfReference)){
                     ArrayUtils.swap(numbers, i, ++partitionIndex);
                 }
             }
@@ -122,23 +137,28 @@ public final class QuickSort {
 
         @Override
         public void sort(double[] numbers) {
-            this.sort(numbers, 0, numbers.length);
+            this.sort(numbers, SortingDirection.ASCENDING);
         }
 
-        public void sort(double[] numbers, int start, int end) {
+        @Override
+        public void sort(double[] numbers, SortingDirection direction) {
+            this.sort(numbers, 0, numbers.length, direction);
+        }
+
+        public void sort(double[] numbers, int start, int end, SortingDirection direction) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end);
-            this.sort(numbers, start, partitionIndex);
-            this.sort(numbers, partitionIndex+1, end);
+            int partitionIndex = this.getPartitionIndex(numbers, start, end, direction);
+            this.sort(numbers, start, partitionIndex, direction);
+            this.sort(numbers, partitionIndex+1, end, direction);
         }
 
-        private int getPartitionIndex(double[] numbers, int start, int end) {
+        private int getPartitionIndex(double[] numbers, int start, int end, SortingDirection direction) {
             double pointOfReference = numbers[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(numbers[i] <= pointOfReference){
+                if(direction.getOpposite().getDoubleComparator().shouldSwap(numbers[i], pointOfReference)){
                     ArrayUtils.swap(numbers, i, ++partitionIndex);
                 }
             }

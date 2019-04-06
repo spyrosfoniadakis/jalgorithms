@@ -35,6 +35,7 @@ public final class InsertionSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(int[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 int key = numbers[i];
@@ -52,6 +53,7 @@ public final class InsertionSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(long[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 long key = numbers[i];
@@ -69,6 +71,7 @@ public final class InsertionSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(float[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 float key = numbers[i];
@@ -86,6 +89,7 @@ public final class InsertionSort {
             this.sort(numbers, SortingDirection.ASCENDING);
         }
 
+        @Override
         public void sort(double[] numbers, SortingDirection direction) {
             for(int i = 1; i < numbers.length; i++){
                 double key = numbers[i];
