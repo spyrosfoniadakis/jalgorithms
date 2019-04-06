@@ -38,4 +38,15 @@ public final class ArrayUtils {
         numbers[index1] = numbers[index2];
         numbers[index2] = tmp;
     }
+
+    public static int indexOfMax(int[] numbers){
+        if(numbers.length == 0){
+            throw new IllegalArgumentException("Array must have at least one element.");
+        }
+        int maxIndex = 0;
+        for(int i=1; i<numbers.length; i++){
+            maxIndex = (numbers[maxIndex] < numbers[i]) ? i : maxIndex;
+        }
+        return maxIndex;
+    }
 }

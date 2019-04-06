@@ -15,16 +15,32 @@ public final class InsertionSort {
         sorter.sort(numbers);
     }
 
+    public static void sort(int[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
+    }
+
     public static void sort(float[] numbers){
         sorter.sort(numbers);
+    }
+
+    public static void sort(float[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
     }
 
     public static void sort(long[] numbers){
         sorter.sort(numbers);
     }
 
+    public static void sort(long[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
+    }
+
     public static void sort(double[] numbers){
         sorter.sort(numbers);
+    }
+
+    public static void sort(double[] numbers, SortingDirection direction){
+        sorter.sort(numbers, direction);
     }
 
 
