@@ -25,4 +25,18 @@ public class ReflectionUtils {
         field.setAccessible(true);
         return field.get(object);
     }
+
+//    public static Object executeMethodOf(Object object, String className, String methodName) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+//        Class c = Class.forName(className);
+//        Method method= c.getMethod();
+//        Optional<Field> optionalField = Arrays.stream(fields).filter(f->f.getName().equals(fieldName)).findFirst();
+//
+//        while(!optionalField.isPresent() && (c = c.getSuperclass()) != null){
+//            optionalField = Arrays.stream(c.getDeclaredFields()).filter(f->f.getName().equals(fieldName)).findFirst();
+//        }
+//
+//        Field field = optionalField.orElseThrow(() -> new NoSuchFieldException());
+//        field.setAccessible(true);
+//        return field.get(object);
+//    }
 }

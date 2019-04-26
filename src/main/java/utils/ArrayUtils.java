@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 public final class ArrayUtils {
 
     private static String INSTANTIATION_ERROR_MESSAGE = String.format("Class %s should not be initialized.", ArrayUtils.class.getSimpleName());
@@ -48,5 +50,14 @@ public final class ArrayUtils {
             maxIndex = (numbers[maxIndex] < numbers[i]) ? i : maxIndex;
         }
         return maxIndex;
+    }
+
+    public static int[] createIntArrayFrom(List<Integer> numbers) {
+        int index = 0;
+        int[] result = new int[numbers.size()];
+        for(int number : numbers){
+            result[index++] = number;
+        }
+        return result;
     }
 }
