@@ -22,5 +22,8 @@ Up to now it supports the following:
 ## Caution!
 Any other data structure implementation that you may find in the source-code that is available but not listed in above, it is in a non-final state.
 
+## Configuration
+It is written in Java 8
+
 ## License
 It is licensed under the [Apache Licence version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
