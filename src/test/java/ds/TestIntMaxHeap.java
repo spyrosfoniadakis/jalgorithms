@@ -69,7 +69,7 @@ public class TestIntMaxHeap {
         AssertUtils.assertIsMaxHeap(heap);
 
         AssertUtils.areIdentical(elements, numbers);
-        System.out.println(String.format("After building heap: %s", Arrays.toString(elements)));
+        System.out.println(String.format("After asserting on the contents: %s", Arrays.toString(elements)));
     }
 
     @Test
@@ -123,6 +123,59 @@ public class TestIntMaxHeap {
         int peeked = heap.peek();
         int extracted = heap.extract();
         Assert.assertThat(peeked, is(equalTo(extracted)));
+    }
+
+    @Test
+    public void test_afterSubsequentExtractionTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMaxHeap heap = IntMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        heap.extract();
+        heap.extract();
+        heap.extract();
+        AssertUtils.assertIsMaxHeap(heap);
+    }
+
+    @Test
+    public void test_insertIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMaxHeap heap = IntMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        // then
+        int sizeBefore = heap.getSize();
+        heap.insert(30);
+        int sizeAfter = heap.getSize();
+
+        Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+
+    }
+
+    @Test
+    public void test_insertAddsTheElement() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMaxHeap heap = IntMaxHeap.from(numbers);
+
+        // when
+        int[] elementsBefore = (int[]) ReflectionUtils.getFieldValueOf(heap, IntMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        int toInsert = 30;
+        Assert.assertThat(Arrays.stream(elementsBefore).anyMatch(e -> e == toInsert), is(equalTo(false)));
+
+        heap.insert(30);
+        int[] elementsAfter = (int[]) ReflectionUtils.getFieldValueOf(heap, IntMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+
+        // then
+        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> e == toInsert), is(equalTo(true)));
     }
 
     @Test

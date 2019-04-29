@@ -126,6 +126,59 @@ public class TestIntMinHeap {
     }
 
     @Test
+    public void test_afterSubsequentExtractionTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMinHeap heap = IntMinHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        heap.extract();
+        heap.extract();
+        heap.extract();
+        AssertUtils.assertIsMinHeap(heap);
+    }
+
+    @Test
+    public void test_insertIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMinHeap heap = IntMinHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        // then
+        int sizeBefore = heap.getSize();
+        heap.insert(30);
+        int sizeAfter = heap.getSize();
+
+        Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+
+    }
+
+    @Test
+    public void test_insertAddsTheElement() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        IntMinHeap heap = IntMinHeap.from(numbers);
+
+        // when
+        int[] elementsBefore = (int[]) ReflectionUtils.getFieldValueOf(heap, IntMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        int toInsert = 30;
+        Assert.assertThat(Arrays.stream(elementsBefore).anyMatch(e -> e == toInsert), is(equalTo(false)));
+
+        heap.insert(30);
+        int[] elementsAfter = (int[]) ReflectionUtils.getFieldValueOf(heap, IntMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+
+        // then
+        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> e == toInsert), is(equalTo(true)));
+    }
+
+    @Test
     public void test_parentElementIsSmallerThanTheChildElements() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         int[] numbers = new int[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
