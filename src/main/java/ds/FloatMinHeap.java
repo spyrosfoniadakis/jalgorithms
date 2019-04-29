@@ -32,7 +32,7 @@ public class FloatMinHeap extends AbstractFloatHeap {
     }
 
     FloatMinHeap(float[] elements, int size){
-        super(elements, size, (a, b) -> a > b ? 1 : a < b ? -1 : 0);
+        super(elements, size, (FloatHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
     @Override

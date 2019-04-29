@@ -33,7 +33,7 @@ public class DoubleMaxHeap extends AbstractDoubleHeap{
     }
 
     DoubleMaxHeap(double[] elements, int size){
-        super(elements, size, (a, b) -> a > b ? -1 : a < b ? 1 : 0);
+        super(elements, size, (DoubleHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
     @Override

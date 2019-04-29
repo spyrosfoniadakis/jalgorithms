@@ -32,7 +32,7 @@ public class LongMaxHeap extends AbstractLongHeap  {
     }
 
     LongMaxHeap(long[] elements, int size){
-        super(elements, size, (a, b) -> a > b ? -1 : a < b ? 1 : 0);
+        super(elements, size, (LongHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
     @Override

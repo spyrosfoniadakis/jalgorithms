@@ -20,7 +20,7 @@ public class IntMinHeap extends AbstractIntHeap{
     }
 
     IntMinHeap(int[] elements, int size){
-        super(elements, size, (a, b) -> a < b ? -1 : a > b ? 1 : 0);
+        super(elements, size, (IntHeapComparator) (a, b) -> a < b ? -1 : a > b ? 1 : 0);
     }
 
     @Override

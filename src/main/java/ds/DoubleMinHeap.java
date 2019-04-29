@@ -33,7 +33,7 @@ public class DoubleMinHeap extends AbstractDoubleHeap{
     }
 
     DoubleMinHeap(double[] elements, int size){
-        super(elements, size, (a, b) -> a > b ? 1 : a < b ? -1 : 0);
+        super(elements, size, (DoubleHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
     @Override

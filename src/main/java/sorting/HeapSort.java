@@ -2,6 +2,7 @@ package sorting;
 
 import comparator.*;
 import ds.*;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Comparator;
 
@@ -151,12 +152,12 @@ public final class HeapSort {
 
         @Override
         public <T extends Comparable<T>> void sort(T[] elements) {
-
+            throw new NotImplementedException("HeapSort for Objects implementing Comparable is not yet implemented.");
         }
 
         @Override
         public <T> void sort(T[] elements, Comparator<T> comparator) {
-
+            throw new NotImplementedException("HeapSort for Objects ordered via Comparator is not yet implemented.");
         }
     }
 }
