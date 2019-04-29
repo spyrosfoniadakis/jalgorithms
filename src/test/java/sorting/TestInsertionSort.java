@@ -1,6 +1,8 @@
 package sorting;
 
+import misc.Person;
 import org.junit.Test;
+import utils.DateUtils;
 
 public class TestInsertionSort {
 
@@ -50,5 +52,63 @@ public class TestInsertionSort {
     public void test_insertionSort_doubleSorted(){
         double[] numbers = new double[]{1.0d, 14.1d, 8.3d, 10.8d, 6.2d, 9.01d, 21.3d, 16.7d, 12.2d, 3.3d, 0.4d};
         SortingUtils.executeSortTestOn(numbers, SortingDirection.ASCENDING, InsertionSort::sort, "test_insertionSort_doubleSorted");
+    }
+
+    @Test
+    public void test_insertionSort_objects_comparable(){
+        Person[] persons = new Person[]{
+            Person.from("John", "Doe", DateUtils.getDateFrom(1980, 7, 19)),
+            Person.from("Jack", "Brown", DateUtils.getDateFrom(1990, 8, 14)),
+            Person.from("Joe", "Black", DateUtils.getDateFrom(1997, 3, 20)),
+            Person.from("Hank", "Smith", DateUtils.getDateFrom(1972, 10, 30)),
+            Person.from("Tim", "Johnson", DateUtils.getDateFrom(1979, 1, 22)),
+            Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
+            Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7))
+        };
+        SortingUtils.executeSortTestOn(persons, InsertionSort::sort, "test_insertionSort_objects_comparable");
+    }
+
+    @Test
+    public void test_insertionSort_objects_comparable_sorted(){
+        Person[] persons = new Person[]{
+                Person.from("Jack", "Brown", DateUtils.getDateFrom(1990, 8, 14)),
+                Person.from("Joe", "Black", DateUtils.getDateFrom(1997, 3, 20)),
+                Person.from("John", "Doe", DateUtils.getDateFrom(1980, 7, 19)),
+                Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7)),
+                Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
+                Person.from("Tim", "Johnson", DateUtils.getDateFrom(1979, 1, 22)),
+                Person.from("Hank", "Smith", DateUtils.getDateFrom(1972, 10, 30))
+        };
+        SortingUtils.executeSortTestOn(persons, InsertionSort::sort, "test_insertionSort_objects_comparable_sorted");
+    }
+
+    @Test
+    public void test_insertionSort_objects_comparator(){
+        Person[] persons = new Person[]{
+                Person.from("John", "Doe", DateUtils.getDateFrom(1980, 7, 19)),
+                Person.from("Jack", "Brown", DateUtils.getDateFrom(1990, 8, 14)),
+                Person.from("Joe", "Black", DateUtils.getDateFrom(1997, 3, 20)),
+                Person.from("Hank", "Smith", DateUtils.getDateFrom(1972, 10, 30)),
+                Person.from("Tim", "Johnson", DateUtils.getDateFrom(1979, 1, 22)),
+                Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
+                Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7))
+        };
+        Person.AgeComparator comparator = Person.newAgeComparator();
+        SortingUtils.executeSortTestOn(persons, comparator, InsertionSort::sort, "test_insertionSort_objects_comparator");
+    }
+
+    @Test
+    public void test_insertionSort_objects_comparator_sorted(){
+        Person[] persons = new Person[]{
+                Person.from("Hank", "Smith", DateUtils.getDateFrom(1972, 10, 30)),
+                Person.from("Tim", "Johnson", DateUtils.getDateFrom(1979, 1, 22)),
+                Person.from("John", "Doe", DateUtils.getDateFrom(1980, 7, 19)),
+                Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7)),
+                Person.from("Jack", "Brown", DateUtils.getDateFrom(1990, 8, 14)),
+                Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
+                Person.from("Joe", "Black", DateUtils.getDateFrom(1997, 3, 20))
+        };
+        Person.AgeComparator comparator = Person.newAgeComparator();
+        SortingUtils.executeSortTestOn(persons, comparator, InsertionSort::sort,  "test_insertionSort_objects_comparator_sorted");
     }
 }

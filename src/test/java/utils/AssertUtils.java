@@ -13,6 +13,7 @@ import org.junit.Assert;
 import sorting.SortingDirection;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
@@ -134,6 +135,22 @@ public class AssertUtils {
         }
     }
 
+    public static <T extends Comparable<T>> void assertIsSorted(T[] numbers) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(numbers[prev++].compareTo(numbers[current++]), is(lessThanOrEqualTo(0)));
+        }
+    }
+
+    public static <T> void assertIsSorted(T[] numbers, Comparator<T> comparator) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(comparator.compare(numbers[prev++], numbers[current++]), is(lessThanOrEqualTo(0)));
+        }
+    }
+
     public static void assertIsSorted(int[] numbers, SortingDirection direction) {
         int prev = 0;
         int current = 1;
@@ -196,5 +213,13 @@ public class AssertUtils {
         Arrays.sort(copyOriginal);
         Arrays.sort(copyTarget);
         Assert.assertArrayEquals(copyOriginal, copyTarget, 0);
+    }
+
+    public static <T> void areIdentical(T[] original, T[] target) {
+        T[] copyOriginal = Arrays.copyOfRange(original, 0, original.length);
+        T[] copyTarget = Arrays.copyOfRange(target, 0, target.length);
+        Arrays.sort(copyOriginal);
+        Arrays.sort(copyTarget);
+        Assert.assertArrayEquals(copyOriginal, copyTarget);
     }
 }

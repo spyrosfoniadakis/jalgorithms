@@ -43,6 +43,14 @@ public final class InsertionSort {
         sorter.sort(numbers, direction);
     }
 
+    public static <T extends Comparable<T>> void sort(T[] numbers){
+        sorter.sort(numbers);
+    }
+
+    public static <T> void sort(T[] numbers, Comparator<T> comparator){
+        sorter.sort(numbers, comparator);
+    }
+
 
     private static class InsertionSorter implements Sorter{
 
@@ -119,7 +127,6 @@ public final class InsertionSort {
         }
 
         // TODO: update the implementation using function objects!
-
         @Override
         public <T extends Comparable<T>> void sort(T[] elements) {
             for(int i = 1; i < elements.length; i++){

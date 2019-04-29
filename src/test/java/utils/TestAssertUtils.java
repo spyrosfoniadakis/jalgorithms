@@ -1,8 +1,6 @@
 package utils;
 
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import sorting.SortingDirection;
 
 public class TestAssertUtils {
