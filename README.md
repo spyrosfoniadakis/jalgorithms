@@ -21,9 +21,6 @@ Up to now it supports the following:
 <li><b>MinPriorityQueue</b> for all primitive types</li>
 </ul>
 
-## Caution!
-Any other data structure implementation that you may find in the source-code that is available but not listed in above, it is in a non-final state.
-
 ## Configuration
 Implemented in Java 8
 
