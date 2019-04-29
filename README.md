@@ -7,18 +7,18 @@ Up to now it supports the following:
 <b>Sorting algorithms:</b>
 <ul>
 <li><b>InsertionSort</b> for primitive and reference types</li>
-<li><b>MergeSort</b> for all primitive types</li>
-<li><b>QuickSort</b> for all primitive types</li>
-<li><b>HeapSort</b> for all primitive types</li>
+<li><b>MergeSort</b> for primitive types</li>
+<li><b>QuickSort</b> for primitive types</li>
+<li><b>HeapSort</b> for primitive types</li>
 <li><b>CountingSort</b> for int numbers only</li>
 </ul>
 
 <b>Data structures</b>
 <ul>
-<li><b>MaxHeap</b> for all primitive types</li>
-<li><b>MinHeap</b> for all primitive types</li>
-<li><b>MaxPriorityQueue</b> for all primitive types</li>
-<li><b>MinPriorityQueue</b> for all primitive types</li>
+<li><b>MaxHeap</b> for primitive types</li>
+<li><b>MinHeap</b> for primitive types</li>
+<li><b>MaxPriorityQueue</b> for primitive types</li>
+<li><b>MinPriorityQueue</b> for primitive types</li>
 </ul>
 
 ## Configuration
