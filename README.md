@@ -4,7 +4,7 @@ A Java Library providing an API for sorting algorithms and data structures. It i
 ## Contents
 Up to now it supports the following:
 
-Sorting algorithms:
+<b>Sorting algorithms:</b>
 <ul>
 <li><b>InsertionSort</b> for all primitive and reference types</li>
 <li><b>MergeSort</b> for all primitive types</li>
@@ -13,7 +13,7 @@ Sorting algorithms:
 <li><b>CountingSort</b> for all int numbers only</li>
 </ul>
 
-Data structures
+<b>Data structures</b>
 <ul>
 <li><b>MaxHeap</b> for all primitive types</li>
 <li><b>MinHeap</b> for all primitive types</li>
