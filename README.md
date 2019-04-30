@@ -21,8 +21,5 @@ Up to now it supports the following:
 <li><b>MinPriorityQueue</b> for primitive types</li>
 </ul>
 
-## Configuration
-Implemented in Java 8
-
 ## License
 It is licensed under the [Apache Licence version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
