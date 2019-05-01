@@ -120,7 +120,7 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
      */
     public abstract void increaseElementValueBy(int index, float value);
 
-    public final void insert(int element){
+    public final void insert(float element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }

@@ -6,6 +6,7 @@ import utils.AssertUtils;
 import utils.ReflectionUtils;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
@@ -155,10 +156,45 @@ public class TestDoubleMinHeap {
 
         // then
         int sizeBefore = heap.getSize();
-        heap.insert(30);
+        heap.insert(30d);
         int sizeAfter = heap.getSize();
 
         Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+    }
+
+    @Test
+    public void test_subsequentInsertionsIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        DoubleMinHeap heap = DoubleMinHeap.newHeap();
+
+        // when
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+
+        // then
+        Random random = new Random();
+        for(int i=0;i<100;i++){
+            int sizeBefore = heap.getSize();
+            heap.insert(random.nextDouble());
+            int sizeAfter = heap.getSize();
+
+            Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+        }
+    }
+
+    @Test
+    public void test_afterSubsequentInsertionsTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        DoubleMinHeap heap = DoubleMinHeap.newHeap();
+
+        // when
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+
+        // then
+        Random random = new Random();
+        for(int i=0;i<100;i++){
+            heap.insert(random.nextDouble());
+            AssertUtils.assertIsMinHeap(heap);
+        }
     }
 
     @Test

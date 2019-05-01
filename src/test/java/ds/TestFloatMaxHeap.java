@@ -6,6 +6,7 @@ import utils.AssertUtils;
 import utils.ReflectionUtils;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
@@ -156,10 +157,45 @@ public class TestFloatMaxHeap {
 
         // then
         int sizeBefore = heap.getSize();
-        heap.insert(30);
+        heap.insert(30f);
         int sizeAfter = heap.getSize();
 
         Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+    }
+
+    @Test
+    public void test_subsequentInsertionsIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        FloatMaxHeap heap = FloatMaxHeap.newHeap();
+
+        // when
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+
+        // then
+        Random random = new Random();
+        for(int i=0;i<100;i++){
+            int sizeBefore = heap.getSize();
+            heap.insert(random.nextFloat());
+            int sizeAfter = heap.getSize();
+
+            Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+        }
+    }
+
+    @Test
+    public void test_afterSubsequentInsertionsTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        FloatMaxHeap heap = FloatMaxHeap.newHeap();
+
+        // when
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+
+        // then
+        Random random = new Random();
+        for(int i=0;i<100;i++){
+            heap.insert(random.nextFloat());
+            AssertUtils.assertIsMaxHeap(heap);
+        }
     }
 
     @Test
