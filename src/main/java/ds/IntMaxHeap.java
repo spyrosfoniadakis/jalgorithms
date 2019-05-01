@@ -35,6 +35,10 @@ public class IntMaxHeap extends AbstractIntHeap {
         super(elements, size, (IntHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
+    IntMaxHeap(IntMaxHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, int value){
         this.elements[index] += value;
@@ -68,4 +72,6 @@ public class IntMaxHeap extends AbstractIntHeap {
     public final static IntMaxHeap from(int[] elements, int capacity){
         return new IntMaxHeap(elements, capacity);
     }
+
+    public final static IntMaxHeap from(IntMaxHeap heap){ return new IntMaxHeap(heap); }
 }

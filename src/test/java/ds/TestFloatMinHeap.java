@@ -127,6 +127,42 @@ public class TestFloatMinHeap {
     }
 
     @Test
+    public void test_afterSubsequentExtractionTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        FloatMinHeap heap = FloatMinHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        while(!heap.isEmpty()){
+            heap.extract();
+            AssertUtils.assertIsMinHeap(heap);
+        }
+
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+    }
+
+    @Test
+    public void test_insertIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        FloatMinHeap heap = FloatMinHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        // then
+        int sizeBefore = heap.getSize();
+        heap.insert(30);
+        int sizeAfter = heap.getSize();
+
+        Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+    }
+
+    @Test
     public void test_parentElementIsSmallerThanTheChildElements() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};

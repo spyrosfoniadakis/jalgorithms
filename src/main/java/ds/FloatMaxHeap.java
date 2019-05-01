@@ -35,6 +35,10 @@ public class FloatMaxHeap extends AbstractFloatHeap {
         super(elements, size, (FloatHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
+    FloatMaxHeap(FloatMaxHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, float value){
         this.elements[index] += value;
@@ -68,4 +72,6 @@ public class FloatMaxHeap extends AbstractFloatHeap {
     public final static FloatMaxHeap from(float[] elements, int capacity){
         return new FloatMaxHeap(elements, capacity);
     }
+
+    public final static FloatMaxHeap from(FloatMaxHeap heap){ return new FloatMaxHeap(heap); }
 }

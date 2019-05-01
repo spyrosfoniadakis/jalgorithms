@@ -126,6 +126,42 @@ public class TestDoubleMaxHeap {
     }
 
     @Test
+    public void test_afterSubsequentExtractionTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        double[] numbers = new double[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        DoubleMaxHeap heap = DoubleMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        while(!heap.isEmpty()){
+            heap.extract();
+            AssertUtils.assertIsMaxHeap(heap);
+        }
+
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+    }
+
+    @Test
+    public void test_insertIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        double[] numbers = new double[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        DoubleMaxHeap heap = DoubleMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        // then
+        int sizeBefore = heap.getSize();
+        heap.insert(30);
+        int sizeAfter = heap.getSize();
+
+        Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
+    }
+
+    @Test
     public void test_parentElementIsLargerThanTheChildElements() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         double[] numbers = new double[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};

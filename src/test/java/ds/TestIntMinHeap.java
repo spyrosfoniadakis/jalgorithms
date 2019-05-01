@@ -135,10 +135,12 @@ public class TestIntMinHeap {
         Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
         Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
 
-        heap.extract();
-        heap.extract();
-        heap.extract();
-        AssertUtils.assertIsMinHeap(heap);
+        while(!heap.isEmpty()){
+            heap.extract();
+            AssertUtils.assertIsMinHeap(heap);
+        }
+
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
     }
 
     @Test

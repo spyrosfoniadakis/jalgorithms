@@ -35,6 +35,10 @@ public class LongMaxHeap extends AbstractLongHeap  {
         super(elements, size, (LongHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
+    LongMaxHeap(LongMaxHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, long value){
         this.elements[index] += value;
@@ -72,4 +76,6 @@ public class LongMaxHeap extends AbstractLongHeap  {
     public final static LongMaxHeap from(long[] elements, int capacity){
         return new LongMaxHeap(elements, capacity);
     }
+
+    public final static LongMaxHeap from(LongMaxHeap heap){ return new LongMaxHeap(heap); }
 }

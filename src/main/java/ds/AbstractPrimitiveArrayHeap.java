@@ -10,6 +10,11 @@ public abstract class AbstractPrimitiveArrayHeap implements PrimitiveHeap, Index
     }
 
     @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    @Override
     public int getParentIndexOf(int index) {
         if (index == 0){
             return -1;

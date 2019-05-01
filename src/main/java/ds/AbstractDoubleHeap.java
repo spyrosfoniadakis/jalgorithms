@@ -33,6 +33,10 @@ public abstract class AbstractDoubleHeap extends AbstractPrimitiveArrayHeap {
         this(elements, elements.length, comparator);
     }
 
+    protected AbstractDoubleHeap(AbstractDoubleHeap heap){
+        this(heap.elements.clone(), heap.size, heap.comparator);
+    }
+
     protected AbstractDoubleHeap(double[] elements, int size, DoubleComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
@@ -51,8 +55,7 @@ public abstract class AbstractDoubleHeap extends AbstractPrimitiveArrayHeap {
 
     public final double extract(){
         double extracted = elements[0];
-        this.elements[0] = this.elements[elements.length-1];
-        this.size--;
+        this.elements[0] = this.elements[--this.size];
         this.heapify();
         return extracted;
     }

@@ -36,6 +36,10 @@ public class DoubleMaxHeap extends AbstractDoubleHeap{
         super(elements, size, (DoubleHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
+    DoubleMaxHeap(DoubleMaxHeap heap){
+        super(heap);
+    }
+
     @Override
     public void increaseElementValueBy(int index, double value) {
         this.elements[index] += value;
@@ -69,4 +73,6 @@ public class DoubleMaxHeap extends AbstractDoubleHeap{
     public final static DoubleMaxHeap from(double[] elements, int capacity){
         return new DoubleMaxHeap(elements, capacity);
     }
+
+    public final static DoubleMaxHeap from(DoubleMaxHeap heap){ return new DoubleMaxHeap(heap); }
 }

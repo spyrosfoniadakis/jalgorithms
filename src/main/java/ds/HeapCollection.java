@@ -12,4 +12,6 @@ public interface HeapCollection {
 
     void heapify();
 
+    boolean isEmpty();
+
 }

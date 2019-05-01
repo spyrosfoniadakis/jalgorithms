@@ -135,10 +135,12 @@ public class TestIntMaxHeap {
         Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
         Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
 
-        heap.extract();
-        heap.extract();
-        heap.extract();
-        AssertUtils.assertIsMaxHeap(heap);
+        while(!heap.isEmpty()){
+            heap.extract();
+            AssertUtils.assertIsMaxHeap(heap);
+        }
+
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
     }
 
     @Test
@@ -157,7 +159,6 @@ public class TestIntMaxHeap {
         int sizeAfter = heap.getSize();
 
         Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
-
     }
 
     @Test

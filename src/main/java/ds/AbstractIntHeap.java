@@ -48,6 +48,10 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         this.build();
     }
 
+    protected AbstractIntHeap(AbstractIntHeap heap){
+        this(heap.elements.clone(), heap.size, heap.comparator);
+    }
+
     @Override
     public final int getCapacity() {
         return elements.length;
@@ -59,8 +63,7 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
 
     public final int extract(){
         int extracted = elements[0];
-        this.elements[0] = this.elements[elements.length-1];
-        this.size--;
+        this.elements[0] = this.elements[--this.size];
         this.heapify();
         return extracted;
     }
@@ -78,7 +81,11 @@ public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
         if(leftIndex == -1 && rightIndex == -1)
             return;
 
-        System.out.println(String.format("heap size: %s, left: %s, right: %s, root: %s", this.getSize(), leftIndex, rightIndex, index));
+        System.out.println(String.format("heap size: %s, left: elements[%s] = %s, right: elements[%s] = %s, root: elements[%s] = %s",
+                this.getSize(),
+                leftIndex, (leftIndex != -1) ? elements[leftIndex] : "n/a",
+                rightIndex, (rightIndex != -1) ? elements[rightIndex] : "n/a",
+                index, (index != -1) ? elements[index] : "n/a"));
 
         if (leftIndex != -1 && this.comparator.shouldSwap(elements[nextIndex], elements[leftIndex])){
             nextIndex = leftIndex;

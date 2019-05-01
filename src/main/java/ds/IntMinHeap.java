@@ -23,6 +23,10 @@ public class IntMinHeap extends AbstractIntHeap{
         super(elements, size, (IntHeapComparator) (a, b) -> a < b ? -1 : a > b ? 1 : 0);
     }
 
+    IntMinHeap(IntMinHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, int value){
         this.elements[index] += value;
@@ -56,4 +60,6 @@ public class IntMinHeap extends AbstractIntHeap{
     public final static IntMinHeap from(int[] elements, int capacity){
         return new IntMinHeap(elements, capacity);
     }
+
+    public final static IntMinHeap from(IntMinHeap heap){ return new IntMinHeap(heap); }
 }

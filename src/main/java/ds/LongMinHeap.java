@@ -35,6 +35,10 @@ public class LongMinHeap extends AbstractLongHeap  {
         super(elements, size, (LongHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
+    LongMinHeap(LongMinHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, long value){
         this.elements[index] += value;
@@ -72,4 +76,6 @@ public class LongMinHeap extends AbstractLongHeap  {
     public final static LongMinHeap from(long[] elements, int capacity){
         return new LongMinHeap(elements, capacity);
     }
+
+    public final static LongMinHeap from(LongMinHeap heap){ return new LongMinHeap(heap); }
 }

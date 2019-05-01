@@ -39,6 +39,10 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
         this.build();
     }
 
+    protected AbstractLongHeap(AbstractLongHeap heap){
+        this(heap.elements.clone(), heap.size, heap.comparator);
+    }
+
     @Override
     public final int getCapacity() {
         return elements.length;
@@ -50,8 +54,7 @@ public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
 
     public final long extract(){
         long extracted = elements[0];
-        this.elements[0] = this.elements[elements.length-1];
-        this.size--;
+        this.elements[0] = this.elements[--this.size];
         this.heapify();
         return extracted;
     }

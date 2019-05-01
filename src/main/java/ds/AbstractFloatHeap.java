@@ -51,6 +51,10 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
         this.build();
     }
 
+    protected AbstractFloatHeap(AbstractFloatHeap heap){
+        this(heap.elements.clone(), heap.size, heap.comparator);
+    }
+
     @Override
     public final int getCapacity() {
         return elements.length;
@@ -62,8 +66,7 @@ public abstract class AbstractFloatHeap extends AbstractPrimitiveArrayHeap {
 
     public float extract(){
         float extracted = elements[0];
-        this.elements[0] = this.elements[elements.length-1];
-        this.size--;
+        this.elements[0] = this.elements[--this.size];
         this.heapify();
         return extracted;
     }

@@ -35,6 +35,10 @@ public class FloatMinHeap extends AbstractFloatHeap {
         super(elements, size, (FloatHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
+    FloatMinHeap(FloatMinHeap heap){
+        super(heap);
+    }
+
     @Override
     public final void increaseElementValueBy(int index, float value){
         this.elements[index] += value;
@@ -68,5 +72,7 @@ public class FloatMinHeap extends AbstractFloatHeap {
     public final static FloatMinHeap from(float[] elements, int capacity){
         return new FloatMinHeap(elements, capacity);
     }
+
+    public final static FloatMinHeap from(FloatMinHeap heap){ return new FloatMinHeap(heap); }
 }
 

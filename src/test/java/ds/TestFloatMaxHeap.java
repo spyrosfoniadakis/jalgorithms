@@ -73,7 +73,7 @@ public class TestFloatMaxHeap {
     }
 
     @Test
-    public void test_extractReducesTheSizeBYOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+    public void test_extractReducesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
         FloatMaxHeap heap = FloatMaxHeap.from(numbers);
@@ -124,6 +124,42 @@ public class TestFloatMaxHeap {
         float peeked = heap.peek();
         float extracted = heap.extract();
         Assert.assertThat(peeked, is(equalTo(extracted)));
+    }
+
+    @Test
+    public void test_afterSubsequentExtractionTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        FloatMaxHeap heap = FloatMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        while(!heap.isEmpty()){
+            heap.extract();
+            AssertUtils.assertIsMaxHeap(heap);
+        }
+
+        Assert.assertThat(heap.getSize(), is(equalTo(0)) );
+    }
+
+    @Test
+    public void test_insertIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        // given
+        float[] numbers = new float[]{1, 14, 8, 10, 6, 9, 21, 16, 12, 3, 0};
+        FloatMaxHeap heap = FloatMaxHeap.from(numbers);
+
+        // when
+        Assert.assertThat(heap.getCapacity(), is(equalTo(numbers.length)) );
+        Assert.assertThat(heap.getSize(), is(equalTo(numbers.length)) );
+
+        // then
+        int sizeBefore = heap.getSize();
+        heap.insert(30);
+        int sizeAfter = heap.getSize();
+
+        Assert.assertThat(sizeBefore, is(equalTo(sizeAfter - 1)));
     }
 
     @Test
