@@ -1,3 +1,18 @@
+/*
+ * Copyright 2019 Spyridon Foniadakis
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package sorting;
 
 import java.util.Arrays;
@@ -42,6 +57,14 @@ public final class MergeSort {
 
     public static void sort(double[] numbers, SortingDirection direction){
         sorter.sort(numbers, direction);
+    }
+
+    public static <T extends Comparable<T>> void sort(T[] numbers){
+        sorter.sort(numbers);
+    }
+
+    public static <T> void sort(T[] numbers, Comparator<T> comparator){
+        sorter.sort(numbers, comparator);
     }
 
     private static class MergeSorter implements Sorter {
