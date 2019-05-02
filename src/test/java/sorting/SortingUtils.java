@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Spyridon Foniadakis
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ import java.util.Comparator;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+/**
+ * @author Spyros Foniadakis
+ */
 public class SortingUtils {
 
     public static void executeSortTestOn(int[] numbers, SortingDirection direction, Consumer<int[]> sortingAction, String testName){

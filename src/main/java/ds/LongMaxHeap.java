@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Spyridon Foniadakis
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ import utils.ArrayUtils;
  *          extraction</li>
  *     <li>Sort the elements of the heap - this action will destroy the heap.</li>
  * </ul>
+ *
+ * @author Spyros Foniadakis
  */
 public class LongMaxHeap extends AbstractLongHeap  {
 

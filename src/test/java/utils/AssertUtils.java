@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Spyridon Foniadakis
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * @author Spyros Foniadakis
+ */
 public class AssertUtils {
 
     private static String INSTANTIATION_ERROR_MESSAGE = String.format("Class %s should not be initialized.", AssertUtils.class.getSimpleName());
