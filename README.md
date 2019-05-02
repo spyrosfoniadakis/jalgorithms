@@ -7,7 +7,7 @@ Up to now it supports the following:
 <b>Sorting algorithms:</b>
 <ul>
 <li><b>InsertionSort</b> for primitive and reference types</li>
-<li><b>MergeSort</b> for primitive types</li>
+<li><b>MergeSort</b> for primitive and reference types</li>
 <li><b>QuickSort</b> for primitive types</li>
 <li><b>HeapSort</b> for primitive types</li>
 <li><b>CountingSort</b> for int numbers only</li>
