@@ -2,7 +2,7 @@
 A Java Library providing an API for sorting algorithms and data structures, implemented in Java 8. It is still in progress.
 
 ## Current state
-The current version is 0.01 beta. The version will be updated as more implementations are added. For now there is only one branch. As earlier said, it is still in progress.
+The current version is 0.01 beta. The version will be updated as more implementations are added. As earlier said, it is still in progress.
 
 ### Contents
 Up to now it supports the following:
