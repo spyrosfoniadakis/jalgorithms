@@ -29,6 +29,7 @@ Support for reference types in
 <ul>
   <li>MaxHeap, MinHeap, MaxPriorityQueue, MinPriorityQueue</li>
   <li>HeapSort</li>
+  <li>QuickSort</li>
 </ul>
 
 ## License
