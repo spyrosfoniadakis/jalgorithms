@@ -21,7 +21,7 @@ import utils.ArrayUtils;
 /**
  * @author Spyros Foniadakis
  */
-public abstract class AbstractIntHeap extends AbstractPrimitiveArrayHeap{
+public abstract class AbstractIntHeap extends AbstractIndexedHeap { //AbstractPrimitiveArrayHeap{
 
     /**
      * This interface although a Comparator it does not extends teh Comparator interface

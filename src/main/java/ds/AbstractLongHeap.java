@@ -21,7 +21,7 @@ import utils.ArrayUtils;
 /**
  * @author Spyros Foniadakis
  */
-public abstract class AbstractLongHeap extends AbstractPrimitiveArrayHeap  {
+public abstract class AbstractLongHeap extends AbstractIndexedHeap { //AbstractPrimitiveArrayHeap  {
 
     @FunctionalInterface
     public interface LongHeapComparator extends LongComparator {

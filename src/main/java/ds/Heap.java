@@ -18,6 +18,6 @@ package ds;
 /**
  * @author Spyros Foniadakis
  */
-public interface Heap<T extends HeapElement<K, V>, K extends Comparable<K>, V> extends HeapCollection {
+public interface Heap<T> extends HeapCollection {
 
 }

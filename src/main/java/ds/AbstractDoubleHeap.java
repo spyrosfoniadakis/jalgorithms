@@ -21,7 +21,7 @@ import utils.ArrayUtils;
 /**
  * @author Spyros Foniadakis
  */
-public abstract class AbstractDoubleHeap extends AbstractPrimitiveArrayHeap {
+public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //AbstractPrimitiveArrayHeap {
 
     @FunctionalInterface
     public interface DoubleHeapComparator extends DoubleComparator {
