@@ -203,55 +203,55 @@ public final class QuickSort {
 
         @Override
         public <T extends Comparable<T>> void sort(T[] elements) {
-
+            this.sort(elements, 0, elements.length);
         }
 
-        public <T extends Comparable<T>> void sort(T[] numbers, int start, int end) {
+        public <T extends Comparable<T>> void sort(T[] elements, int start, int end) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end);
-            this.sort(numbers, start, partitionIndex);
-            this.sort(numbers, partitionIndex+1, end);
+            int partitionIndex = this.getPartitionIndex(elements, start, end);
+            this.sort(elements, start, partitionIndex);
+            this.sort(elements, partitionIndex+1, end);
         }
 
-        private <T extends Comparable<T>> int getPartitionIndex(T[] numbers, int start, int end) {
-            T pointOfReference = numbers[end-1];
+        private <T extends Comparable<T>> int getPartitionIndex(T[] elements, int start, int end) {
+            T pointOfReference = elements[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(numbers[i].compareTo(pointOfReference) <= 0){
-                    ArrayUtils.swap(numbers, i, ++partitionIndex);
+                if(elements[i].compareTo(pointOfReference) <= 0){
+                    ArrayUtils.swap(elements, i, ++partitionIndex);
                 }
             }
 
-            ArrayUtils.swap(numbers, end-1, ++partitionIndex);
+            ArrayUtils.swap(elements, end-1, ++partitionIndex);
             return partitionIndex;
         }
 
         @Override
         public <T> void sort(T[] elements, Comparator<T> comparator) {
-
+            this.sort(elements, 0, elements.length, comparator);
         }
 
-        public <T> void sort(T[] numbers, int start, int end, Comparator<T> comparator) {
+        public <T> void sort(T[] elements, int start, int end, Comparator<T> comparator) {
             if(isSingleElementArray(start, end))
                 return;
 
-            int partitionIndex = this.getPartitionIndex(numbers, start, end, comparator);
-            this.sort(numbers, start, partitionIndex, comparator);
-            this.sort(numbers, partitionIndex+1, end, comparator);
+            int partitionIndex = this.getPartitionIndex(elements, start, end, comparator);
+            this.sort(elements, start, partitionIndex, comparator);
+            this.sort(elements, partitionIndex+1, end, comparator);
         }
 
-        private <T> int getPartitionIndex(T[] numbers, int start, int end, Comparator<T> comparator) {
-            T pointOfReference = numbers[end-1];
+        private <T> int getPartitionIndex(T[] elements, int start, int end, Comparator<T> comparator) {
+            T pointOfReference = elements[end-1];
             int partitionIndex = start - 1;
             for(int i=start; i<end-1; i++){
-                if(comparator.compare(numbers[i], pointOfReference) <=0){
-                    ArrayUtils.swap(numbers, i, ++partitionIndex);
+                if(comparator.compare(elements[i], pointOfReference) <=0){
+                    ArrayUtils.swap(elements, i, ++partitionIndex);
                 }
             }
 
-            ArrayUtils.swap(numbers, end-1, ++partitionIndex);
+            ArrayUtils.swap(elements, end-1, ++partitionIndex);
             return partitionIndex;
         }
 
