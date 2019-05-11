@@ -25,12 +25,6 @@ public class TestAssertUtils {
 
     // ascending
     @Test(expected=AssertionError.class)
-    public void test_isSorted_throwsAssertionErrorOnNotSorted(){
-        int[] a = new int[]{1, 3, 6, 8, 0, 2, 3, 4, 11, 56, 23, 98};
-        AssertUtils.assertIsSorted(a);
-    }
-
-    @Test(expected=AssertionError.class)
     public void test_isSortedAscending_throwsAssertionErrorOnNotSorted(){
         int[] a = new int[]{1, 3, 6, 8, 0, 2, 3, 4, 11, 56, 23, 98};
         AssertUtils.assertIsSorted(a, SortingDirection.ASCENDING);

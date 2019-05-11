@@ -15,10 +15,12 @@
  */
 package utils;
 
+import KeyedElement.IntKeyedElement;
 import ds.DoubleMaxHeap;
 import ds.DoubleMinHeap;
 import ds.FloatMaxHeap;
 import ds.FloatMinHeap;
+import ds.IntKeyedMaxHeap;
 import ds.IntMaxHeap;
 import ds.IntMinHeap;
 import ds.LongMaxHeap;
@@ -104,6 +106,18 @@ public class AssertUtils {
         assertIsSorted(extracted, SortingDirection.DESCENDING);
     }
 
+    public static <T> void assertIsMaxHeap(IntKeyedMaxHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        IntKeyedMaxHeap copiedHeap = IntKeyedMaxHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        IntKeyedElement<T>[] elements = (IntKeyedElement<T>[]) value;
+        IntKeyedElement<T>[] extracted = new IntKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
     public static void assertIsMinHeap(IntMinHeap heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         IntMinHeap copiedHeap = IntMinHeap.from(heap);
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
@@ -152,14 +166,6 @@ public class AssertUtils {
         assertIsSorted(extracted, SortingDirection.ASCENDING);
     }
 
-    public static void assertIsSorted(int[] numbers) {
-        int prev = 0;
-        int current = 1;
-        while(current < numbers.length){
-            Assert.assertThat(numbers[prev++], is(lessThanOrEqualTo(numbers[current++])));
-        }
-    }
-
     public static <T extends Comparable<T>> void assertIsSorted(T[] numbers) {
         int prev = 0;
         int current = 1;
@@ -181,6 +187,14 @@ public class AssertUtils {
         int current = 1;
         while(current < numbers.length){
             Assert.assertThat(direction.getIntComparator().shouldSwap(numbers[prev++], numbers[current++]), is(equalTo(false)));
+        }
+    }
+
+    public static <T> void assertIsSorted(IntKeyedElement<T>[] numbers, SortingDirection direction) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(direction.getIntComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
         }
     }
 
