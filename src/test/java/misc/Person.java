@@ -15,6 +15,7 @@
  */
 package misc;
 
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -88,6 +89,13 @@ public class Person implements Comparable{
 
     public static Person from(String firstName, String lastName, Date birthDate){
         return new Person(firstName, lastName, birthDate);
+    }
+
+    public int getAgeInMonths() {
+        long now  = Calendar.getInstance().getTime().getTime();
+        long then = this.birthDate.getTime();
+
+        return (int) ((now - then) / (1000 * 60 * 60 * 24 * 12));
     }
 
     public static class AgeComparator<T extends Person> implements Comparator<T> {
