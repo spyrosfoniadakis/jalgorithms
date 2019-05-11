@@ -106,7 +106,7 @@ public class TestMergeSort {
                 Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7))
         };
         Person.AgeComparator comparator = Person.newAgeComparator();
-        SortingUtils.executeSortTestOn(persons, comparator, InsertionSort::sort, "test_mergeSort_objects_comparator");
+        SortingUtils.executeSortTestOn(persons, comparator, MergeSort::sort, "test_mergeSort_objects_comparator");
     }
 
     @Test
@@ -121,6 +121,6 @@ public class TestMergeSort {
                 Person.from("Joe", "Black", DateUtils.getDateFrom(1997, 3, 20))
         };
         Person.AgeComparator comparator = Person.newAgeComparator();
-        SortingUtils.executeSortTestOn(persons, comparator, InsertionSort::sort,  "test_mergeSort_objects_comparator_sorted");
+        SortingUtils.executeSortTestOn(persons, comparator, MergeSort::sort,  "test_mergeSort_objects_comparator_sorted");
     }
 }

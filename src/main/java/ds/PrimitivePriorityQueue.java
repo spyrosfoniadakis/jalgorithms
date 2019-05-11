@@ -15,8 +15,6 @@
  */
 package ds;
 
-// TODO: Consider deleting the file if the PrimitiveHeap interface becomes package-private
-
 /**
  * It is an interface defined only for logical consistency and guidance. A priority queue implementation
  * is based on the Heap class and interface hierarchies, so this interface serves none other purpose
@@ -26,6 +24,6 @@ package ds;
  *
  * @author Spyros Foniadakis
  */
-public interface PrimitivePriorityQueue extends PrimitiveHeap {
+public interface PrimitivePriorityQueue {
 
 }

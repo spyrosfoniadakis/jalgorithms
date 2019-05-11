@@ -22,11 +22,7 @@ public interface HeapCollection {
 
     int getSize();
 
-    int getParentIndexOf(int index);
-
-    int getLeftChildIndexOf(int index);
-
-    int getRightChildIndexOf(int index);
+    void setSize(int size);
 
     void heapify();
 

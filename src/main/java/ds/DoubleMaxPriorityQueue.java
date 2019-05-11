@@ -18,7 +18,7 @@ package ds;
 /**
  * @author Spyros Foniadakis
  */
-public final class DoubleMaxPriorityQueue extends DoubleMaxHeap implements PrimitivePriorityQueue{
+public final class DoubleMaxPriorityQueue extends DoubleMaxHeap implements PrimitivePriorityQueue {
 
     DoubleMaxPriorityQueue(){
         super();

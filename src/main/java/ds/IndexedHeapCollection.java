@@ -22,4 +22,10 @@ public interface IndexedHeapCollection extends HeapCollection {
 
     int getCapacity();
 
+    int getParentIndexOf(int index);
+
+    int getLeftChildIndexOf(int index);
+
+    int getRightChildIndexOf(int index);
+
 }
