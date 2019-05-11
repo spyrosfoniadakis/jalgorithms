@@ -48,8 +48,11 @@ public class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
                 value.equals(that.value);
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(key, value);
-//    }
+    @Override
+    public int hashCode() {
+        int value = 17;
+        value += this.key * 19;
+        value += this.value.hashCode() * 19;
+        return value;
+    }
 }

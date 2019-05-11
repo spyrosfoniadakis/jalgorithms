@@ -4,6 +4,8 @@ import KeyedElement.IntKeyedElement;
 import comparator.IntComparator;
 import utils.ArrayUtils;
 
+import java.util.List;
+
 public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
 
     IntKeyedMaxHeap(){
@@ -19,31 +21,16 @@ public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
     }
 
     IntKeyedMaxHeap(IntKeyedElement<T>[] elements, int size){
-//        super(elements, size, (AbstractIntHeap.IntHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
         super(elements, size, (IntComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
+    }
+
+    IntKeyedMaxHeap(List<IntKeyedElement<T>> elements){
+        super(elements, elements.size(), (IntComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
     IntKeyedMaxHeap(IntKeyedMaxHeap heap){
         super(heap);
     }
-
-//    @Override
-//    public final void increaseElementValueBy(int index, int value){
-//        this.elements[index] += value;
-//        if (value == 0){
-//            return;
-//        }
-//        else if(value > 0){
-//            int parentIndex;
-//            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-//                ArrayUtils.swap(this.elements, index, parentIndex);
-//                index= parentIndex;
-//            }
-//        }
-//        else {
-//            this.heapifyFrom(index);
-//        }
-//    }
 
     @Override
     public void increaseElementKeyBy(int index, int offset) {
@@ -78,6 +65,8 @@ public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
     public final static <T> IntKeyedMaxHeap from(IntKeyedElement<T>[] elements, int capacity){
         return new IntKeyedMaxHeap(elements, capacity);
     }
+
+    public final static IntKeyedMaxHeap from(List<IntKeyedMaxHeap> elements){ return new IntKeyedMaxHeap(elements); }
 
     public final static IntKeyedMaxHeap from(IntKeyedMaxHeap heap){ return new IntKeyedMaxHeap(heap); }
 }

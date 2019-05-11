@@ -88,7 +88,6 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         return this.extract().getKey();
     }
 
-    // TODO: Move up the hierarchy
     @Override
     public final void heapify(){
         heapifyFrom(0);
@@ -120,7 +119,6 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         }
     }
 
-    // TODO: Move up the hierarchy
     public final void sort(){
         for(int i = this.getSize()-1; i>=0 ; i--){
             ArrayUtils.swap(this.elements, 0, i);
@@ -129,9 +127,8 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         }
     }
 
-    // TODO: Move up the hierarchy
     public final void build(){
-        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+        for(int i=Math.floorDiv(this.size, 2); i>=0; i--){
             heapifyFrom(i);
         }
     }

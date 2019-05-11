@@ -12,18 +12,18 @@ import utils.ReflectionUtils;
 import java.util.Arrays;
 import java.util.Random;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class TestIntKeyedMaxHeap {
+public class TestIntKeyedMinHeap {
 
     public static final String HEAP_ELEMENTS_FIELD_NAME = "elements";
 
     @Test
     public void test_defaultFactoryMethod_createsAnArrayOfTenForZeroSizeHeap() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         // given
-        IntKeyedMaxHeap heap = IntKeyedMaxHeap.newHeap();
+        IntKeyedMinHeap heap = IntKeyedMinHeap.newHeap();
 
         // when
 
@@ -31,7 +31,7 @@ public class TestIntKeyedMaxHeap {
         Assert.assertThat(heap.getCapacity(), is(equalTo(10)) );
         Assert.assertThat(heap.getSize(), is(equalTo(0)) );
 
-        Object value = ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        Object value = ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
         IntKeyedElement[] elements = (IntKeyedElement[]) value;
 
         for(IntKeyedElement element : elements){
@@ -42,7 +42,7 @@ public class TestIntKeyedMaxHeap {
     @Test
     public void test_factoryMethodWithInitialCapacity_createsAnArrayWithZeroSizeHeap() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         // given
-        IntKeyedMaxHeap<String> heap = IntKeyedMaxHeap.newHeap(20);
+        IntKeyedMinHeap<String> heap = IntKeyedMinHeap.newHeap(20);
 
         // when
 
@@ -50,7 +50,7 @@ public class TestIntKeyedMaxHeap {
         Assert.assertThat(heap.getCapacity(), is(equalTo(20)) );
         Assert.assertThat(heap.getSize(), is(equalTo(0)) );
 
-        Object value = ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        Object value = ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
         IntKeyedElement[] elements = (IntKeyedElement[]) value;
 
         for(IntKeyedElement element : elements){
@@ -65,28 +65,28 @@ public class TestIntKeyedMaxHeap {
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
 
         // then
         Assert.assertThat(heap.getCapacity(), is(equalTo(people.length)) );
         Assert.assertThat(heap.getSize(), is(equalTo(people.length)) );
 
-        IntKeyedElement<Person>[] data = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
-        AssertUtils.assertIsMaxHeap(heap);
+        IntKeyedElement<Person>[] data = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        AssertUtils.assertIsMinHeap(heap);
 
         AssertUtils.areIdentical(elements, data);
         System.out.println(String.format("After asserting on the contents: %s", Arrays.toString(elements)));
     }
 
     @Test
-    public void test_extractReducesTheSizeBYOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+    public void test_extractReducesTheSizeBYOneEachTime() {
         // given
         Person[] people = PersonUtils.getPeople();
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
         // when
         Assert.assertThat(heap.getCapacity(), is(equalTo(elements.length)) );
@@ -107,29 +107,29 @@ public class TestIntKeyedMaxHeap {
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
         // then
         Assert.assertThat(heap.getCapacity(), is(equalTo(elements.length)) );
         Assert.assertThat(heap.getSize(), is(equalTo(elements.length)) );
 
-        IntKeyedElement<Person>[] elementsBefore = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        IntKeyedElement<Person>[] elementsBefore = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
         IntKeyedElement<Person> peeked = heap.peek();
         Assert.assertThat(Arrays.stream(elementsBefore).anyMatch(e -> e.equals(peeked)), is(equalTo(true)));
 
         IntKeyedElement<Person> extracted = heap.extract();
-        IntKeyedElement<Person>[] elementsAfter = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        IntKeyedElement<Person>[] elementsAfter = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
         Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> e.equals(peeked)), is(equalTo(false)));
     }
 
     @Test
-    public void test_theElementPeekedIsTheOneToExtract() {
+    public void test_theElementPeekedIsTheOneToExtract() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         Person[] people = PersonUtils.getPeople();
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
         // then
         Assert.assertThat(heap.getCapacity(), is(equalTo(elements.length)) );
@@ -147,7 +147,7 @@ public class TestIntKeyedMaxHeap {
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
         // then
         Assert.assertThat(heap.getCapacity(), is(equalTo(elements.length)) );
@@ -155,7 +155,7 @@ public class TestIntKeyedMaxHeap {
 
         while(!heap.isEmpty()){
             heap.extract();
-            AssertUtils.assertIsMaxHeap(heap);
+            AssertUtils.assertIsMinHeap(heap);
         }
 
         Assert.assertThat(heap.getSize(), is(equalTo(0)) );
@@ -169,7 +169,7 @@ public class TestIntKeyedMaxHeap {
         Person p = Person.from("David", "Davidson", DateUtils.getDateFrom(1980, 7, 19));
 
         // when
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
         // then
         int sizeBefore = heap.getSize();
@@ -182,7 +182,7 @@ public class TestIntKeyedMaxHeap {
     @Test
     public void test_subsequentInsertionsIncreasesTheSizeByOneEachTime() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.newHeap();
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.newHeap();
 
         // when
         Assert.assertThat(heap.getSize(), is(equalTo(0)) );
@@ -202,7 +202,7 @@ public class TestIntKeyedMaxHeap {
     @Test
     public void test_afterSubsequentInsertionsTheHeapRemainsValid() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.newHeap();
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.newHeap();
 
 
         // when
@@ -213,7 +213,7 @@ public class TestIntKeyedMaxHeap {
         for(int i=0;i<100;i++){
             Person p = Person.from("David", "Davidson", DateUtils.getDateFrom(1900 + random.nextInt(100), random.nextInt(12), random.nextInt(28)));
             heap.insert(p, p.getAgeInMonths());
-            AssertUtils.assertIsMaxHeap(heap);
+            AssertUtils.assertIsMinHeap(heap);
         }
     }
 
@@ -222,17 +222,17 @@ public class TestIntKeyedMaxHeap {
         // given
         Person[] people = PersonUtils.getPeople();
         IntKeyedElement<Person>[] elements = PersonUtils.createIntKeyedElementsArrayFrom(people);
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(elements);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(elements);
 
 
         // when
-        IntKeyedElement<Person>[] elementsBefore = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        IntKeyedElement<Person>[] elementsBefore = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
         Person toInsert = Person.from("David", "Davidson", DateUtils.getDateFrom(1980, 7, 19));;
         Assert.assertThat(Arrays.stream(elementsBefore).anyMatch(e -> e.equals(toInsert)), is(equalTo(false)));
 
         heap.insert(toInsert, toInsert.getAgeInMonths());
         IntKeyedElement<Person> inserted = IntKeyedElement.from(toInsert.getAgeInMonths(), toInsert);
-        IntKeyedElement<Person>[] elementsAfter = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        IntKeyedElement<Person>[] elementsAfter = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
 
         // then
         // TODO: Put limit to all such tests.
@@ -240,13 +240,13 @@ public class TestIntKeyedMaxHeap {
     }
 
     @Test
-    public void test_parentElementIsLargerThanTheChildElements() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+    public void test_parentElementIsLessThanTheChildElements() throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         // given
         // given
         Person[] people = PersonUtils.getPeople();
         IntKeyedElement<Person>[] inputElements = PersonUtils.createIntKeyedElementsArrayFrom(people);
-        IntKeyedMaxHeap<Person> heap = IntKeyedMaxHeap.from(inputElements);
-        IntKeyedElement<Person>[] elements = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
+        IntKeyedMinHeap<Person> heap = IntKeyedMinHeap.from(inputElements);
+        IntKeyedElement<Person>[] elements = ( IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
 
         int parentIndex = 0;
         while(true){
@@ -259,10 +259,10 @@ public class TestIntKeyedMaxHeap {
                 break;
             }
             if(leftIndex != -1) {
-                Assert.assertThat(elements[parentIndex].getKey(), is(greaterThanOrEqualTo(elements[leftIndex].getKey())));
+                Assert.assertThat(elements[parentIndex].getKey(), is(lessThanOrEqualTo(elements[leftIndex].getKey())));
             }
             if(rightIndex != -1) {
-                Assert.assertThat(elements[parentIndex].getKey(), is(greaterThanOrEqualTo(elements[rightIndex].getKey())));
+                Assert.assertThat(elements[parentIndex].getKey(), is(lessThanOrEqualTo(elements[rightIndex].getKey())));
             }
 
             parentIndex ++;
