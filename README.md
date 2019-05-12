@@ -2,7 +2,7 @@
 A Java Library providing an API for sorting algorithms and data structures, implemented in Java 8. It is still in progress.
 
 ## Current state
-The current version is 0.02 beta. The version will be updated as more implementations are added. As earlier said, it is still in progress.
+The current version is 0.03 beta. The version will be updated as more implementations are added. As earlier said, it is still in progress.
 
 ### Contents
 Up to now it supports the following:
@@ -19,7 +19,7 @@ Up to now it supports the following:
 <b>Data structures</b>
 <ul>
 <li><b>MaxHeap</b> for primitive and reference types</li>
-<li><b>MinHeap</b> for primitive types</li>
+<li><b>MinHeap</b> for primitive and reference types</li>
 <li><b>MaxPriorityQueue</b> for primitive types</li>
 <li><b>MinPriorityQueue</b> for primitive types</li>
 </ul>
@@ -27,7 +27,7 @@ Up to now it supports the following:
 ### Coming up next
 Support for reference types in
 <ul>
-  <li>MaxHeap, MinHeap, MaxPriorityQueue, MinPriorityQueue</li>
+  <li>MaxPriorityQueue, MinPriorityQueue</li>
   <li>HeapSort</li>
 </ul>
 
