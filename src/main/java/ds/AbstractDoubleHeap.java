@@ -85,8 +85,6 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
         if(leftIndex == -1 && rightIndex == -1)
             return;
 
-        System.out.println(String.format("heap size: %s, left: %s, right: %s, root: %s", this.getSize(), leftIndex, rightIndex, index));
-
         if (leftIndex != -1 && this.comparator.shouldSwap(elements[nextIndex], elements[leftIndex])){
             nextIndex = leftIndex;
         }

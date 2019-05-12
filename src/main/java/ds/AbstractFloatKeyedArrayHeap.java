@@ -100,12 +100,6 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
         if(leftIndex == -1 && rightIndex == -1)
             return;
 
-        System.out.println(String.format("heap size: %s, left: elements[%s] = %s, right: elements[%s] = %s, root: elements[%s] = %s",
-                this.getSize(),
-                leftIndex, (leftIndex != -1) ? elements[leftIndex] : "n/a",
-                rightIndex, (rightIndex != -1) ? elements[rightIndex] : "n/a",
-                index, (index != -1) ? elements[index] : "n/a"));
-
         if (leftIndex != -1 && this.shouldSwap(elements[nextIndex], elements[leftIndex])){
             nextIndex = leftIndex;
         }
