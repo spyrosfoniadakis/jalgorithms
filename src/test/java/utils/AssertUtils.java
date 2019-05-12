@@ -15,10 +15,12 @@
  */
 package utils;
 
+import KeyedElement.FloatKeyedElement;
 import KeyedElement.IntKeyedElement;
 import KeyedElement.LongKeyedElement;
 import ds.DoubleMaxHeap;
 import ds.DoubleMinHeap;
+import ds.FloatKeyedMaxHeap;
 import ds.FloatMaxHeap;
 import ds.FloatMinHeap;
 import ds.IntKeyedMaxHeap;
@@ -127,6 +129,18 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
         LongKeyedElement<T>[] elements = (LongKeyedElement<T>[]) value;
         LongKeyedElement<T>[] extracted = new LongKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
+    public static <T> void assertIsMaxHeap(FloatKeyedMaxHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        FloatKeyedMaxHeap copiedHeap = FloatKeyedMaxHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        FloatKeyedElement<T>[] elements = (FloatKeyedElement<T>[]) value;
+        FloatKeyedElement<T>[] extracted = new FloatKeyedElement[copiedHeap.getSize()];
         int index = 0;
         while (copiedHeap.getSize() > 0){
             extracted[index++]= copiedHeap.extract();
@@ -243,6 +257,14 @@ public class AssertUtils {
         int current = 1;
         while(current < numbers.length){
             Assert.assertThat(direction.getLongComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
+        }
+    }
+
+    public static <T> void assertIsSorted(FloatKeyedElement<T>[] numbers, SortingDirection direction) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(direction.getFloatComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
         }
     }
 
