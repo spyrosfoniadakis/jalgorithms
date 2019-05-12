@@ -132,7 +132,7 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, int offset);
+    public abstract void increaseElementKeyBy(int index, double offset);
 
     public final void insert(T value, int key){
         this.ensureInsertion(DoubleKeyedElement.from(0, value));

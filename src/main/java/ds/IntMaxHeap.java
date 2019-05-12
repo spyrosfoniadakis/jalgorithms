@@ -34,7 +34,7 @@ import utils.ArrayUtils;
  *
  * @author Spyros Foniadakis
  */
-public class IntMaxHeap extends AbstractIntHeap {
+public class IntMaxHeap extends AbstractIntHeap implements IntHeap, IntPriorityQueue{
 
     IntMaxHeap(){
         this(10, 0);

@@ -33,7 +33,7 @@ public class DoubleKeyedMaxHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
     }
 
     @Override
-    public void increaseElementKeyBy(int index, int offset) {
+    public void increaseElementKeyBy(int index, double offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;

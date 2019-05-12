@@ -132,7 +132,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, int offset);
+    public abstract void increaseElementKeyBy(int index, float offset);
 
     public final void insert(T value, int key){
         this.ensureInsertion(FloatKeyedElement.from(0, value));

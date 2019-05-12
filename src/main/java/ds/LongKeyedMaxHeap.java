@@ -33,7 +33,7 @@ public class LongKeyedMaxHeap<T> extends AbstractLongKeyedArrayHeap<T> {
     }
 
     @Override
-    public void increaseElementKeyBy(int index, int offset) {
+    public void increaseElementKeyBy(int index, long offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;

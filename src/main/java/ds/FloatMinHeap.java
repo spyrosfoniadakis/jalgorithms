@@ -34,7 +34,7 @@ import utils.ArrayUtils;
  *
  * @author Spyros Foniadakis
  */
-public class FloatMinHeap extends AbstractFloatHeap {
+public class FloatMinHeap extends AbstractFloatHeap implements FloatHeap, FloatPriorityQueue {
 
     FloatMinHeap(){
         this(10, 0);

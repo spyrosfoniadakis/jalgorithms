@@ -30,7 +30,7 @@ public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
         this.value = value;
     }
 
-    public void increaseKeyBy(int offset) {
+    public void increaseKeyBy(long offset) {
         this.key += offset;
     }
 

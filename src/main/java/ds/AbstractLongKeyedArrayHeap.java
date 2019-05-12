@@ -133,7 +133,7 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, int offset);
+    public abstract void increaseElementKeyBy(int index, long offset);
 
     public final void insert(T value, int key){
         this.ensureInsertion(LongKeyedElement.from(0, value));

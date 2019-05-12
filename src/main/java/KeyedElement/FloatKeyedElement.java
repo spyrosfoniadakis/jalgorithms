@@ -30,7 +30,7 @@ public class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
         this.value = value;
     }
 
-    public void increaseKeyBy(int offset) {
+    public void increaseKeyBy(float offset) {
         this.key += offset;
     }
 
