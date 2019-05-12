@@ -18,10 +18,8 @@ Up to now it supports the following:
 
 <b>Data structures</b>
 <ul>
-<li><b>MaxHeap</b> for primitive and reference types</li>
-<li><b>MinHeap</b> for primitive and reference types</li>
-<li><b>MaxPriorityQueue</b> for primitive types</li>
-<li><b>MinPriorityQueue</b> for primitive types</li>
+<li><b>MaxHeap - MaxPriorityQueue</b> for primitive and reference types</li>
+<li><b>MinHeap - MinPriorityQueue</b> for primitive and reference types</li>
 </ul>
 
 ### Coming up next
