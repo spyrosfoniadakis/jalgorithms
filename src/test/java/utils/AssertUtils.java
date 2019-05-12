@@ -26,6 +26,7 @@ import ds.IntKeyedMinHeap;
 import ds.IntMaxHeap;
 import ds.IntMinHeap;
 import ds.LongKeyedMaxHeap;
+import ds.LongKeyedMinHeap;
 import ds.LongMaxHeap;
 import ds.LongMinHeap;
 import org.junit.Assert;
@@ -186,6 +187,18 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
         IntKeyedElement<T>[] elements = (IntKeyedElement<T>[]) value;
         IntKeyedElement<T>[] extracted = new IntKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.ASCENDING);
+    }
+
+    public static <T> void assertIsMinHeap(LongKeyedMinHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        LongKeyedMinHeap copiedHeap = LongKeyedMinHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        LongKeyedElement<T>[] elements = (LongKeyedElement<T>[]) value;
+        LongKeyedElement<T>[] extracted = new LongKeyedElement[copiedHeap.getSize()];
         int index = 0;
         while (copiedHeap.getSize() > 0){
             extracted[index++]= copiedHeap.extract();
