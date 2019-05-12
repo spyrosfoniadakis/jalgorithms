@@ -16,6 +16,7 @@
 package utils;
 
 import KeyedElement.IntKeyedElement;
+import KeyedElement.LongKeyedElement;
 import ds.DoubleMaxHeap;
 import ds.DoubleMinHeap;
 import ds.FloatMaxHeap;
@@ -24,6 +25,7 @@ import ds.IntKeyedMaxHeap;
 import ds.IntKeyedMinHeap;
 import ds.IntMaxHeap;
 import ds.IntMinHeap;
+import ds.LongKeyedMaxHeap;
 import ds.LongMaxHeap;
 import ds.LongMinHeap;
 import org.junit.Assert;
@@ -112,6 +114,18 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
         IntKeyedElement<T>[] elements = (IntKeyedElement<T>[]) value;
         IntKeyedElement<T>[] extracted = new IntKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
+    public static <T> void assertIsMaxHeap(LongKeyedMaxHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        LongKeyedMaxHeap copiedHeap = LongKeyedMaxHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        LongKeyedElement<T>[] elements = (LongKeyedElement<T>[]) value;
+        LongKeyedElement<T>[] extracted = new LongKeyedElement[copiedHeap.getSize()];
         int index = 0;
         while (copiedHeap.getSize() > 0){
             extracted[index++]= copiedHeap.extract();
@@ -208,6 +222,14 @@ public class AssertUtils {
         int current = 1;
         while(current < numbers.length){
             Assert.assertThat(direction.getIntComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
+        }
+    }
+
+    public static <T> void assertIsSorted(LongKeyedElement<T>[] numbers, SortingDirection direction) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(direction.getLongComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
         }
     }
 

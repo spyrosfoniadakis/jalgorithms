@@ -5,12 +5,12 @@ public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
     private long key;
     private T value;
 
-    public LongKeyedElement(int key, T value) {
+    public LongKeyedElement(long key, T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> LongKeyedElement<T> from(int key, T value) {
+    public static <T> LongKeyedElement<T> from(long key, T value) {
         return new LongKeyedElement<>(key, value);
     }
 

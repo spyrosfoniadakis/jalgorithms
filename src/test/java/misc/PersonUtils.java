@@ -1,6 +1,7 @@
 package misc;
 
 import KeyedElement.IntKeyedElement;
+import KeyedElement.LongKeyedElement;
 import utils.DateUtils;
 
 import java.util.Arrays;
@@ -24,5 +25,12 @@ public final class PersonUtils {
                     Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
                     Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7))
             };
+    }
+
+    public static LongKeyedElement<Person>[] createLongKeyedElementsArrayFrom(Person[] people) {
+        return Arrays.stream(people)
+                .map(p -> LongKeyedElement.from(((long)p.getAgeInMonths()), p))
+                .collect(Collectors.toList())
+                .toArray(new LongKeyedElement[people.length]);
     }
 }
