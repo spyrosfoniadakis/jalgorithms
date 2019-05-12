@@ -21,6 +21,7 @@ import KeyedElement.LongKeyedElement;
 import ds.DoubleMaxHeap;
 import ds.DoubleMinHeap;
 import ds.FloatKeyedMaxHeap;
+import ds.FloatKeyedMinHeap;
 import ds.FloatMaxHeap;
 import ds.FloatMinHeap;
 import ds.IntKeyedMaxHeap;
@@ -213,6 +214,18 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
         LongKeyedElement<T>[] elements = (LongKeyedElement<T>[]) value;
         LongKeyedElement<T>[] extracted = new LongKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.ASCENDING);
+    }
+
+    public static <T> void assertIsMinHeap(FloatKeyedMinHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        FloatKeyedMinHeap copiedHeap = FloatKeyedMinHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        FloatKeyedElement<T>[] elements = (FloatKeyedElement<T>[]) value;
+        FloatKeyedElement<T>[] extracted = new FloatKeyedElement[copiedHeap.getSize()];
         int index = 0;
         while (copiedHeap.getSize() > 0){
             extracted[index++]= copiedHeap.extract();
