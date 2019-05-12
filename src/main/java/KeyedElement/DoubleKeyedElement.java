@@ -5,12 +5,12 @@ public class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
     private double key;
     private T value;
 
-    public DoubleKeyedElement(int key, T value) {
+    public DoubleKeyedElement(double key, T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> DoubleKeyedElement<T> from(int key, T value) {
+    public static <T> DoubleKeyedElement<T> from(double key, T value) {
         return new DoubleKeyedElement<>(key, value);
     }
 

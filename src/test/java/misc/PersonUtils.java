@@ -1,5 +1,6 @@
 package misc;
 
+import KeyedElement.DoubleKeyedElement;
 import KeyedElement.FloatKeyedElement;
 import KeyedElement.IntKeyedElement;
 import KeyedElement.LongKeyedElement;
@@ -41,5 +42,12 @@ public final class PersonUtils {
                 .map(p -> FloatKeyedElement.from(((float)p.getAgeInMonths()), p))
                 .collect(Collectors.toList())
                 .toArray(new FloatKeyedElement[people.length]);
+    }
+
+    public static DoubleKeyedElement<Person>[] createDoubleKeyedElementsArrayFrom(Person[] people) {
+        return Arrays.stream(people)
+                .map(p -> DoubleKeyedElement.from((double)p.getAgeInMonths(), p))
+                .collect(Collectors.toList())
+                .toArray(new DoubleKeyedElement[people.length]);
     }
 }

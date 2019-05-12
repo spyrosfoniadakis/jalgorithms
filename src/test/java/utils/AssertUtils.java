@@ -15,9 +15,11 @@
  */
 package utils;
 
+import KeyedElement.DoubleKeyedElement;
 import KeyedElement.FloatKeyedElement;
 import KeyedElement.IntKeyedElement;
 import KeyedElement.LongKeyedElement;
+import ds.DoubleKeyedMaxHeap;
 import ds.DoubleMaxHeap;
 import ds.DoubleMinHeap;
 import ds.FloatKeyedMaxHeap;
@@ -142,6 +144,18 @@ public class AssertUtils {
         Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
         FloatKeyedElement<T>[] elements = (FloatKeyedElement<T>[]) value;
         FloatKeyedElement<T>[] extracted = new FloatKeyedElement[copiedHeap.getSize()];
+        int index = 0;
+        while (copiedHeap.getSize() > 0){
+            extracted[index++]= copiedHeap.extract();
+        }
+        assertIsSorted(extracted, SortingDirection.DESCENDING);
+    }
+
+    public static <T> void assertIsMaxHeap(DoubleKeyedMaxHeap<T> heap) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
+        DoubleKeyedMaxHeap copiedHeap = DoubleKeyedMaxHeap.from(heap);
+        Object value = ReflectionUtils.getFieldValueOf(copiedHeap, copiedHeap.getClass().getCanonicalName(), "elements");
+        DoubleKeyedElement<T>[] elements = (DoubleKeyedElement<T>[]) value;
+        DoubleKeyedElement<T>[] extracted = new DoubleKeyedElement[copiedHeap.getSize()];
         int index = 0;
         while (copiedHeap.getSize() > 0){
             extracted[index++]= copiedHeap.extract();
@@ -278,6 +292,14 @@ public class AssertUtils {
         int current = 1;
         while(current < numbers.length){
             Assert.assertThat(direction.getFloatComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
+        }
+    }
+
+    public static <T> void assertIsSorted(DoubleKeyedElement<T>[] numbers, SortingDirection direction) {
+        int prev = 0;
+        int current = 1;
+        while(current < numbers.length){
+            Assert.assertThat(direction.getDoubleComparator().shouldSwap(numbers[prev++].getKey(), numbers[current++].getKey()), is(equalTo(false)));
         }
     }
 
