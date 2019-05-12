@@ -25,7 +25,6 @@ Up to now it supports the following:
 ### Coming up next
 Support for reference types in
 <ul>
-  <li>MaxPriorityQueue, MinPriorityQueue</li>
   <li>HeapSort</li>
 </ul>
 
