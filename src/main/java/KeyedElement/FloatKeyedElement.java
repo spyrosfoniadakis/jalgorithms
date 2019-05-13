@@ -1,6 +1,6 @@
 package KeyedElement;
 
-public class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
+public final class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
 
     private float key;
     private T value;

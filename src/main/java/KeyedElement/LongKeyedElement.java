@@ -1,6 +1,6 @@
 package KeyedElement;
 
-public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
+public final class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
 
     private long key;
     private T value;

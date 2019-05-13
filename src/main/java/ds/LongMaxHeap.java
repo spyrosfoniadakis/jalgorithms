@@ -34,7 +34,7 @@ import utils.ArrayUtils;
  *
  * @author Spyros Foniadakis
  */
-public class LongMaxHeap extends AbstractLongHeap implements LongHeap, LongPriorityQueue {
+public final class LongMaxHeap extends AbstractLongHeap implements LongHeap, LongPriorityQueue {
 
     LongMaxHeap(){
         this(10, 0);

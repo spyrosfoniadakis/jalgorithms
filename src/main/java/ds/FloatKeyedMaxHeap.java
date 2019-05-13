@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class FloatKeyedMaxHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
+public final class FloatKeyedMaxHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
 
     FloatKeyedMaxHeap(){
         this(10, 0);

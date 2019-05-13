@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
+public final class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
 
     IntKeyedMinHeap(){
         this(10, 0);

@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
+public final class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
 
     IntKeyedMaxHeap(){
         this(10, 0);

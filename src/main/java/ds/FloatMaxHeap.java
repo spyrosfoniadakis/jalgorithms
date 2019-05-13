@@ -34,7 +34,7 @@ import utils.ArrayUtils;
  *
  * @author Spyros Foniadakis
  */
-public class FloatMaxHeap extends AbstractFloatHeap implements FloatHeap, FloatPriorityQueue {
+public final class FloatMaxHeap extends AbstractFloatHeap implements FloatHeap, FloatPriorityQueue {
 
     FloatMaxHeap(){
         this(10, 0);

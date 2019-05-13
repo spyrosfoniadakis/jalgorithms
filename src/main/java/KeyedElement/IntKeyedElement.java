@@ -1,6 +1,6 @@
 package KeyedElement;
 
-public class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
+public final class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
 
     private int key;
     private T value;

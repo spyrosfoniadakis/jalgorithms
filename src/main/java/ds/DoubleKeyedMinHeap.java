@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
+public final class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
 
     DoubleKeyedMinHeap(){
         this(10, 0);

@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class FloatKeyedMinHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
+public final class FloatKeyedMinHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
 
     FloatKeyedMinHeap(){
         this(10, 0);

@@ -20,7 +20,7 @@ import utils.ArrayUtils;
 /**
  * @author Spyros Foniadakis
  */
-public class IntMinHeap extends AbstractIntHeap implements IntHeap, IntPriorityQueue {
+public final class IntMinHeap extends AbstractIntHeap implements IntHeap, IntPriorityQueue {
 
     IntMinHeap(){
         this(10);

@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
+public final class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
 
     LongKeyedMinHeap(){
         this(10, 0);

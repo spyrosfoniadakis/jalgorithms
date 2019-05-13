@@ -6,7 +6,7 @@ import utils.ArrayUtils;
 
 import java.util.List;
 
-public class DoubleKeyedMaxHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
+public final class DoubleKeyedMaxHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
 
     DoubleKeyedMaxHeap(){
         this(10, 0);

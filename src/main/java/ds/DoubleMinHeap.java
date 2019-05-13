@@ -34,7 +34,7 @@ import utils.ArrayUtils;
  *
  * @author Spyros Foniadakis
  */
-public class DoubleMinHeap extends AbstractDoubleHeap{
+public final class DoubleMinHeap extends AbstractDoubleHeap{
 
     DoubleMinHeap(){
         this(10, 0);

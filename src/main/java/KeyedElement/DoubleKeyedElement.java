@@ -1,6 +1,6 @@
 package KeyedElement;
 
-public class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
+public final class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
 
     private double key;
     private T value;

@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 /**
  * @author Spyros Foniadakis
  */
-public class CountingSort {
+public final class CountingSort {
 
     private static String INSTANTIATION_ERROR_MESSAGE = String.format("Class %s should not be initialized.", CountingSort.class);
     private static CountingSort.CountingSorter sorter = new CountingSort.CountingSorter();
