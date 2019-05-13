@@ -23,9 +23,13 @@ Up to now it supports the following:
 </ul>
 
 ### Coming up next
+<ul>
+  <li>
 Support for reference types in
 <ul>
   <li>HeapSort</li>
+</ul>
+    </li>
   <li>Utility classes for constructing HeapSorts and PriorityQueues</li>
 </ul>
 
