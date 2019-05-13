@@ -26,6 +26,7 @@ Up to now it supports the following:
 Support for reference types in
 <ul>
   <li>HeapSort</li>
+  <li>Utility classes for constructing HeapSorts and PriorityQueues</li>
 </ul>
 
 ## License
