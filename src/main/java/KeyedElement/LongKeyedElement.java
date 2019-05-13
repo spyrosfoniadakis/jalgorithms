@@ -5,12 +5,12 @@ public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
     private long key;
     private T value;
 
-    public LongKeyedElement(long key, T value) {
+    public LongKeyedElement(final long key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> LongKeyedElement<T> from(long key, T value) {
+    public static <T> LongKeyedElement<T> from(final long key, final T value) {
         return new LongKeyedElement<>(key, value);
     }
 
@@ -18,7 +18,7 @@ public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
         return key;
     }
 
-    public void setKey(long key) {
+    public void setKey(final long key) {
         this.key = key;
     }
 
@@ -26,21 +26,21 @@ public class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
-    public void increaseKeyBy(long offset) {
+    public void increaseKeyBy(final long offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(LongKeyedElement<T> o) {
+    public int compareTo(final LongKeyedElement<T> o) {
         return Long.compare(this.key, o.key);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LongKeyedElement)) return false;
         LongKeyedElement<?> that = (LongKeyedElement<?>) o;

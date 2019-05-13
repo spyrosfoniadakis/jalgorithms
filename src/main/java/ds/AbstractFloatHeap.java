@@ -38,10 +38,10 @@ public abstract class AbstractFloatHeap extends AbstractIndexedHeap { //Abstract
     public interface FloatHeapComparator extends FloatComparator {
 
         @Override
-        int compare(float a, float b);
+        int compare(final float a, final float b);
 
         @Override
-        default boolean shouldSwap(float a, float b){
+        default boolean shouldSwap(final float a, final float b){
             return this.compare(a, b) > 0;
         }
 
@@ -50,26 +50,26 @@ public abstract class AbstractFloatHeap extends AbstractIndexedHeap { //Abstract
     protected float[] elements;
     private FloatComparator comparator;
 
-    protected AbstractFloatHeap(FloatComparator comparator){
+    protected AbstractFloatHeap(final FloatComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractFloatHeap(FloatComparator comparator, int capacity){
+    protected AbstractFloatHeap(final FloatComparator comparator, final int capacity){
         this(new float[capacity], comparator);
     }
 
-    protected AbstractFloatHeap(float[] elements, FloatComparator comparator){
+    protected AbstractFloatHeap(final float[] elements, final FloatComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractFloatHeap(float[] elements, int size, FloatComparator comparator){
+    protected AbstractFloatHeap(final float[] elements, final int size, final FloatComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
         this.build();
     }
 
-    protected AbstractFloatHeap(AbstractFloatHeap heap){
+    protected AbstractFloatHeap(final AbstractFloatHeap heap){
         this(heap.elements.clone(), heap.size, heap.comparator);
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractFloatHeap extends AbstractIndexedHeap { //Abstract
         return extracted;
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -134,14 +134,14 @@ public abstract class AbstractFloatHeap extends AbstractIndexedHeap { //Abstract
      * @param index
      * @param value
      */
-    public abstract void increaseElementValueBy(int index, float value);
+    public abstract void increaseElementValueBy(final int index, final float value);
 
-    public final void insert(float element){
+    public final void insert(final float element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected final void ensureInsertion(float element){
+    protected final void ensureInsertion(final float element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;

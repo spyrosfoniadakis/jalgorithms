@@ -40,33 +40,34 @@ public class LongMinHeap extends AbstractLongHeap implements LongHeap, LongPrior
         this(10, 0);
     }
 
-    LongMinHeap(int capacity, int size){
+    LongMinHeap(final int capacity, final int size){
         this(new long[capacity], size);
     }
 
-    LongMinHeap(long[] elements){
+    LongMinHeap(final long[] elements){
         this(elements, elements.length);
     }
 
-    LongMinHeap(long[] elements, int size){
+    LongMinHeap(final long[] elements, final int size){
         super(elements, size, (LongHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    LongMinHeap(LongMinHeap heap){
+    LongMinHeap(final LongMinHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, long value){
+    public final void increaseElementValueBy(final int index, final long value){
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -82,17 +83,17 @@ public class LongMinHeap extends AbstractLongHeap implements LongHeap, LongPrior
         return new LongMinHeap();
     }
 
-    public final static LongMinHeap newHeap(int capacity){
+    public final static LongMinHeap newHeap(final int capacity){
         return new LongMinHeap(capacity, 0);
     }
 
-    public final static LongMinHeap from(long[] elements){
+    public final static LongMinHeap from(final long[] elements){
         return new LongMinHeap(elements);
     }
 
-    public final static LongMinHeap from(long[] elements, int capacity){
+    public final static LongMinHeap from(final long[] elements, final int capacity){
         return new LongMinHeap(elements, capacity);
     }
 
-    public final static LongMinHeap from(LongMinHeap heap){ return new LongMinHeap(heap); }
+    public final static LongMinHeap from(final LongMinHeap heap){ return new LongMinHeap(heap); }
 }

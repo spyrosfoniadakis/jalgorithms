@@ -12,28 +12,28 @@ public class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    DoubleKeyedMinHeap(int capacity, int size){
+    DoubleKeyedMinHeap(final int capacity, final int size){
         this(new DoubleKeyedElement[capacity], size);
     }
 
-    DoubleKeyedMinHeap(DoubleKeyedElement<T>[] elements){
+    DoubleKeyedMinHeap(final DoubleKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    DoubleKeyedMinHeap(DoubleKeyedElement<T>[] elements, int size){
+    DoubleKeyedMinHeap(final DoubleKeyedElement<T>[] elements, final int size){
         super(elements, size, (DoubleComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    DoubleKeyedMinHeap(List<DoubleKeyedElement<T>> elements){
+    DoubleKeyedMinHeap(final List<DoubleKeyedElement<T>> elements){
         super(elements, elements.size(), (DoubleComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    DoubleKeyedMinHeap(DoubleKeyedMinHeap heap){
+    DoubleKeyedMinHeap(final DoubleKeyedMinHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, double offset) {
+    public void increaseElementKeyBy(final int index, final double offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
@@ -43,9 +43,10 @@ public class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
         }
         else {
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex= parentIndex;
             }
         }
     }
@@ -54,19 +55,19 @@ public class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
         return new DoubleKeyedMinHeap();
     }
 
-    public final static DoubleKeyedMinHeap newHeap(int capacity){
+    public final static DoubleKeyedMinHeap newHeap(final int capacity){
         return new DoubleKeyedMinHeap(capacity, 0);
     }
 
-    public final static <T> DoubleKeyedMinHeap from(DoubleKeyedElement<T>[] elements){
+    public final static <T> DoubleKeyedMinHeap from(final DoubleKeyedElement<T>[] elements){
         return new DoubleKeyedMinHeap(elements);
     }
 
-    public final static <T> DoubleKeyedMinHeap from(DoubleKeyedElement<T>[] elements, int capacity){
+    public final static <T> DoubleKeyedMinHeap from(final DoubleKeyedElement<T>[] elements, int capacity){
         return new DoubleKeyedMinHeap(elements, capacity);
     }
 
-    public final static DoubleKeyedMinHeap from(List<DoubleKeyedMinHeap> elements){ return new DoubleKeyedMinHeap(elements); }
+    public final static DoubleKeyedMinHeap from(final List<DoubleKeyedMinHeap> elements){ return new DoubleKeyedMinHeap(elements); }
 
-    public final static DoubleKeyedMinHeap from(DoubleKeyedMinHeap heap){ return new DoubleKeyedMinHeap(heap); }
+    public final static DoubleKeyedMinHeap from(final DoubleKeyedMinHeap heap){ return new DoubleKeyedMinHeap(heap); }
 }

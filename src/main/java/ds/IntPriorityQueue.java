@@ -14,7 +14,7 @@ public interface IntPriorityQueue {
      * @param index
      * @param value
      */
-    void increaseElementValueBy(int index, int value);
+    void increaseElementValueBy(final int index, final int value);
 
-    void insert(int element);
+    void insert(final int element);
 }

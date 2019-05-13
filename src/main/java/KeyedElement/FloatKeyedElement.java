@@ -5,12 +5,12 @@ public class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
     private float key;
     private T value;
 
-    public FloatKeyedElement(float key, T value) {
+    public FloatKeyedElement(final float key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> FloatKeyedElement<T> from(float key, T value) {
+    public static <T> FloatKeyedElement<T> from(final float key, final T value) {
         return new FloatKeyedElement<>(key, value);
     }
 
@@ -18,7 +18,7 @@ public class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
         return key;
     }
 
-    public void setKey(float key) {
+    public void setKey(final float key) {
         this.key = key;
     }
 
@@ -26,21 +26,21 @@ public class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
-    public void increaseKeyBy(float offset) {
+    public void increaseKeyBy(final float offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(FloatKeyedElement<T> o) {
+    public int compareTo(final FloatKeyedElement<T> o) {
         return Float.compare(this.key, o.key);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof FloatKeyedElement)) return false;
         FloatKeyedElement<?> that = (FloatKeyedElement<?>) o;

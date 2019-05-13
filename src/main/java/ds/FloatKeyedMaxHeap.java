@@ -12,37 +12,38 @@ public class FloatKeyedMaxHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    FloatKeyedMaxHeap(int capacity, int size){
+    FloatKeyedMaxHeap(final int capacity, final int size){
         this(new FloatKeyedElement[capacity], size);
     }
 
-    FloatKeyedMaxHeap(FloatKeyedElement<T>[] elements){
+    FloatKeyedMaxHeap(final FloatKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    FloatKeyedMaxHeap(FloatKeyedElement<T>[] elements, int size){
+    FloatKeyedMaxHeap(final FloatKeyedElement<T>[] elements, final int size){
         super(elements, size, (FloatComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    FloatKeyedMaxHeap(List<FloatKeyedElement<T>> elements){
+    FloatKeyedMaxHeap(final List<FloatKeyedElement<T>> elements){
         super(elements, elements.size(), (FloatComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    FloatKeyedMaxHeap(FloatKeyedMaxHeap heap){
+    FloatKeyedMaxHeap(final FloatKeyedMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, float offset) {
+    public void increaseElementKeyBy(final int index, final float offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
         }
         else if(offset > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex= parentIndex;
             }
         }
         else {

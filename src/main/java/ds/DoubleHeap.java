@@ -14,7 +14,7 @@ public interface DoubleHeap {
      * @param index
      * @param value
      */
-    void increaseElementValueBy(int index, double value);
+    void increaseElementValueBy(final int index, final double value);
 
-    void insert(double element);
+    void insert(final double element);
 }

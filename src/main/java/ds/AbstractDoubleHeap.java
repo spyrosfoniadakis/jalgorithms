@@ -27,10 +27,10 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
     public interface DoubleHeapComparator extends DoubleComparator {
 
         @Override
-        int compare(double a, double b);
+        int compare(final double a, final double b);
 
         @Override
-        default boolean shouldSwap(double a, double b){
+        default boolean shouldSwap(final double a, final double b){
             return this.compare(a, b) > 0;
         }
     }
@@ -38,23 +38,23 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
     protected double[] elements;
     private DoubleComparator comparator;
 
-    protected AbstractDoubleHeap(DoubleComparator comparator){
+    protected AbstractDoubleHeap(final DoubleComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractDoubleHeap(DoubleComparator comparator, int capacity){
+    protected AbstractDoubleHeap(final DoubleComparator comparator, int capacity){
         this(new double[capacity], comparator);
     }
 
-    protected AbstractDoubleHeap(double[] elements, DoubleComparator comparator){
+    protected AbstractDoubleHeap(final double[] elements, final DoubleComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractDoubleHeap(AbstractDoubleHeap heap){
+    protected AbstractDoubleHeap(final AbstractDoubleHeap heap){
         this(heap.elements.clone(), heap.size, heap.comparator);
     }
 
-    protected AbstractDoubleHeap(double[] elements, int size, DoubleComparator comparator){
+    protected AbstractDoubleHeap(final double[] elements, final int size, final DoubleComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
@@ -77,7 +77,7 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
         return extracted;
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -122,14 +122,14 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
      * @param index
      * @param value
      */
-    public abstract void increaseElementValueBy(int index, double value);
+    public abstract void increaseElementValueBy(final int index, final double value);
 
-    public final void insert(double element){
+    public final void insert(final double element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected final void ensureInsertion(double element){
+    protected final void ensureInsertion(final double element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;

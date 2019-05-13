@@ -5,12 +5,12 @@ public class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
     private double key;
     private T value;
 
-    public DoubleKeyedElement(double key, T value) {
+    public DoubleKeyedElement(final double key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> DoubleKeyedElement<T> from(double key, T value) {
+    public static <T> DoubleKeyedElement<T> from(final double key, final T value) {
         return new DoubleKeyedElement<>(key, value);
     }
 
@@ -18,7 +18,7 @@ public class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
         return key;
     }
 
-    public void setKey(double key) {
+    public void setKey(final double key) {
         this.key = key;
     }
 
@@ -26,21 +26,21 @@ public class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
-    public void increaseKeyBy(double offset) {
+    public void increaseKeyBy(final double offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(DoubleKeyedElement<T> o) {
+    public int compareTo(final DoubleKeyedElement<T> o) {
         return Double.compare(this.key, o.key);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof DoubleKeyedElement)) return false;
         DoubleKeyedElement<?> that = (DoubleKeyedElement<?>) o;

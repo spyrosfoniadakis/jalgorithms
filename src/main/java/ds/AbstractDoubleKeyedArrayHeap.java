@@ -52,8 +52,8 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
         this(10);
     }
 
-    private AbstractDoubleKeyedArrayHeap(int capacity){
-        elements = new DoubleKeyedElement[10];
+    private AbstractDoubleKeyedArrayHeap(final int capacity){
+        elements = new DoubleKeyedElement[capacity];
     }
 
     @Override
@@ -92,7 +92,7 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
         heapifyFrom(0);
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -132,14 +132,14 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, double offset);
+    public abstract void increaseElementKeyBy(final int index, final double offset);
 
-    public final void insert(T value, int key){
+    public final void insert(final T value, final int key){
         this.ensureInsertion(DoubleKeyedElement.from(0, value));
         this.increaseElementKeyBy(size-1, key);
     }
 
-    protected final void ensureInsertion(DoubleKeyedElement<T> element){
+    protected final void ensureInsertion(final DoubleKeyedElement<T> element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -153,7 +153,7 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
         this.elements = newElements;
     }
 
-    private boolean shouldSwap(DoubleKeyedElement<T> t1, DoubleKeyedElement<T> t2){
+    private boolean shouldSwap(final DoubleKeyedElement<T> t1, final DoubleKeyedElement<T> t2){
         return this.keysComparator.shouldSwap(t1.getKey(), t2.getKey());
     }
 

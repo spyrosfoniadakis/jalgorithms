@@ -5,12 +5,12 @@ public class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
     private int key;
     private T value;
 
-    public IntKeyedElement(int key, T value) {
+    public IntKeyedElement(final int key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> IntKeyedElement<T> from(int key, T value) {
+    public static <T> IntKeyedElement<T> from(final int key, final T value) {
         return new IntKeyedElement<>(key, value);
     }
 
@@ -18,7 +18,7 @@ public class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(final int key) {
         this.key = key;
     }
 
@@ -26,21 +26,21 @@ public class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
-    public void increaseKeyBy(int offset) {
+    public void increaseKeyBy(final int offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(IntKeyedElement<T> o) {
+    public int compareTo(final IntKeyedElement<T> o) {
         return Integer.compare(this.key, o.key);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof IntKeyedElement)) return false;
         IntKeyedElement<?> that = (IntKeyedElement<?>) o;

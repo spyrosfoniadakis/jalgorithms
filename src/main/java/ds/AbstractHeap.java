@@ -10,7 +10,7 @@ public abstract class AbstractHeap implements Heap{
     }
 
     @Override
-    public void setSize(int size) {
+    public void setSize(final int size) {
         this.size = size;
     }
 

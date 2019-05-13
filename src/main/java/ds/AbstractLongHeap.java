@@ -27,10 +27,10 @@ public abstract class AbstractLongHeap extends AbstractIndexedHeap { //AbstractP
     public interface LongHeapComparator extends LongComparator {
 
         @Override
-        int compare(long a, long b);
+        int compare(final long a, final long b);
 
         @Override
-        default boolean shouldSwap(long a, long b){
+        default boolean shouldSwap(final long a, final long b){
             return this.compare(a, b) > 0;
         }
     }
@@ -38,26 +38,26 @@ public abstract class AbstractLongHeap extends AbstractIndexedHeap { //AbstractP
     protected long[] elements;
     private LongComparator comparator;
 
-    protected AbstractLongHeap(LongComparator comparator){
+    protected AbstractLongHeap(final LongComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractLongHeap(LongComparator comparator, int capacity){
+    protected AbstractLongHeap(final LongComparator comparator, final int capacity){
         this(new long[capacity], comparator);
     }
 
-    protected AbstractLongHeap(long[] elements, LongComparator comparator){
+    protected AbstractLongHeap(final long[] elements, final LongComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractLongHeap(long[] elements, int size, LongComparator comparator){
+    protected AbstractLongHeap(final long[] elements, final int size, final LongComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
         this.build();
     }
 
-    protected AbstractLongHeap(AbstractLongHeap heap){
+    protected AbstractLongHeap(final AbstractLongHeap heap){
         this(heap.elements.clone(), heap.size, heap.comparator);
     }
 
@@ -77,7 +77,7 @@ public abstract class AbstractLongHeap extends AbstractIndexedHeap { //AbstractP
         return extracted;
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -121,14 +121,14 @@ public abstract class AbstractLongHeap extends AbstractIndexedHeap { //AbstractP
      * @param index
      * @param value
      */
-    public abstract void increaseElementValueBy(int index, long value);
+    public abstract void increaseElementValueBy(final int index, final long value);
 
-    public final void insert(long element){
+    public final void insert(final long element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected final void ensureInsertion(long element){
+    protected final void ensureInsertion(final long element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;

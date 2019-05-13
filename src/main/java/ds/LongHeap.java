@@ -14,7 +14,7 @@ public interface LongHeap {
      * @param index
      * @param value
      */
-    void increaseElementValueBy(int index, long value);
+    void increaseElementValueBy(final int index, final long value);
 
-    void insert(long element);
+    void insert(final long element);
 }

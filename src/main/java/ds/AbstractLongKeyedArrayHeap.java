@@ -45,7 +45,7 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
         this.build();
     }
 
-    protected AbstractLongKeyedArrayHeap(AbstractLongKeyedArrayHeap heap){
+    protected AbstractLongKeyedArrayHeap(final AbstractLongKeyedArrayHeap heap){
         this(heap.elements.clone(), heap.size, heap.keysComparator);
     }
 
@@ -53,8 +53,8 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
         this(10);
     }
 
-    private AbstractLongKeyedArrayHeap(int capacity){
-        elements = new LongKeyedElement[10];
+    private AbstractLongKeyedArrayHeap(final int capacity){
+        elements = new LongKeyedElement[capacity];
     }
 
     @Override
@@ -93,7 +93,7 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
         heapifyFrom(0);
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -133,14 +133,14 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, long offset);
+    public abstract void increaseElementKeyBy(final int index, final long offset);
 
-    public final void insert(T value, int key){
+    public final void insert(final T value, final int key){
         this.ensureInsertion(LongKeyedElement.from(0, value));
         this.increaseElementKeyBy(size-1, key);
     }
 
-    protected final void ensureInsertion(LongKeyedElement<T> element){
+    protected final void ensureInsertion(final LongKeyedElement<T> element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -154,7 +154,7 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
         this.elements = newElements;
     }
 
-    private boolean shouldSwap(LongKeyedElement<T> t1, LongKeyedElement<T> t2){
+    private boolean shouldSwap(final LongKeyedElement<T> t1, final LongKeyedElement<T> t2){
         return this.keysComparator.shouldSwap(t1.getKey(), t2.getKey());
     }
 

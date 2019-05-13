@@ -37,9 +37,9 @@ public abstract class AbstractIntHeap extends AbstractIndexedHeap { //AbstractPr
     @FunctionalInterface
     public interface IntHeapComparator extends IntComparator {
 
-        int compare(int a, int b);
+        int compare(final int a, final int b);
 
-        default boolean shouldSwap(int a, int b){
+        default boolean shouldSwap(final int a, final int b){
             return this.compare(a, b) > 0;
         }
     }
@@ -47,26 +47,26 @@ public abstract class AbstractIntHeap extends AbstractIndexedHeap { //AbstractPr
     protected int[] elements;
     private IntComparator comparator;
 
-    protected AbstractIntHeap(IntComparator comparator){
+    protected AbstractIntHeap(final IntComparator comparator){
         this(comparator, 10);
     }
 
-    protected AbstractIntHeap(IntComparator comparator, int capacity){
+    protected AbstractIntHeap(final IntComparator comparator, final int capacity){
         this(new int[capacity], comparator);
     }
 
-    protected AbstractIntHeap(int[] elements, IntComparator comparator){
+    protected AbstractIntHeap(final int[] elements, final IntComparator comparator){
         this(elements, elements.length, comparator);
     }
 
-    protected AbstractIntHeap(int[] elements, int size, IntComparator comparator){
+    protected AbstractIntHeap(final int[] elements, final int size, final IntComparator comparator){
         this.elements = elements;
         this.comparator = comparator;
         this.setSize(size);
         this.build();
     }
 
-    protected AbstractIntHeap(AbstractIntHeap heap){
+    protected AbstractIntHeap(final AbstractIntHeap heap){
         this(heap.elements.clone(), heap.size, heap.comparator);
     }
 
@@ -91,7 +91,7 @@ public abstract class AbstractIntHeap extends AbstractIndexedHeap { //AbstractPr
         heapifyFrom(0);
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -131,14 +131,14 @@ public abstract class AbstractIntHeap extends AbstractIndexedHeap { //AbstractPr
      * @param index
      * @param value
      */
-    public abstract void increaseElementValueBy(int index, int value);
+    public abstract void increaseElementValueBy(final int index, final int value);
 
-    public final void insert(int element){
+    public final void insert(final int element){
         this.ensureInsertion(0);
         this.increaseElementValueBy(size-1, element);
     }
 
-    protected final void ensureInsertion(int element){
+    protected final void ensureInsertion(final int element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;

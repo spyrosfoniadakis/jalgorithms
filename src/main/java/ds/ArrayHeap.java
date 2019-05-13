@@ -29,16 +29,16 @@ public class ArrayHeap<T> extends AbstractIndexedHeap {
 
 
 
-    private ArrayHeap(ToIntEvaluator<T> evaluator){
+    private ArrayHeap(final ToIntEvaluator<T> evaluator){
 
     }
-    private ArrayHeap(ToDoubleEvaluator<T> evaluator){
+    private ArrayHeap(final ToDoubleEvaluator<T> evaluator){
 
     }
-    private ArrayHeap(ToLongEvaluator<T> evaluator){
+    private ArrayHeap(final ToLongEvaluator<T> evaluator){
 
     }
-    private ArrayHeap(ToFloatEvaluator<T> evaluator){
+    private ArrayHeap(final ToFloatEvaluator<T> evaluator){
 
     }
 

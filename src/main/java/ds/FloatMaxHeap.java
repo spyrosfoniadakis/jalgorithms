@@ -40,33 +40,34 @@ public class FloatMaxHeap extends AbstractFloatHeap implements FloatHeap, FloatP
         this(10, 0);
     }
 
-    FloatMaxHeap(int capacity, int size){
+    FloatMaxHeap(final int capacity, final int size){
         this(new float[capacity], size);
     }
 
-    FloatMaxHeap(float[] elements){
+    FloatMaxHeap(final float[] elements){
         this(elements, elements.length);
     }
 
-    FloatMaxHeap(float[] elements, int size){
+    FloatMaxHeap(final float[] elements, final int size){
         super(elements, size, (FloatHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    FloatMaxHeap(FloatMaxHeap heap){
+    FloatMaxHeap(final FloatMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, float value){
+    public final void increaseElementValueBy(final int index, final float value){
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -78,17 +79,17 @@ public class FloatMaxHeap extends AbstractFloatHeap implements FloatHeap, FloatP
         return new FloatMaxHeap();
     }
 
-    public final static FloatMaxHeap newHeap(int capacity){
+    public final static FloatMaxHeap newHeap(final int capacity){
         return new FloatMaxHeap(capacity, 0);
     }
 
-    public final static FloatMaxHeap from(float[] elements){
+    public final static FloatMaxHeap from(final float[] elements){
         return new FloatMaxHeap(elements);
     }
 
-    public final static FloatMaxHeap from(float[] elements, int capacity){
+    public final static FloatMaxHeap from(final float[] elements, final int capacity){
         return new FloatMaxHeap(elements, capacity);
     }
 
-    public final static FloatMaxHeap from(FloatMaxHeap heap){ return new FloatMaxHeap(heap); }
+    public final static FloatMaxHeap from(final FloatMaxHeap heap){ return new FloatMaxHeap(heap); }
 }

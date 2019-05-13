@@ -12,37 +12,38 @@ public class LongKeyedMaxHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    LongKeyedMaxHeap(int capacity, int size){
+    LongKeyedMaxHeap(final int capacity, final int size){
         this(new LongKeyedElement[capacity], size);
     }
 
-    LongKeyedMaxHeap(LongKeyedElement<T>[] elements){
+    LongKeyedMaxHeap(final LongKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    LongKeyedMaxHeap(LongKeyedElement<T>[] elements, int size){
+    LongKeyedMaxHeap(final LongKeyedElement<T>[] elements, int size){
         super(elements, size, (LongComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    LongKeyedMaxHeap(List<LongKeyedElement<T>> elements){
+    LongKeyedMaxHeap(final List<LongKeyedElement<T>> elements){
         super(elements, elements.size(), (LongComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    LongKeyedMaxHeap(LongKeyedMaxHeap heap){
+    LongKeyedMaxHeap(final LongKeyedMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, long offset) {
+    public void increaseElementKeyBy(final int index, final long offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
         }
         else if(offset > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -54,19 +55,19 @@ public class LongKeyedMaxHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         return new LongKeyedMaxHeap();
     }
 
-    public final static LongKeyedMaxHeap newHeap(int capacity){
+    public final static LongKeyedMaxHeap newHeap(final int capacity){
         return new LongKeyedMaxHeap(capacity, 0);
     }
 
-    public final static <T> LongKeyedMaxHeap from(LongKeyedElement<T>[] elements){
+    public final static <T> LongKeyedMaxHeap from(final LongKeyedElement<T>[] elements){
         return new LongKeyedMaxHeap(elements);
     }
 
-    public final static <T> LongKeyedMaxHeap from(LongKeyedElement<T>[] elements, int capacity){
+    public final static <T> LongKeyedMaxHeap from(final LongKeyedElement<T>[] elements, int capacity){
         return new LongKeyedMaxHeap(elements, capacity);
     }
 
-    public final static LongKeyedMaxHeap from(List<LongKeyedMaxHeap> elements){ return new LongKeyedMaxHeap(elements); }
+    public final static LongKeyedMaxHeap from(final List<LongKeyedMaxHeap> elements){ return new LongKeyedMaxHeap(elements); }
 
-    public final static LongKeyedMaxHeap from(LongKeyedMaxHeap heap){ return new LongKeyedMaxHeap(heap); }
+    public final static LongKeyedMaxHeap from(final LongKeyedMaxHeap heap){ return new LongKeyedMaxHeap(heap); }
 }

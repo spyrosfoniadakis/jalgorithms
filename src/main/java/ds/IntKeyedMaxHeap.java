@@ -12,37 +12,38 @@ public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    IntKeyedMaxHeap(int capacity, int size){
+    IntKeyedMaxHeap(final int capacity, final int size){
         this(new IntKeyedElement[capacity], size);
     }
 
-    IntKeyedMaxHeap(IntKeyedElement<T>[] elements){
+    IntKeyedMaxHeap(final IntKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    IntKeyedMaxHeap(IntKeyedElement<T>[] elements, int size){
+    IntKeyedMaxHeap(final IntKeyedElement<T>[] elements, int size){
         super(elements, size, (IntComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    IntKeyedMaxHeap(List<IntKeyedElement<T>> elements){
+    IntKeyedMaxHeap(final List<IntKeyedElement<T>> elements){
         super(elements, elements.size(), (IntComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    IntKeyedMaxHeap(IntKeyedMaxHeap heap){
+    IntKeyedMaxHeap(final IntKeyedMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, int offset) {
+    public void increaseElementKeyBy(final int index, final int offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
         }
         else if(offset > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -54,19 +55,19 @@ public class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         return new IntKeyedMaxHeap();
     }
 
-    public final static IntKeyedMaxHeap newHeap(int capacity){
+    public final static IntKeyedMaxHeap newHeap(final int capacity){
         return new IntKeyedMaxHeap(capacity, 0);
     }
 
-    public final static <T> IntKeyedMaxHeap from(IntKeyedElement<T>[] elements){
+    public final static <T> IntKeyedMaxHeap from(final IntKeyedElement<T>[] elements){
         return new IntKeyedMaxHeap(elements);
     }
 
-    public final static <T> IntKeyedMaxHeap from(IntKeyedElement<T>[] elements, int capacity){
+    public final static <T> IntKeyedMaxHeap from(final IntKeyedElement<T>[] elements, final int capacity){
         return new IntKeyedMaxHeap(elements, capacity);
     }
 
-    public final static IntKeyedMaxHeap from(List<IntKeyedMaxHeap> elements){ return new IntKeyedMaxHeap(elements); }
+    public final static IntKeyedMaxHeap from(final List<IntKeyedMaxHeap> elements){ return new IntKeyedMaxHeap(elements); }
 
-    public final static IntKeyedMaxHeap from(IntKeyedMaxHeap heap){ return new IntKeyedMaxHeap(heap); }
+    public final static IntKeyedMaxHeap from(final IntKeyedMaxHeap heap){ return new IntKeyedMaxHeap(heap); }
 }

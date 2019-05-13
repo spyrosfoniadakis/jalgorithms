@@ -12,28 +12,28 @@ public class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    LongKeyedMinHeap(int capacity, int size){
+    LongKeyedMinHeap(final int capacity, final int size){
         this(new LongKeyedElement[capacity], size);
     }
 
-    LongKeyedMinHeap(LongKeyedElement<T>[] elements){
+    LongKeyedMinHeap(final LongKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    LongKeyedMinHeap(LongKeyedElement<T>[] elements, int size){
+    LongKeyedMinHeap(final LongKeyedElement<T>[] elements, final int size){
         super(elements, size, (LongComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    LongKeyedMinHeap(List<LongKeyedElement<T>> elements){
+    LongKeyedMinHeap(final List<LongKeyedElement<T>> elements){
         super(elements, elements.size(), (LongComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    LongKeyedMinHeap(LongKeyedMinHeap heap){
+    LongKeyedMinHeap(final LongKeyedMinHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, long offset) {
+    public void increaseElementKeyBy(final int index, final long offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
@@ -43,9 +43,10 @@ public class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         }
         else {
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
     }
@@ -54,19 +55,19 @@ public class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         return new LongKeyedMinHeap();
     }
 
-    public final static LongKeyedMinHeap newHeap(int capacity){
+    public final static LongKeyedMinHeap newHeap(final int capacity){
         return new LongKeyedMinHeap(capacity, 0);
     }
 
-    public final static <T> LongKeyedMinHeap from(LongKeyedElement<T>[] elements){
+    public final static <T> LongKeyedMinHeap from(final LongKeyedElement<T>[] elements){
         return new LongKeyedMinHeap(elements);
     }
 
-    public final static <T> LongKeyedMinHeap from(LongKeyedElement<T>[] elements, int capacity){
+    public final static <T> LongKeyedMinHeap from(final LongKeyedElement<T>[] elements, int capacity){
         return new LongKeyedMinHeap(elements, capacity);
     }
 
-    public final static LongKeyedMinHeap from(List<LongKeyedMinHeap> elements){ return new LongKeyedMinHeap(elements); }
+    public final static LongKeyedMinHeap from(final List<LongKeyedMinHeap> elements){ return new LongKeyedMinHeap(elements); }
 
-    public final static LongKeyedMinHeap from(LongKeyedMinHeap heap){ return new LongKeyedMinHeap(heap); }
+    public final static LongKeyedMinHeap from(final LongKeyedMinHeap heap){ return new LongKeyedMinHeap(heap); }
 }

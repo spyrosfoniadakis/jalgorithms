@@ -12,37 +12,38 @@ public class DoubleKeyedMaxHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    DoubleKeyedMaxHeap(int capacity, int size){
+    DoubleKeyedMaxHeap(final int capacity, final int size){
         this(new DoubleKeyedElement[capacity], size);
     }
 
-    DoubleKeyedMaxHeap(DoubleKeyedElement<T>[] elements){
+    DoubleKeyedMaxHeap(final DoubleKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    DoubleKeyedMaxHeap(DoubleKeyedElement<T>[] elements, int size){
+    DoubleKeyedMaxHeap(final DoubleKeyedElement<T>[] elements, final int size){
         super(elements, size, (DoubleComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    DoubleKeyedMaxHeap(List<DoubleKeyedElement<T>> elements){
+    DoubleKeyedMaxHeap(final List<DoubleKeyedElement<T>> elements){
         super(elements, elements.size(), (DoubleComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    DoubleKeyedMaxHeap(DoubleKeyedMaxHeap heap){
+    DoubleKeyedMaxHeap(final DoubleKeyedMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, double offset) {
+    public void increaseElementKeyBy(final int index, final double offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
         }
         else if(offset > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex= parentIndex;
             }
         }
         else {

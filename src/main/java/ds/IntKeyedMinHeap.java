@@ -12,28 +12,28 @@ public class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         this(10, 0);
     }
 
-    IntKeyedMinHeap(int capacity, int size){
+    IntKeyedMinHeap(final int capacity, final int size){
         this(new IntKeyedElement[capacity], size);
     }
 
-    IntKeyedMinHeap(IntKeyedElement<T>[] elements){
+    IntKeyedMinHeap(final IntKeyedElement<T>[] elements){
         this(elements, elements.length);
     }
 
-    IntKeyedMinHeap(IntKeyedElement<T>[] elements, int size){
+    IntKeyedMinHeap(final IntKeyedElement<T>[] elements, final int size){
         super(elements, size, (IntComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    IntKeyedMinHeap(List<IntKeyedElement<T>> elements){
+    IntKeyedMinHeap(final List<IntKeyedElement<T>> elements){
         super(elements, elements.size(), (IntComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    IntKeyedMinHeap(IntKeyedMinHeap heap){
+    IntKeyedMinHeap(final IntKeyedMinHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementKeyBy(int index, int offset) {
+    public void increaseElementKeyBy(final int index, final int offset) {
         this.elements[index].increaseKeyBy(offset);
         if (offset == 0){
             return;
@@ -43,9 +43,10 @@ public class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         }
         else {
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index].getKey(), this.elements[parentIndex = this.getParentIndexOf(index)].getKey())){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex].getKey(), this.elements[parentIndex = this.getParentIndexOf(currentIndex)].getKey())){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
     }
@@ -54,19 +55,19 @@ public class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         return new IntKeyedMinHeap();
     }
 
-    public final static IntKeyedMinHeap newHeap(int capacity){
+    public final static IntKeyedMinHeap newHeap(final int capacity){
         return new IntKeyedMinHeap(capacity, 0);
     }
 
-    public final static <T> IntKeyedMinHeap from(IntKeyedElement<T>[] elements){
+    public final static <T> IntKeyedMinHeap from(final IntKeyedElement<T>[] elements){
         return new IntKeyedMinHeap(elements);
     }
 
-    public final static <T> IntKeyedMinHeap from(IntKeyedElement<T>[] elements, int capacity){
+    public final static <T> IntKeyedMinHeap from(final IntKeyedElement<T>[] elements, final int capacity){
         return new IntKeyedMinHeap(elements, capacity);
     }
 
-    public final static IntKeyedMinHeap from(List<IntKeyedMinHeap> elements){ return new IntKeyedMinHeap(elements); }
+    public final static IntKeyedMinHeap from(final List<IntKeyedMinHeap> elements){ return new IntKeyedMinHeap(elements); }
 
-    public final static IntKeyedMinHeap from(IntKeyedMinHeap heap){ return new IntKeyedMinHeap(heap); }
+    public final static IntKeyedMinHeap from(final IntKeyedMinHeap heap){ return new IntKeyedMinHeap(heap); }
 }

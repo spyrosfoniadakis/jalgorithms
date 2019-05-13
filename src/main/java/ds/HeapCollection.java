@@ -22,7 +22,7 @@ public interface HeapCollection {
 
     int getSize();
 
-    void setSize(int size);
+    void setSize(final int size);
 
     void heapify();
 

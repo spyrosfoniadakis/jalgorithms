@@ -40,33 +40,34 @@ public class FloatMinHeap extends AbstractFloatHeap implements FloatHeap, FloatP
         this(10, 0);
     }
 
-    FloatMinHeap(int capacity, int size){
+    FloatMinHeap(final int capacity, final int size){
         this(new float[capacity], size);
     }
 
-    FloatMinHeap(float[] elements){
+    FloatMinHeap(final float[] elements){
         this(elements, elements.length);
     }
 
-    FloatMinHeap(float[] elements, int size){
+    FloatMinHeap(final float[] elements, final int size){
         super(elements, size, (FloatHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    FloatMinHeap(FloatMinHeap heap){
+    FloatMinHeap(final FloatMinHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, float value){
+    public final void increaseElementValueBy(final int index, final float value){
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -78,18 +79,18 @@ public class FloatMinHeap extends AbstractFloatHeap implements FloatHeap, FloatP
         return new FloatMinHeap();
     }
 
-    public final static FloatMinHeap newHeap(int capacity){
+    public final static FloatMinHeap newHeap(final int capacity){
         return new FloatMinHeap(capacity, 0);
     }
 
-    public final static FloatMinHeap from(float[] elements){
+    public final static FloatMinHeap from(final float[] elements){
         return new FloatMinHeap(elements);
     }
 
-    public final static FloatMinHeap from(float[] elements, int capacity){
+    public final static FloatMinHeap from(final float[] elements, int capacity){
         return new FloatMinHeap(elements, capacity);
     }
 
-    public final static FloatMinHeap from(FloatMinHeap heap){ return new FloatMinHeap(heap); }
+    public final static FloatMinHeap from(final FloatMinHeap heap){ return new FloatMinHeap(heap); }
 }
 

@@ -41,33 +41,34 @@ public class DoubleMinHeap extends AbstractDoubleHeap{
     }
 
     // TODO: reconsider
-    DoubleMinHeap(int capacity, int size){
+    DoubleMinHeap(final int capacity, final int size){
         this(new double[capacity], size);
     }
 
-    DoubleMinHeap(double[] elements){
+    DoubleMinHeap(final double[] elements){
         this(elements, elements.length);
     }
 
-    DoubleMinHeap(double[] elements, int size){
+    DoubleMinHeap(final double[] elements, final int size){
         super(elements, size, (DoubleHeapComparator) (a, b) -> a > b ? 1 : a < b ? -1 : 0);
     }
 
-    DoubleMinHeap(DoubleMinHeap heap){
+    DoubleMinHeap(final DoubleMinHeap heap){
         super(heap);
     }
 
     @Override
-    public void increaseElementValueBy(int index, double value) {
+    public void increaseElementValueBy(final int index, final double value) {
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -79,17 +80,17 @@ public class DoubleMinHeap extends AbstractDoubleHeap{
         return new DoubleMinHeap();
     }
 
-    public final static DoubleMinHeap newHeap(int capacity){
+    public final static DoubleMinHeap newHeap(final int capacity){
         return new DoubleMinHeap(capacity, 0);
     }
 
-    public final static DoubleMinHeap from(double[] elements){
+    public final static DoubleMinHeap from(final double[] elements){
         return new DoubleMinHeap(elements);
     }
 
-    public final static DoubleMinHeap from(double[] elements, int capacity){
+    public final static DoubleMinHeap from(final double[] elements, final int capacity){
         return new DoubleMinHeap(elements, capacity);
     }
 
-    public final static DoubleMinHeap from(DoubleMinHeap heap){ return new DoubleMinHeap(heap); }
+    public final static DoubleMinHeap from(final DoubleMinHeap heap){ return new DoubleMinHeap(heap); }
 }

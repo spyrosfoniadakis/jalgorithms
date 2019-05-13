@@ -26,24 +26,24 @@ public class IntMinHeap extends AbstractIntHeap implements IntHeap, IntPriorityQ
         this(10);
     }
 
-    IntMinHeap(int capacity){
+    IntMinHeap(final int capacity){
         this(new int[capacity], 0);
     }
 
-    IntMinHeap(int[] elements){
+    IntMinHeap(final int[] elements){
         this(elements, elements.length);
     }
 
-    IntMinHeap(int[] elements, int size){
+    IntMinHeap(final int[] elements, final int size){
         super(elements, size, (IntHeapComparator) (a, b) -> a < b ? -1 : a > b ? 1 : 0);
     }
 
-    IntMinHeap(IntMinHeap heap){
+    IntMinHeap(final IntMinHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, int value){
+    public final void increaseElementValueBy(final int index, final int value){
         this.elements[index] += value;
         if (value == 0){
             return;
@@ -53,9 +53,10 @@ public class IntMinHeap extends AbstractIntHeap implements IntHeap, IntPriorityQ
         }
         else {
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
     }

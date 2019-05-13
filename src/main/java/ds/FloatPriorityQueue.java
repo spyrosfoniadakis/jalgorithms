@@ -14,7 +14,7 @@ public interface FloatPriorityQueue {
      * @param index
      * @param value
      */
-    void increaseElementValueBy(int index, float value);
+    void increaseElementValueBy(final int index, final float value);
 
-    void insert(float element);
+    void insert(final float element);
 }

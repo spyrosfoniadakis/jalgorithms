@@ -40,33 +40,34 @@ public class IntMaxHeap extends AbstractIntHeap implements IntHeap, IntPriorityQ
         this(10, 0);
     }
 
-    IntMaxHeap(int capacity, int size){
+    IntMaxHeap(final int capacity, final int size){
         this(new int[capacity], size);
     }
 
-    IntMaxHeap(int[] elements){
+    IntMaxHeap(final int[] elements){
         this(elements, elements.length);
     }
 
-    IntMaxHeap(int[] elements, int size){
+    IntMaxHeap(final int[] elements, final int size){
         super(elements, size, (IntHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    IntMaxHeap(IntMaxHeap heap){
+    IntMaxHeap(final IntMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, int value){
+    public final void increaseElementValueBy(final int index, final int value){
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -78,17 +79,17 @@ public class IntMaxHeap extends AbstractIntHeap implements IntHeap, IntPriorityQ
         return new IntMaxHeap();
     }
 
-    public final static IntMaxHeap newHeap(int capacity){
+    public final static IntMaxHeap newHeap(final int capacity){
         return new IntMaxHeap(capacity, 0);
     }
 
-    public final static IntMaxHeap from(int[] elements){
+    public final static IntMaxHeap from(final int[] elements){
         return new IntMaxHeap(elements);
     }
 
-    public final static IntMaxHeap from(int[] elements, int capacity){
+    public final static IntMaxHeap from(final int[] elements, final int capacity){
         return new IntMaxHeap(elements, capacity);
     }
 
-    public final static IntMaxHeap from(IntMaxHeap heap){ return new IntMaxHeap(heap); }
+    public final static IntMaxHeap from(final IntMaxHeap heap){ return new IntMaxHeap(heap); }
 }

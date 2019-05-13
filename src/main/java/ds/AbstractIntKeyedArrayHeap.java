@@ -45,7 +45,7 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         this.build();
     }
 
-    protected AbstractIntKeyedArrayHeap(AbstractIntKeyedArrayHeap heap){
+    protected AbstractIntKeyedArrayHeap(final AbstractIntKeyedArrayHeap heap){
         this(heap.elements.clone(), heap.size, heap.keysComparator);
     }
 
@@ -53,8 +53,9 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         this(10);
     }
 
-    private AbstractIntKeyedArrayHeap(int capacity){
-        elements = new IntKeyedElement[10];
+    // TODO: Add test for that and all those kind of constructors
+    private AbstractIntKeyedArrayHeap(final int capacity){
+        elements = new IntKeyedElement[capacity];
     }
 
     @Override
@@ -93,7 +94,7 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         heapifyFrom(0);
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -133,14 +134,14 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, int offset);
+    public abstract void increaseElementKeyBy(final int index, final int offset);
 
-    public final void insert(T value, int key){
+    public final void insert(final T value, final int key){
         this.ensureInsertion(IntKeyedElement.from(0, value));
         this.increaseElementKeyBy(size-1, key);
     }
 
-    protected final void ensureInsertion(IntKeyedElement<T> element){
+    protected final void ensureInsertion(final IntKeyedElement<T> element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -154,7 +155,7 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
         this.elements = newElements;
     }
 
-    private boolean shouldSwap(IntKeyedElement<T> t1, IntKeyedElement<T> t2){
+    private boolean shouldSwap(final IntKeyedElement<T> t1, final IntKeyedElement<T> t2){
         return this.keysComparator.shouldSwap(t1.getKey(), t2.getKey());
     }
 

@@ -44,7 +44,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
         this.build();
     }
 
-    protected AbstractFloatKeyedArrayHeap(AbstractFloatKeyedArrayHeap heap){
+    protected AbstractFloatKeyedArrayHeap(final AbstractFloatKeyedArrayHeap heap){
         this(heap.elements.clone(), heap.size, heap.keysComparator);
     }
 
@@ -52,7 +52,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
         this(10);
     }
 
-    private AbstractFloatKeyedArrayHeap(int capacity){
+    private AbstractFloatKeyedArrayHeap(final int capacity){
         elements = new FloatKeyedElement[10];
     }
 
@@ -92,7 +92,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
         heapifyFrom(0);
     }
 
-    protected final void heapifyFrom(int index) {
+    protected final void heapifyFrom(final int index) {
         int leftIndex = getLeftChildIndexOf(index);
         int rightIndex= getRightChildIndexOf(index);
         int nextIndex = index;
@@ -132,14 +132,14 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
      * @param index
      * @param offset
      */
-    public abstract void increaseElementKeyBy(int index, float offset);
+    public abstract void increaseElementKeyBy(final int index, final float offset);
 
-    public final void insert(T value, int key){
+    public final void insert(final T value, final int key){
         this.ensureInsertion(FloatKeyedElement.from(0, value));
         this.increaseElementKeyBy(size-1, key);
     }
 
-    protected final void ensureInsertion(FloatKeyedElement<T> element){
+    protected final void ensureInsertion(final FloatKeyedElement<T> element){
         if(this.size < this.elements.length){
             this.elements[this.size++] = element;
             return;
@@ -153,7 +153,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
         this.elements = newElements;
     }
 
-    private boolean shouldSwap(FloatKeyedElement<T> t1, FloatKeyedElement<T> t2){
+    private boolean shouldSwap(final FloatKeyedElement<T> t1, final FloatKeyedElement<T> t2){
         return this.keysComparator.shouldSwap(t1.getKey(), t2.getKey());
     }
 

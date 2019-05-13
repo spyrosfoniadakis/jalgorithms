@@ -40,33 +40,34 @@ public class LongMaxHeap extends AbstractLongHeap implements LongHeap, LongPrior
         this(10, 0);
     }
 
-    LongMaxHeap(int capacity, int size){
+    LongMaxHeap(final int capacity, final int size){
         this(new long[capacity], size);
     }
 
-    LongMaxHeap(long[] elements){
+    LongMaxHeap(final long[] elements){
         this(elements, elements.length);
     }
 
-    LongMaxHeap(long[] elements, int size){
+    LongMaxHeap(final long[] elements, final int size){
         super(elements, size, (LongHeapComparator) (a, b) -> a > b ? -1 : a < b ? 1 : 0);
     }
 
-    LongMaxHeap(LongMaxHeap heap){
+    LongMaxHeap(final LongMaxHeap heap){
         super(heap);
     }
 
     @Override
-    public final void increaseElementValueBy(int index, long value){
+    public final void increaseElementValueBy(final int index, final long value){
         this.elements[index] += value;
         if (value == 0){
             return;
         }
         else if(value > 0){
             int parentIndex;
-            while(index > 0 && this.getComparator().shouldSwap(this.elements[index], this.elements[parentIndex = this.getParentIndexOf(index)])){
-                ArrayUtils.swap(this.elements, index, parentIndex);
-                index= parentIndex;
+            int currentIndex = index;
+            while(currentIndex > 0 && this.getComparator().shouldSwap(this.elements[currentIndex], this.elements[parentIndex = this.getParentIndexOf(currentIndex)])){
+                ArrayUtils.swap(this.elements, currentIndex, parentIndex);
+                currentIndex = parentIndex;
             }
         }
         else {
@@ -82,17 +83,17 @@ public class LongMaxHeap extends AbstractLongHeap implements LongHeap, LongPrior
         return new LongMaxHeap();
     }
 
-    public final static LongMaxHeap newHeap(int capacity){
+    public final static LongMaxHeap newHeap(final int capacity){
         return new LongMaxHeap(capacity, 0);
     }
 
-    public final static LongMaxHeap from(long[] elements){
+    public final static LongMaxHeap from(final long[] elements){
         return new LongMaxHeap(elements);
     }
 
-    public final static LongMaxHeap from(long[] elements, int capacity){
+    public final static LongMaxHeap from(final long[] elements, final int capacity){
         return new LongMaxHeap(elements, capacity);
     }
 
-    public final static LongMaxHeap from(LongMaxHeap heap){ return new LongMaxHeap(heap); }
+    public final static LongMaxHeap from(final LongMaxHeap heap){ return new LongMaxHeap(heap); }
 }
