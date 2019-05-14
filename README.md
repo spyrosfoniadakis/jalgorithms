@@ -30,7 +30,7 @@ Support for reference types in
   <li>HeapSort</li>
 </ul>
     </li>
-  <li>Utility classes for constructing HeapSorts and PriorityQueues</li>
+  <li>Utility classes for constructing Heaps and PriorityQueues</li>
 </ul>
 
 ## License
