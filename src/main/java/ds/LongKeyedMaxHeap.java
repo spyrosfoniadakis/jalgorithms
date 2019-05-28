@@ -81,8 +81,8 @@ public final class LongKeyedMaxHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         return new LongKeyedMaxHeap(elements);
     }
 
-    public final static <T> LongKeyedMaxHeap from(final LongKeyedElement<T>[] elements, int capacity){
-        return new LongKeyedMaxHeap(elements, capacity);
+    public final static <T> LongKeyedMaxHeap from(final LongKeyedElement<T>[] elements, int size){
+        return new LongKeyedMaxHeap(elements, size);
     }
 
     public final static LongKeyedMaxHeap from(final List<LongKeyedMaxHeap> elements){ return new LongKeyedMaxHeap(elements); }

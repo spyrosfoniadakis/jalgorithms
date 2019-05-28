@@ -106,7 +106,7 @@ public abstract class AbstractDoubleHeap extends AbstractIndexedHeap { //Abstrac
     }
 
     public final void build() {
-        for(int i=Math.floorDiv(this.elements.length, 2); i>=0; i--){
+        for(int i=Math.floorDiv(this.size, 2); i>=0; i--){
             heapifyFrom(i);
         }
     }

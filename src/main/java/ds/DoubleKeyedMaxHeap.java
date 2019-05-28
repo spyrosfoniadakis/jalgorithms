@@ -81,8 +81,8 @@ public final class DoubleKeyedMaxHeap<T> extends AbstractDoubleKeyedArrayHeap<T>
         return new DoubleKeyedMaxHeap(elements);
     }
 
-    public final static <T> DoubleKeyedMaxHeap from(DoubleKeyedElement<T>[] elements, int capacity){
-        return new DoubleKeyedMaxHeap(elements, capacity);
+    public final static <T> DoubleKeyedMaxHeap from(DoubleKeyedElement<T>[] elements, int size){
+        return new DoubleKeyedMaxHeap(elements, size);
     }
 
     public final static DoubleKeyedMaxHeap from(List<DoubleKeyedMaxHeap> elements){ return new DoubleKeyedMaxHeap(elements); }

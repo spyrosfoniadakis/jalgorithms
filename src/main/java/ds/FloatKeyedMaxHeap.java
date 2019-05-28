@@ -81,8 +81,8 @@ public final class FloatKeyedMaxHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
         return new FloatKeyedMaxHeap(elements);
     }
 
-    public final static <T> FloatKeyedMaxHeap from(FloatKeyedElement<T>[] elements, int capacity){
-        return new FloatKeyedMaxHeap(elements, capacity);
+    public final static <T> FloatKeyedMaxHeap from(FloatKeyedElement<T>[] elements, int size){
+        return new FloatKeyedMaxHeap(elements, size);
     }
 
     public final static FloatKeyedMaxHeap from(List<FloatKeyedMaxHeap> elements){ return new FloatKeyedMaxHeap(elements); }

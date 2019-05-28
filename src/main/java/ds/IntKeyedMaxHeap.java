@@ -81,8 +81,8 @@ public final class IntKeyedMaxHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         return new IntKeyedMaxHeap(elements);
     }
 
-    public final static <T> IntKeyedMaxHeap from(final IntKeyedElement<T>[] elements, final int capacity){
-        return new IntKeyedMaxHeap(elements, capacity);
+    public final static <T> IntKeyedMaxHeap from(final IntKeyedElement<T>[] elements, final int size){
+        return new IntKeyedMaxHeap(elements, size);
     }
 
     public final static IntKeyedMaxHeap from(final List<IntKeyedMaxHeap> elements){ return new IntKeyedMaxHeap(elements); }

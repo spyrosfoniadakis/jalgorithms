@@ -91,8 +91,8 @@ public final class LongMaxHeap extends AbstractLongHeap implements LongHeap, Lon
         return new LongMaxHeap(elements);
     }
 
-    public final static LongMaxHeap from(final long[] elements, final int capacity){
-        return new LongMaxHeap(elements, capacity);
+    public final static LongMaxHeap from(final long[] elements, final int size){
+        return new LongMaxHeap(elements, size);
     }
 
     public final static LongMaxHeap from(final LongMaxHeap heap){ return new LongMaxHeap(heap); }

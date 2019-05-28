@@ -81,8 +81,8 @@ public final class LongKeyedMinHeap<T> extends AbstractLongKeyedArrayHeap<T> {
         return new LongKeyedMinHeap(elements);
     }
 
-    public final static <T> LongKeyedMinHeap from(final LongKeyedElement<T>[] elements, int capacity){
-        return new LongKeyedMinHeap(elements, capacity);
+    public final static <T> LongKeyedMinHeap from(final LongKeyedElement<T>[] elements, int size){
+        return new LongKeyedMinHeap(elements, size);
     }
 
     public final static LongKeyedMinHeap from(final List<LongKeyedMinHeap> elements){ return new LongKeyedMinHeap(elements); }

@@ -88,8 +88,8 @@ public final class DoubleMinHeap extends AbstractDoubleHeap{
         return new DoubleMinHeap(elements);
     }
 
-    public final static DoubleMinHeap from(final double[] elements, final int capacity){
-        return new DoubleMinHeap(elements, capacity);
+    public final static DoubleMinHeap from(final double[] elements, final int size){
+        return new DoubleMinHeap(elements, size);
     }
 
     public final static DoubleMinHeap from(final DoubleMinHeap heap){ return new DoubleMinHeap(heap); }

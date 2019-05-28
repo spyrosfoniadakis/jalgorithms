@@ -88,8 +88,8 @@ public final class DoubleMaxHeap extends AbstractDoubleHeap{
         return new DoubleMaxHeap(elements);
     }
 
-    public final static DoubleMaxHeap from(final double[] elements, final int capacity){
-        return new DoubleMaxHeap(elements, capacity);
+    public final static DoubleMaxHeap from(final double[] elements, final int size){
+        return new DoubleMaxHeap(elements, size);
     }
 
     public final static DoubleMaxHeap from(final DoubleMaxHeap heap){ return new DoubleMaxHeap(heap); }

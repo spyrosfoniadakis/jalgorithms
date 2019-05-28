@@ -81,8 +81,8 @@ public final class IntKeyedMinHeap<T> extends AbstractIntKeyedArrayHeap<T> {
         return new IntKeyedMinHeap(elements);
     }
 
-    public final static <T> IntKeyedMinHeap from(final IntKeyedElement<T>[] elements, final int capacity){
-        return new IntKeyedMinHeap(elements, capacity);
+    public final static <T> IntKeyedMinHeap from(final IntKeyedElement<T>[] elements, final int size){
+        return new IntKeyedMinHeap(elements, size);
     }
 
     public final static IntKeyedMinHeap from(final List<IntKeyedMinHeap> elements){ return new IntKeyedMinHeap(elements); }

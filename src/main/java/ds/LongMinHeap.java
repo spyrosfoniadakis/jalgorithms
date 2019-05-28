@@ -91,8 +91,8 @@ public final class LongMinHeap extends AbstractLongHeap implements LongHeap, Lon
         return new LongMinHeap(elements);
     }
 
-    public final static LongMinHeap from(final long[] elements, final int capacity){
-        return new LongMinHeap(elements, capacity);
+    public final static LongMinHeap from(final long[] elements, final int size){
+        return new LongMinHeap(elements, size);
     }
 
     public final static LongMinHeap from(final LongMinHeap heap){ return new LongMinHeap(heap); }

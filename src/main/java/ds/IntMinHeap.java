@@ -73,8 +73,8 @@ public final class IntMinHeap extends AbstractIntHeap implements IntHeap, IntPri
         return new IntMinHeap(elements);
     }
 
-    public final static IntMinHeap from(int[] elements, int capacity){
-        return new IntMinHeap(elements, capacity);
+    public final static IntMinHeap from(int[] elements, int size){
+        return new IntMinHeap(elements, size);
     }
 
     public final static IntMinHeap from(IntMinHeap heap){ return new IntMinHeap(heap); }

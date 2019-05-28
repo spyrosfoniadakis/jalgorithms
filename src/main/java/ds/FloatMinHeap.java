@@ -87,8 +87,8 @@ public final class FloatMinHeap extends AbstractFloatHeap implements FloatHeap, 
         return new FloatMinHeap(elements);
     }
 
-    public final static FloatMinHeap from(final float[] elements, int capacity){
-        return new FloatMinHeap(elements, capacity);
+    public final static FloatMinHeap from(final float[] elements, int size){
+        return new FloatMinHeap(elements, size);
     }
 
     public final static FloatMinHeap from(final FloatMinHeap heap){ return new FloatMinHeap(heap); }

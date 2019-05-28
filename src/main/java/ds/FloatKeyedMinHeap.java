@@ -81,8 +81,8 @@ public final class FloatKeyedMinHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
         return new FloatKeyedMinHeap(elements);
     }
 
-    public final static <T> FloatKeyedMinHeap from(final FloatKeyedElement<T>[] elements, final int capacity){
-        return new FloatKeyedMinHeap(elements, capacity);
+    public final static <T> FloatKeyedMinHeap from(final FloatKeyedElement<T>[] elements, final int size){
+        return new FloatKeyedMinHeap(elements, size);
     }
 
     public final static FloatKeyedMinHeap from(final List<FloatKeyedMinHeap> elements){ return new FloatKeyedMinHeap(elements); }

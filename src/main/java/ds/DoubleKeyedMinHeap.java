@@ -81,8 +81,8 @@ public final class DoubleKeyedMinHeap<T> extends AbstractDoubleKeyedArrayHeap<T>
         return new DoubleKeyedMinHeap(elements);
     }
 
-    public final static <T> DoubleKeyedMinHeap from(final DoubleKeyedElement<T>[] elements, int capacity){
-        return new DoubleKeyedMinHeap(elements, capacity);
+    public final static <T> DoubleKeyedMinHeap from(final DoubleKeyedElement<T>[] elements, int size){
+        return new DoubleKeyedMinHeap(elements, size);
     }
 
     public final static DoubleKeyedMinHeap from(final List<DoubleKeyedMinHeap> elements){ return new DoubleKeyedMinHeap(elements); }

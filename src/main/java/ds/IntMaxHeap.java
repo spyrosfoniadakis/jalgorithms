@@ -87,8 +87,8 @@ public final class IntMaxHeap extends AbstractIntHeap implements IntHeap, IntPri
         return new IntMaxHeap(elements);
     }
 
-    public final static IntMaxHeap from(final int[] elements, final int capacity){
-        return new IntMaxHeap(elements, capacity);
+    public final static IntMaxHeap from(final int[] elements, final int size){
+        return new IntMaxHeap(elements, size);
     }
 
     public final static IntMaxHeap from(final IntMaxHeap heap){ return new IntMaxHeap(heap); }

@@ -87,8 +87,8 @@ public final class FloatMaxHeap extends AbstractFloatHeap implements FloatHeap, 
         return new FloatMaxHeap(elements);
     }
 
-    public final static FloatMaxHeap from(final float[] elements, final int capacity){
-        return new FloatMaxHeap(elements, capacity);
+    public final static FloatMaxHeap from(final float[] elements, final int size){
+        return new FloatMaxHeap(elements, size);
     }
 
     public final static FloatMaxHeap from(final FloatMaxHeap heap){ return new FloatMaxHeap(heap); }
