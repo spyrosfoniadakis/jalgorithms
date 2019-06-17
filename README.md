@@ -2,7 +2,7 @@
 A Java Library providing an API for sorting algorithms and data structures, implemented in Java 8. It is still in progress.
 
 ## Current state
-The current version is 0.06 beta. The version will be updated as more implementations are added. As earlier said, it is still in progress.
+The current version is 0.07 beta. The version will be updated as more implementations are added. As earlier said, it is still in progress.
 
 ### Contents
 Up to now it supports the following:
@@ -12,7 +12,7 @@ Up to now it supports the following:
 <li><b>InsertionSort</b> for primitive and reference types</li>
 <li><b>MergeSort</b> for primitive and reference types</li>
 <li><b>QuickSort</b> for primitive and reference types</li>
-<li><b>HeapSort</b> for primitive types</li>
+<li><b>HeapSort</b> for primitive types and reference types</li>
 <li><b>CountingSort</b> for int numbers only</li>
 </ul>
 
@@ -24,13 +24,8 @@ Up to now it supports the following:
 
 ### Coming up next
 <ul>
-  <li>
-Support for reference types in
-<ul>
-  <li>HeapSort</li>
-</ul>
-    </li>
-  <li>Utility classes for constructing PriorityQueues</li>
+  <li>Utility classes for constructing PriorityQueues.</li>
+  <li>Unit tests for the KeyedElements classes.</li>
 </ul>
 
 ## License
