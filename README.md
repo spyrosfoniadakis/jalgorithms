@@ -12,7 +12,7 @@ Up to now it supports the following:
 <li><b>InsertionSort</b> for primitive and reference types</li>
 <li><b>MergeSort</b> for primitive and reference types</li>
 <li><b>QuickSort</b> for primitive and reference types</li>
-<li><b>HeapSort</b> for primitive types and reference types</li>
+<li><b>HeapSort</b> for primitive and reference types</li>
 <li><b>CountingSort</b> for int numbers only</li>
 </ul>
 
