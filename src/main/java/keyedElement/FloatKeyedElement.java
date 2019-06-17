@@ -15,28 +15,42 @@
  */
 package KeyedElement;
 
+import evaluator.FloatEvaluator;
+
 /**
  * @author Spyros Foniadakis
  */
-public final class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
+public final class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
 
-    private long key;
+    private float key;
     private T value;
 
-    public LongKeyedElement(final long key, final T value) {
+    public FloatKeyedElement(final float key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> LongKeyedElement<T> from(final long key, final T value) {
-        return new LongKeyedElement<>(key, value);
+    public FloatKeyedElement(final FloatEvaluator<T> keyEvaluator, final T value){
+        this(keyEvaluator.evaluate(), value);
     }
 
-    public long getKey() {
+    public static <T> FloatKeyedElement<T> from(final float key, final T value) {
+        return new FloatKeyedElement<>(key, value);
+    }
+
+    public static <T> FloatKeyedElement<T> from(final FloatEvaluator<T> keyEvaluator, final T value) {
+        return new FloatKeyedElement<>(keyEvaluator, value);
+    }
+
+    public static <T extends FloatEvaluator<T>> FloatKeyedElement<T> from(final T value) {
+        return new FloatKeyedElement<>(value.evaluate(), value);
+    }
+
+    public float getKey() {
         return key;
     }
 
-    public void setKey(final long key) {
+    public void setKey(final float key) {
         this.key = key;
     }
 
@@ -48,20 +62,20 @@ public final class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>
         this.value = value;
     }
 
-    public void increaseKeyBy(final long offset) {
+    public void increaseKeyBy(final float offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(final LongKeyedElement<T> o) {
-        return Long.compare(this.key, o.key);
+    public int compareTo(final FloatKeyedElement<T> o) {
+        return Float.compare(this.key, o.key);
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof LongKeyedElement)) return false;
-        LongKeyedElement<?> that = (LongKeyedElement<?>) o;
+        if (!(o instanceof FloatKeyedElement)) return false;
+        FloatKeyedElement<?> that = (FloatKeyedElement<?>) o;
         return key == that.key &&
                 value.equals(that.value);
     }

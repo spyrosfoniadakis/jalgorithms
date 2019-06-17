@@ -15,28 +15,42 @@
  */
 package KeyedElement;
 
+import evaluator.LongEvaluator;
+
 /**
  * @author Spyros Foniadakis
  */
-public final class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
+public final class LongKeyedElement<T> implements Comparable<LongKeyedElement<T>>{
 
-    private double key;
+    private long key;
     private T value;
 
-    public DoubleKeyedElement(final double key, final T value) {
+    public LongKeyedElement(final long key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> DoubleKeyedElement<T> from(final double key, final T value) {
-        return new DoubleKeyedElement<>(key, value);
+    public LongKeyedElement(final LongEvaluator<T> keyEvaluator, final T value){
+        this(keyEvaluator.evaluate(), value);
     }
 
-    public double getKey() {
+    public static <T> LongKeyedElement<T> from(final long key, final T value) {
+        return new LongKeyedElement<>(key, value);
+    }
+
+    public static <T> LongKeyedElement<T> from(final LongEvaluator<T> keyEvaluator, final T value) {
+        return new LongKeyedElement<>(keyEvaluator, value);
+    }
+
+    public static <T extends LongEvaluator<T>> LongKeyedElement<T> from(final T value) {
+        return new LongKeyedElement<>(value.evaluate(), value);
+    }
+
+    public long getKey() {
         return key;
     }
 
-    public void setKey(final double key) {
+    public void setKey(final long key) {
         this.key = key;
     }
 
@@ -48,20 +62,20 @@ public final class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElemen
         this.value = value;
     }
 
-    public void increaseKeyBy(final double offset) {
+    public void increaseKeyBy(final long offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(final DoubleKeyedElement<T> o) {
-        return Double.compare(this.key, o.key);
+    public int compareTo(final LongKeyedElement<T> o) {
+        return Long.compare(this.key, o.key);
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof DoubleKeyedElement)) return false;
-        DoubleKeyedElement<?> that = (DoubleKeyedElement<?>) o;
+        if (!(o instanceof LongKeyedElement)) return false;
+        LongKeyedElement<?> that = (LongKeyedElement<?>) o;
         return key == that.key &&
                 value.equals(that.value);
     }

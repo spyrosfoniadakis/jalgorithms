@@ -15,6 +15,8 @@
  */
 package KeyedElement;
 
+import evaluator.IntEvaluator;
+
 /**
  * @author Spyros Foniadakis
  */
@@ -28,8 +30,20 @@ public final class IntKeyedElement<T> implements Comparable<IntKeyedElement<T>>{
         this.value = value;
     }
 
+    public IntKeyedElement(final IntEvaluator<T> keyEvaluator, final T value){
+        this(keyEvaluator.evaluate(), value);
+    }
+
     public static <T> IntKeyedElement<T> from(final int key, final T value) {
         return new IntKeyedElement<>(key, value);
+    }
+
+    public static <T> IntKeyedElement<T> from(final IntEvaluator<T> keyEvaluator, final T value) {
+        return new IntKeyedElement<>(keyEvaluator, value);
+    }
+
+    public static <T extends IntEvaluator<T>> IntKeyedElement<T> from(final T value) {
+        return new IntKeyedElement<>(value.evaluate(), value);
     }
 
     public int getKey() {

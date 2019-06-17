@@ -15,9 +15,17 @@
  */
 package sorting;
 
-import comparator.*;
-import ds.*;
-import org.apache.commons.lang3.NotImplementedException;
+import comparator.Comparators;
+import comparator.DoubleComparator;
+import comparator.FloatComparator;
+import comparator.IntComparator;
+import comparator.LongComparator;
+import ds.AbstractDoubleHeap;
+import ds.AbstractFloatHeap;
+import ds.AbstractIndexedHeap;
+import ds.AbstractIntHeap;
+import ds.AbstractLongHeap;
+import utils.ArrayUtils;
 
 import java.util.Comparator;
 
@@ -60,6 +68,30 @@ public final class HeapSort {
     public static void sort(double[] numbers, SortingDirection direction){
         sorter.sort(numbers, direction);
     }
+
+    public static <T extends Comparable<T>> void sort(T[] elements){
+        sorter.sort(elements);
+    }
+
+    public static <T> void sort(T[] elements, Comparator<T> comparator){
+        sorter.sort(elements, comparator);
+    }
+
+//    public static <T> void sort(IntKeyedElement<T> elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T> void sort(LongKeyedElement<T> elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T> void sort(FloatKeyedElement<T> elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T> void sort(DoubleKeyedElement<T> elements, SortingDirection direction){ sorter.sort(elements, direction); }
+
+//    public static <T extends IntEvaluator<T>> void sort(T[] elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T extends LongEvaluator<T>> void sort(T[] elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T extends FloatEvaluator<T>> void sort(T[] elements, SortingDirection direction){ sorter.sort(elements, direction); }
+//    public static <T extends DoubleEvaluator<T>> void sort(T[] elements, SortingDirection direction){ sorter.sort(elements, direction); }
+
+//    public static <T> void sort(T[] elements, IntEvaluator<T> evaluator, SortingDirection direction){ sorter.sort(elements, evaluator, direction); }
+//    public static <T> void sort(T[] elements, LongEvaluator<T> evaluator, SortingDirection direction){ sorter.sort(elements, evaluator, direction); }
+//    public static <T> void sort(T[] elements, FloatEvaluator<T> evaluator, SortingDirection direction){ sorter.sort(elements, evaluator, direction); }
+//    public static <T> void sort(T[] elements, DoubleEvaluator<T> evaluator, SortingDirection direction){ sorter.sort(elements, evaluator, direction); }
+
 
     private static class IntHeap extends AbstractIntHeap{
 
@@ -125,6 +157,137 @@ public final class HeapSort {
         }
     }
 
+    private static class Heap<T> extends AbstractIndexedHeap {
+
+        protected T[] elements;
+        private Comparator<T> comparator;
+
+        private Heap(T[] elements, Comparator<T> comparator){
+            super.setSize(elements.length);
+            this.elements = elements;
+            this.comparator = comparator;
+            this.build();
+        }
+
+        private final void build() {
+            for(int i=Math.floorDiv(this.size, 2); i>=0; i--){
+                heapifyFrom(i);
+            }
+        }
+
+        @Override
+        public void heapify() {
+            heapifyFrom(0);
+        }
+
+        protected final void heapifyFrom(final int index) {
+            int leftIndex = getLeftChildIndexOf(index);
+            int rightIndex= getRightChildIndexOf(index);
+            int nextIndex = index;
+
+            if(leftIndex == -1 && rightIndex == -1)
+                return;
+
+            if (leftIndex != -1 && this.comparator.compare(elements[nextIndex], elements[leftIndex]) <= 0 ){
+                nextIndex = leftIndex;
+            }
+            if(rightIndex != -1 && this.comparator.compare(elements[nextIndex], elements[rightIndex]) <= 0 ) {
+                nextIndex = rightIndex;
+            }
+            if(index != nextIndex){
+                ArrayUtils.swap(elements, index, nextIndex);
+                this.heapifyFrom(nextIndex);
+            }
+        }
+
+        public static <T> Heap from(T[] elements, Comparator<T> comparator){
+            return new Heap(elements, comparator);
+        }
+
+        public static <T extends Comparable<T>> Heap from(T[] elements){
+            return new Heap<T>(elements, (T t1, T t2) -> t1.compareTo(t2));
+        }
+
+        public final void sort(){
+            for(int i = this.getSize()-1; i>=0 ; i--){
+                ArrayUtils.swap(this.elements, 0, i);
+                this.setSize(this.getSize()-1);
+                this.heapify();
+            }
+        }
+
+        @Override
+        public int getCapacity() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+
+//    private static class IntKeyedHeap<T> extends AbstractIntKeyedArrayHeap<T> {
+//
+//        private IntKeyedHeap(IntKeyedElement<T>[] elements, IntComparator comparator){
+//            super(elements, elements.length, comparator);
+//        }
+//
+//        @Override
+//        public void increaseElementKeyBy(int index, int offset) {
+//            throw new UnsupportedOperationException();
+//        }
+//
+//        public static <T> IntKeyedHeap<T> from(IntKeyedElement<T>[] elements, IntComparator comparator){
+//            return new IntKeyedHeap(elements, comparator);
+//        }
+//    }
+//
+//    private static class LongKeyedHeap<T> extends AbstractLongKeyedArrayHeap<T> {
+//
+//        private LongKeyedHeap(LongKeyedElement<T>[] elements, LongComparator comparator){
+//            super(elements, elements.length, comparator);
+//        }
+//
+//        @Override
+//        public void increaseElementKeyBy(int index, long offset) {
+//            throw new UnsupportedOperationException();
+//        }
+//
+//        public static <T> LongKeyedHeap<T> from(LongKeyedElement<T>[] elements, LongComparator comparator){
+//            return new LongKeyedHeap(elements, comparator);
+//        }
+//    }
+//
+//    private static class DoubleKeyedHeap<T> extends AbstractDoubleKeyedArrayHeap<T> {
+//
+//        private DoubleKeyedHeap(DoubleKeyedElement<T>[] elements, DoubleComparator comparator){
+//            super(elements, elements.length, comparator);
+//        }
+//
+//        @Override
+//        public void increaseElementKeyBy(int index, double offset) {
+//            throw new UnsupportedOperationException();
+//        }
+//
+//        public static <T> IntKeyedHeap<T> from(IntKeyedElement<T>[] elements, IntComparator comparator){
+//            return new IntKeyedHeap(elements, comparator);
+//        }
+//    }
+//
+//    private static class FloatKeyedHeap<T> extends AbstractFloatKeyedArrayHeap<T> {
+//
+//        private FloatKeyedHeap(FloatKeyedElement<T>[] elements, FloatComparator comparator){
+//            super(elements, elements.length, comparator);
+//        }
+//
+//        @Override
+//        public void increaseElementKeyBy(int index, float offset) {
+//            throw new UnsupportedOperationException();
+//        }
+//
+//        public static <T> FloatKeyedHeap<T> from(FloatKeyedElement<T>[] elements, IntComparator comparator){
+//            return new FloatKeyedHeap(elements, comparator);
+//        }
+//    }
+
+
     private static class HeapSorter implements Sorter {
 
         @Override
@@ -167,15 +330,36 @@ public final class HeapSort {
             DoubleHeap.from(numbers, direction.getOpposite().getDoubleComparator()).sort();
         }
 
+//        @Override
+//        public <T, E extends IntKeyedElement<T>> void sort(E[] elements, SortingDirection direction) {
+//            IntKeyedHeap.from(elements, direction.getOpposite().getIntComparator());
+//        }
+//
+//        @Override
+//        public <T, E extends FloatKeyedElement<T>> void sort(E[] elements, SortingDirection direction) {
+//            FloatKeyedHeap.from(elements, direction.getOpposite().getFloatComparator());
+//        }
+//
+//        @Override
+//        public <T, E extends LongKeyedElement<T>> void sort(E[] elements, SortingDirection direction) {
+//            LongKeyedHeap.from(elements, direction.getOpposite().getLongComparator());
+//        }
+//
+//        @Override
+//        public <T, E extends DoubleKeyedElement<T>> void sort(E[] elements, SortingDirection direction) {
+//            DoubleKeyedHeap.from(elements, direction.getOpposite().getDoubleComparator());
+//        }
 
         @Override
         public <T extends Comparable<T>> void sort(T[] elements) {
-            throw new NotImplementedException("HeapSort for Objects implementing Comparable is not yet implemented.");
+//            throw new NotImplementedException("HeapSort for Objects implementing Comparable is not yet implemented.");
+            Heap.from(elements).sort();
         }
 
         @Override
         public <T> void sort(T[] elements, Comparator<T> comparator) {
-            throw new NotImplementedException("HeapSort for Objects ordered via Comparator is not yet implemented.");
+//            throw new NotImplementedException("HeapSort for Objects ordered via Comparator is not yet implemented.");
+            Heap.from(elements, comparator).sort();
         }
     }
 }

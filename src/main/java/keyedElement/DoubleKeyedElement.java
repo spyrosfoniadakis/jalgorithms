@@ -15,28 +15,42 @@
  */
 package KeyedElement;
 
+import evaluator.DoubleEvaluator;
+
 /**
  * @author Spyros Foniadakis
  */
-public final class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<T>>{
+public final class DoubleKeyedElement<T> implements Comparable<DoubleKeyedElement<T>>{
 
-    private float key;
+    private double key;
     private T value;
 
-    public FloatKeyedElement(final float key, final T value) {
+    public DoubleKeyedElement(final double key, final T value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <T> FloatKeyedElement<T> from(final float key, final T value) {
-        return new FloatKeyedElement<>(key, value);
+    public DoubleKeyedElement(final DoubleEvaluator<T> keyEvaluator, final T value){
+        this(keyEvaluator.evaluate(), value);
     }
 
-    public float getKey() {
+    public static <T> DoubleKeyedElement<T> from(final double key, final T value) {
+        return new DoubleKeyedElement<>(key, value);
+    }
+
+    public static <T> DoubleKeyedElement<T> from(final DoubleEvaluator<T> keyEvaluator, final T value) {
+        return new DoubleKeyedElement<>(keyEvaluator, value);
+    }
+
+    public static <T extends DoubleEvaluator<T>> DoubleKeyedElement<T> from(final T value) {
+        return new DoubleKeyedElement<>(value.evaluate(), value);
+    }
+
+    public double getKey() {
         return key;
     }
 
-    public void setKey(final float key) {
+    public void setKey(final double key) {
         this.key = key;
     }
 
@@ -48,20 +62,20 @@ public final class FloatKeyedElement<T> implements Comparable<FloatKeyedElement<
         this.value = value;
     }
 
-    public void increaseKeyBy(final float offset) {
+    public void increaseKeyBy(final double offset) {
         this.key += offset;
     }
 
     @Override
-    public int compareTo(final FloatKeyedElement<T> o) {
-        return Float.compare(this.key, o.key);
+    public int compareTo(final DoubleKeyedElement<T> o) {
+        return Double.compare(this.key, o.key);
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof FloatKeyedElement)) return false;
-        FloatKeyedElement<?> that = (FloatKeyedElement<?>) o;
+        if (!(o instanceof DoubleKeyedElement)) return false;
+        DoubleKeyedElement<?> that = (DoubleKeyedElement<?>) o;
         return key == that.key &&
                 value.equals(that.value);
     }
