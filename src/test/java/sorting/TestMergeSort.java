@@ -77,7 +77,7 @@ public class TestMergeSort {
                 Person.from("George", "Edison", DateUtils.getDateFrom(1992, 12, 7)),
                 Person.from("Alan", "Edison", DateUtils.getDateFrom(1990, 9, 7))
         };
-        SortingUtils.executeSortTestOn(persons, MergeSort::sort, "test_insertionSort_objects_comparable");
+        SortingUtils.executeSortTestOn(persons, MergeSort::sort, "test_mergeSort_objects_comparable");
     }
 
     @Test

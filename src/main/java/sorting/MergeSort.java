@@ -62,12 +62,12 @@ public final class MergeSort {
         sorter.sort(numbers, direction);
     }
 
-    public static <T extends Comparable<T>> void sort(T[] numbers){
-        sorter.sort(numbers);
+    public static <T extends Comparable<T>> void sort(T[] elements){
+        sorter.sort(elements);
     }
 
-    public static <T> void sort(T[] numbers, Comparator<T> comparator){
-        sorter.sort(numbers, comparator);
+    public static <T> void sort(T[] elements, Comparator<T> comparator){
+        sorter.sort(elements, comparator);
     }
 
     private static class MergeSorter implements Sorter {

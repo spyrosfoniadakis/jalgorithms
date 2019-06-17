@@ -102,7 +102,7 @@ public class SortingUtils {
         System.out.println(String.format(" ==== Test: %s == ENDED =====", testName));
     }
 
-    public static <T> void executeSortTestOn(T[] items, Comparator<T> comparator, /*Consumer<T[]>*/ BiConsumer<T[], Comparator<T>> sortingAction, String testName){
+    public static <T> void executeSortTestOn(T[] items, Comparator<T> comparator, BiConsumer<T[], Comparator<T>> sortingAction, String testName){
         System.out.println(String.format(" ==== Test: %s == STARTED =====", testName));
 
         T[] copiedBefore = Arrays.copyOf(items, items.length);

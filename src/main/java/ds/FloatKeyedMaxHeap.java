@@ -15,7 +15,7 @@
  */
 package ds;
 
-import KeyedElement.FloatKeyedElement;
+import keyedElement.FloatKeyedElement;
 import comparator.FloatComparator;
 import utils.ArrayUtils;
 

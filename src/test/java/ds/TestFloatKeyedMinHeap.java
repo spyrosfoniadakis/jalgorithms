@@ -1,6 +1,6 @@
 package ds;
 
-import KeyedElement.FloatKeyedElement;
+import keyedElement.FloatKeyedElement;
 import misc.Person;
 import misc.PersonUtils;
 import org.junit.Assert;

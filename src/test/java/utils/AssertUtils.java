@@ -15,10 +15,10 @@
  */
 package utils;
 
-import KeyedElement.DoubleKeyedElement;
-import KeyedElement.FloatKeyedElement;
-import KeyedElement.IntKeyedElement;
-import KeyedElement.LongKeyedElement;
+import keyedElement.DoubleKeyedElement;
+import keyedElement.FloatKeyedElement;
+import keyedElement.IntKeyedElement;
+import keyedElement.LongKeyedElement;
 import ds.DoubleKeyedMaxHeap;
 import ds.DoubleKeyedMinHeap;
 import ds.DoubleMaxHeap;

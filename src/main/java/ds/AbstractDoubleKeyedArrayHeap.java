@@ -15,7 +15,7 @@
  */
 package ds;
 
-import KeyedElement.DoubleKeyedElement;
+import keyedElement.DoubleKeyedElement;
 import comparator.DoubleComparator;
 import utils.ArrayUtils;
 

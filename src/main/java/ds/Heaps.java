@@ -1,9 +1,9 @@
 package ds;
 
-import KeyedElement.DoubleKeyedElement;
-import KeyedElement.FloatKeyedElement;
-import KeyedElement.IntKeyedElement;
-import KeyedElement.LongKeyedElement;
+import keyedElement.DoubleKeyedElement;
+import keyedElement.FloatKeyedElement;
+import keyedElement.IntKeyedElement;
+import keyedElement.LongKeyedElement;
 
 public final class Heaps {
 

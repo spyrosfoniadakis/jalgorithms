@@ -16,7 +16,7 @@
 package ds;
 
 
-import KeyedElement.LongKeyedElement;
+import keyedElement.LongKeyedElement;
 import comparator.LongComparator;
 import utils.ArrayUtils;
 

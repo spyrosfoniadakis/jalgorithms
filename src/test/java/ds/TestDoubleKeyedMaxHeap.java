@@ -1,6 +1,6 @@
 package ds;
 
-import KeyedElement.DoubleKeyedElement;
+import keyedElement.DoubleKeyedElement;
 import misc.Person;
 import misc.PersonUtils;
 import org.junit.Assert;
