@@ -10,6 +10,7 @@ import utils.DateUtils;
 import utils.ReflectionUtils;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -119,7 +120,7 @@ public class TestIntKeyedMinHeap {
 
         IntKeyedElement<Person> extracted = heap.extract();
         IntKeyedElement<Person>[] elementsAfter = (IntKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, IntKeyedMinHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
-        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> e.equals(peeked)), is(equalTo(false)));
+        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> Objects.nonNull(e) && e.equals(peeked)), is(equalTo(false)));
     }
 
     @Test

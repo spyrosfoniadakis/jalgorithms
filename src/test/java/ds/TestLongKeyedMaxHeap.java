@@ -10,6 +10,7 @@ import utils.DateUtils;
 import utils.ReflectionUtils;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -119,7 +120,7 @@ public class TestLongKeyedMaxHeap {
 
         LongKeyedElement<Person> extracted = heap.extract();
         LongKeyedElement<Person>[] elementsAfter = (LongKeyedElement<Person>[]) ReflectionUtils.getFieldValueOf(heap, LongKeyedMaxHeap.class.getCanonicalName(), HEAP_ELEMENTS_FIELD_NAME);
-        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> e.equals(peeked)), is(equalTo(false)));
+        Assert.assertThat(Arrays.stream(elementsAfter).anyMatch(e -> Objects.nonNull(e) && e.equals(peeked)), is(equalTo(false)));
     }
 
     @Test

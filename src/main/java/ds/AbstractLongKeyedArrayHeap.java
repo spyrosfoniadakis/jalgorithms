@@ -94,6 +94,7 @@ public abstract class AbstractLongKeyedArrayHeap<T> extends AbstractIndexedHeap 
     public final LongKeyedElement<T> extract(){
         LongKeyedElement<T> extracted = elements[0];
         this.elements[0] = this.elements[--this.size];
+        this.elements[this.size] = null;
         this.heapify();
         return extracted;
     }

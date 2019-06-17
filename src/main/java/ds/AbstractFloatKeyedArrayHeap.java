@@ -93,6 +93,7 @@ public abstract class AbstractFloatKeyedArrayHeap<T> extends AbstractIndexedHeap
     public final FloatKeyedElement<T> extract(){
         FloatKeyedElement<T> extracted = elements[0];
         this.elements[0] = this.elements[--this.size];
+        this.elements[this.size] = null;
         this.heapify();
         return extracted;
     }

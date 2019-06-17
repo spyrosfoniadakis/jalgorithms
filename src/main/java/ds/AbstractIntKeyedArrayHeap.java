@@ -94,6 +94,7 @@ public abstract class AbstractIntKeyedArrayHeap<T> extends AbstractIndexedHeap i
     public final IntKeyedElement<T> extract(){
         IntKeyedElement<T> extracted = elements[0];
         this.elements[0] = this.elements[--this.size];
+        this.elements[this.size] = null;
         this.heapify();
         return extracted;
     }

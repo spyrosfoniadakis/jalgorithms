@@ -93,6 +93,7 @@ public abstract class AbstractDoubleKeyedArrayHeap<T> extends AbstractIndexedHea
     public final DoubleKeyedElement<T> extract(){
         DoubleKeyedElement<T> extracted = elements[0];
         this.elements[0] = this.elements[--this.size];
+        this.elements[this.size] = null;
         this.heapify();
         return extracted;
     }
